@@ -1,20 +1,38 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark rounded">
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample10" aria-controls="navbarsExample10"
+<nav class="navbar navbar-expand-lg navbar-light fixed-top"style="background-color: #FFFFFF;">
+  <!-- <div class="container"> -->
+    <a class="navbar-brand" style="padding: 0;" routerLink="/">
+      <img style="width: 190px;" src="/assets/images/app_logo.png" title="Home" alt="Home">
+    </a>
+    
+  <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample10" aria-controls="navbarsExample10"
     aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
+  </button> -->
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
   </button>
-
-  <div class="collapse navbar-collapse justify-content-md-center" id="navbarsExample10">
-    <ul class="navbar-nav">
-      <li class="nav-item">
+  <div class="collapse navbar-collapse justify-content-end my-2 my-lg-0" id="navbarsExample10">
+    <ul class="navbar-nav mr-auto">
+      <!-- <li class="nav-item">
         <a class="nav-link" routerLink="/">Home</a>
+      </li> -->
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Services</a>
+        <div class="dropdown-menu" aria-labelledby="dropdown03">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+    </li>
+    <!-- <form class="form-inline mt-2 mt-md-0">
+      <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form> -->
+      <li *ngIf="!auth.isLoggedIn()" class="nav-item">
+        <a class="nav-link" routerLink="/register">Become a Pro</a>
       </li>
-
       <li *ngIf="!auth.isLoggedIn()" class="nav-item">
         <a class="nav-link" routerLink="/login">Login</a>
-      </li>
-      <li *ngIf="!auth.isLoggedIn()" class="nav-item">
-        <a class="nav-link" routerLink="/register">Register</a>
       </li>
       <li *ngIf="auth.isLoggedIn()" class="nav-item">
         <a class="nav-link" routerLink="/profile">{{ auth.getUserDetails()?.first_name }}</a>
@@ -23,7 +41,28 @@
         <a class="nav-link" routerLink="" (click)="auth.logout()">Logout</a>
       </li>
     </ul>
+    </div> 
+<!-- </div> -->
+</nav>
+<!-- <div class="container"> -->
+  <router-outlet></router-outlet>
+<!-- </div> -->
+
+<nav class="navbar fixed-bottom navbar-expand-sm navbar-light" style="background-color: #E9ECEF;">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarCollapse">    
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Home Needs Services</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Help</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Contact Us</a>
+      </li>
+    </ul>
   </div>
 </nav>
-
-<router-outlet></router-outlet>
