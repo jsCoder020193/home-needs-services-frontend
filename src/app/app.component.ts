@@ -9,4 +9,5 @@ import {AuthenticationService} from './authentication.service';
 
 export class AppComponent {
   constructor(public auth: AuthenticationService) {}
+  services = ['Plumbing', 'Electrical', 'House Cleaning', 'Home Improvement'];
 }

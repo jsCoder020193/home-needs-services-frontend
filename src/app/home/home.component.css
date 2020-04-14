@@ -3,7 +3,7 @@
     background-size: cover;
     position: relative;
     background-position: center;
-    padding: 10rem 0;
+    padding: 5rem 0;
   }
 
   .container{
@@ -56,4 +56,4 @@ h1 {
 
 .booking {
   background: #e4edf7;
-  border-top: 2px solid #1467C5; }
+  border-top: 2px solid #99c9ff; }
