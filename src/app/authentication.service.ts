@@ -66,11 +66,11 @@ export class AuthenticationService {
   }
 
   public register(user: TokenPayload): Observable<any> {
-    return this.http.post(`/users/register`, user)
+    return this.http.post(`/api/users/register`, user)
   }
 
   public login(user: TokenPayload): Observable<any> {
-    const base = this.http.post(`/users/login`, user)
+    const base = this.http.post(`/api/users/login`, user)
 
     const request = base.pipe(
       map((data: TokenResponse) => {
@@ -85,7 +85,7 @@ export class AuthenticationService {
   }
 
   public profile(): Observable<any> {
-    return this.http.get(`/users/profile`, {
+    return this.http.get(`/api/users/profile`, {
       headers: { Authorization: ` ${this.getToken()}` }
     })
   }
