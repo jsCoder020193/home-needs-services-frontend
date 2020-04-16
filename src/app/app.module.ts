@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import{HttpClientModule} from '@angular/common/http';
-import{FormsModule} from '@angular/forms';
+import{FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router'  
 
 import { AppRoutingModule } from './app-routing.module';
@@ -14,7 +14,8 @@ import { LoginComponent } from './modules/login/login.component'
 import { RegisterComponent } from './modules/register/register.component'
 import { HomeComponent } from './modules/home/home.component'
 import { AuthenticationService } from './services/authentication.service'
-import { AuthGuardService } from './services/auth-guard.service'
+import { AuthGuardService } from './services/auth-guard.service';
+import { ServiceBookingComponent } from './modules/service-booking/service-booking.component'
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -24,6 +25,10 @@ const routes: Routes = [
     path: 'profile',
     component: ProfileComponent,
     canActivate: [AuthGuardService]
+  },
+  {
+    path: 'service-request',
+    component: ServiceBookingComponent
   }
 ]
 
@@ -33,11 +38,13 @@ const routes: Routes = [
     ProfileComponent,
     LoginComponent,
     RegisterComponent,
-    HomeComponent
+    HomeComponent,
+    ServiceBookingComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     RouterModule.forRoot(routes),
     NgbModule

@@ -5,10 +5,13 @@ import { map } from 'rxjs/operators'
 import { Router } from '@angular/router'
 
 export interface UserDetails {
-  id: number
   first_name: string
+  middle_name: string
   last_name: string
+  user_type: string
   email: string
+  // status: string
+  // user_since: string
   password: string
   exp: number
   iat: number
@@ -20,10 +23,19 @@ interface TokenResponse {
 
 export interface TokenPayload {
   id: number
-  first_name: string
-  last_name: string
   email: string
   password: string
+  user_id: string
+}
+
+export interface CreateUserPayload {
+  first_name: string
+  middle_name: string
+  last_name: string
+  user_type: string
+  email: string
+  password: string
+  user_id: string
 }
 
 @Injectable()
@@ -65,12 +77,12 @@ export class AuthenticationService {
     }
   }
 
-  public register(user: TokenPayload): Observable<any> {
-    return this.http.post(`/api/users/register`, user)
+  public register(user: CreateUserPayload): Observable<any> {
+    return this.http.post(`/api/login/register`, user)
   }
 
   public login(user: TokenPayload): Observable<any> {
-    const base = this.http.post(`/api/users/login`, user)
+    const base = this.http.post(`/api/login/login`, user)
 
     const request = base.pipe(
       map((data: TokenResponse) => {
@@ -80,12 +92,11 @@ export class AuthenticationService {
         return data
       })
     )
-
     return request
   }
 
   public profile(): Observable<any> {
-    return this.http.get(`/api/users/profile`, {
+    return this.http.get(`/api/login/profile`, {
       headers: { Authorization: ` ${this.getToken()}` }
     })
   }

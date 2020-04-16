@@ -1,18 +1,59 @@
-<div class="container">
-    <div class="row" style="margin-top: 40px;">
-      <div class="col-md-6 mt-5 mx-auto">
-        <form (submit)="login()">
-          <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-          <div class="form-group">
-            <label for="email">Email address</label>
-            <input type="email" class="form-control" name="email" placeholder="Enter email" [(ngModel)]="credentials.email">
-          </div>
-          <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" class="form-control" name="password" placeholder="Password" [(ngModel)]="credentials.password">
-          </div>
-          <button type="submit" class="btn btn-lg btn-primary btn-block">Sign in</button>
-        </form>
-      </div>
-    </div>
+ <!-- <div class="container" style="padding:100px;">
+  <ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Customer 123</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Service Provider</a>
+    </li>
+  </ul>
+  <div class="tab-content" id="myTabContent" style="margin-top: 50px">
+    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab"></div>
+    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab"></div>
   </div>
+
+</div> -->
+
+<div class="container" style="padding:100px;">
+  <ngb-alert type="dark" *ngIf="!staticAlertClosed" (close)="staticAlertClosed = true">Email or password incorrect!</ngb-alert>
+  <ngb-tabset [activeId]="activeTab" (tabChange)="onTabChange($event)" [destroyOnHide]="false">
+    <ngb-tab [id]="1">
+      <ng-template ngbTabTitle><b>Customer</b></ng-template>
+      <ng-template ngbTabContent>
+            <div class="col-md-6 mt-5 mx-auto">
+              <form (submit)="login()">
+                <h1 class="h3 mb-3 font-weight-normal">Login</h1>
+                <div class="form-group">
+                  <label for="email">Email address</label>
+                  <input type="email" class="form-control" name="email" placeholder="Enter email" [(ngModel)]="credentials.email">
+                </div>
+                <div class="form-group">
+                  <label for="password">Password</label>
+                  <input type="password" class="form-control" name="password" placeholder="Password" [(ngModel)]="credentials.password">
+                </div>
+                <button type="submit" class="btn btn-lg btn-primary btn-block">Sign in</button>
+              </form>
+            </div>
+      </ng-template>
+    </ngb-tab>
+    <ngb-tab [id]="2">
+      <ng-template ngbTabTitle><b>Service Provider</b></ng-template>
+      <ng-template ngbTabContent>
+        <div class="col-md-6 mt-5 mx-auto">
+          <form (submit)="login()">
+            <h1 class="h3 mb-3 font-weight-normal">Login</h1>
+            <div class="form-group">
+              <label for="email">Email address</label>
+              <input type="email" class="form-control" name="email" placeholder="Enter email" [(ngModel)]="credentials.email">
+            </div>
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input type="password" class="form-control" name="password" placeholder="Password" [(ngModel)]="credentials.password">
+            </div>
+            <button type="submit" class="btn btn-lg btn-primary btn-block">Sign in</button>
+          </form>
+        </div>
+      </ng-template>
+    </ngb-tab>
+  </ngb-tabset>
+</div>

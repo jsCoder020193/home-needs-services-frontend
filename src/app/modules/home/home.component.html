@@ -6,22 +6,40 @@
             <div class="slider-content">
               <h1>Home Services Made Easy</h1>
               <h3>Book expert home cleaners and handymen at a moment's notice. Just pick a time and we’ll do the rest. </h3>
-              <!-- <form _ngcontent-ssf-c18="" action="/booking" class="form-wrap">
-                <div _ngcontent-ssf-c18="" role="group" aria-label="Basic example" class="btn-group">
-                  <input _ngcontent-ssf-c18="" type="text" placeholder="Name" class="btn-group1">
-                  <input _ngcontent-ssf-c18="" type="text" placeholder="Email Address" class="btn-group2">
-                  <input _ngcontent-ssf-c18="" type="number" placeholder="  Zip Code" class="btn-group3">
-                  <button _ngcontent-ssf-c18="" type="submit" class="btn-form">Continue<i _ngcontent-ssf-c18="" class="pe-7s-angle-right"></i>
-                  </button>
-                </div>
-              </form> -->
-              <form class="form-wrap">
+              <form class="form-wrap" [formGroup]="homeForm" (ngSubmit)="goToServiceBooking()">
                 <div class="form-row">
                   <div class="col-7">
-                    <input type="text" class="form-control form-control-lg" placeholder="Email">
+                    <input [ngClass]= "homeForm.get('email').invalid && (homeForm.get('email').dirty || homeForm.get('email').touched)?'invalid':''" id="email" type="text" class="form-control form-control-lg" placeholder="Email" formControlName="email" required>
+                    <div *ngIf="homeForm.get('email').invalid && (homeForm.get('email').dirty || homeForm.get('email').touched)">
+
+                      <div class="error-msg" *ngIf="homeForm.get('email').errors.required">
+                        Please enter an Email.
+                      </div>
+                      <div class="error-msg" *ngIf="homeForm.get('email').errors.pattern">
+                        Invalid email. Allowed is abc@domain.com
+                      </div>
+                    </div>
+                    
                   </div>
                   <div class="col">
-                    <input type="text" class="form-control form-control-lg" placeholder="Zipcode">
+                    <input [ngClass]= "homeForm.get('zipcode').invalid && (homeForm.get('zipcode').dirty || homeForm.get('zipcode').touched)?'invalid':''" id="zipcode" type="text" class="form-control form-control-lg" placeholder="Zipcode" formControlName="zipcode" required>
+
+                    <div *ngIf="homeForm.get('zipcode').invalid && (homeForm.get('zipcode').dirty || homeForm.get('zipcode').touched)">
+
+                    <div class="error-msg" *ngIf="homeForm.get('zipcode').errors.required">
+                      Zipcode is required.
+                    </div>
+                    <div class="error-msg" *ngIf="homeForm.get('zipcode').errors.minlength">
+                      Zipcode must be at least 4 characters long.
+                    </div>
+                    <div class="error-msg" *ngIf="homeForm.get('zipcode').errors.maxength">
+                      Zipcode must be at most 4 characters long.
+                    </div>
+                    <div class="error-msg" *ngIf="homeForm.get('zipcode').errors.pattern">
+                      Zipcode can only be numbers.
+                    </div>
+                  </div>
+
                   </div>
                   <div class="col-auto">
                     <button type="submit" class="btn btn-dark btn-lg mb-2" style="background-color: #1467C5;">Continue</button>
