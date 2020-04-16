@@ -30,10 +30,10 @@
                       Zipcode is required.
                     </div>
                     <div class="error-msg" *ngIf="homeForm.get('zipcode').errors.minlength">
-                      Zipcode must be at least 4 characters long.
+                      Zipcode must be at least 5 characters long.
                     </div>
                     <div class="error-msg" *ngIf="homeForm.get('zipcode').errors.maxength">
-                      Zipcode must be at most 4 characters long.
+                      Zipcode must be at most 5 characters long.
                     </div>
                     <div class="error-msg" *ngIf="homeForm.get('zipcode').errors.pattern">
                       Zipcode can only be numbers.
