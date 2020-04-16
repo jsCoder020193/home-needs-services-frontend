@@ -16,7 +16,6 @@ export class AppComponent {
     this.appService.getServices().subscribe(
       (result) => {
         this.services = result;
-        console.log(result);
       },
       err => {
         console.error(err)
