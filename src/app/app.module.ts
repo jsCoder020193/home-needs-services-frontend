@@ -11,8 +11,8 @@ import { ProfileComponent } from './modules/profile/profile.component'
 import { LoginComponent } from './modules/login/login.component'
 import { RegisterComponent } from './modules/register/register.component'
 import { HomeComponent } from './modules/home/home.component'
-import { AuthenticationService } from './authentication.service'
-import { AuthGuardService } from './auth-guard.service'
+import { AuthenticationService } from './services/authentication.service'
+import { AuthGuardService } from './services/auth-guard.service'
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
