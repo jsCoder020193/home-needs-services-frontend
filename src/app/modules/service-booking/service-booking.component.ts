@@ -15,6 +15,7 @@ export class ServiceBookingComponent implements OnInit {
   serviceBookingForm: FormGroup;
   email;
   zipcode;
+  date;
 
   constructor(private formBuilder: FormBuilder, private activatedRoute: ActivatedRoute, private _ServiceRequest: ServiceRequest) { }
 
@@ -29,6 +30,7 @@ export class ServiceBookingComponent implements OnInit {
     const homeData = self._ServiceRequest.getHomeData();
     self.email = homeData['email'];
     self.zipcode = homeData['zipcode'];
+    self.date = homeData['date'];
   }
 
   buildHomeForm() {

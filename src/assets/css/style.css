@@ -1312,7 +1312,7 @@ footer {
 .booking-details {
   background: #f7fbfc; }
   .booking-details h2 {
-    font-size: 40px;
+    font-size: 32px;
     font-weight: 700;
     margin: 0; }
   .booking-details h6 {
@@ -1328,13 +1328,14 @@ footer {
       flex: 100%; } }
 
 .preference-title {
-  background: #45c3d3;
+  background: #0062C7;
+    opacity: 85%;
   border-top-left-radius: 3px;
   border-top-right-radius: 3px; }
   .preference-title h4 {
     color: #ffffff;
-    padding: 28px 40px;
-    font-weight: 700;
+    padding: 18px 40px;
+    font-weight: 500;
     margin: 0; }
     @media (max-width: 1200px) {
       .preference-title h4 {

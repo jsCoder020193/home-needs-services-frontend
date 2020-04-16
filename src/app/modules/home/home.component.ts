@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { Router } from '@angular/router'
 
+import {NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
+
 import {ServiceRequest} from '../../entities/service-request';
 
 @Component({
@@ -10,6 +12,8 @@ import {ServiceRequest} from '../../entities/service-request';
 })
 export class HomeComponent implements OnInit{
   
+  date: NgbDateStruct;
+
   home = {
     email: '',
     zipcode: ''
@@ -28,13 +32,15 @@ export class HomeComponent implements OnInit{
     const self = this;
     self.homeForm = self.formBuilder.group({
       'email': [this.home.email,[Validators.required, Validators.pattern(/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/)]],
-      'zipcode': [this.home.zipcode,[Validators.required, Validators.pattern('^[0-9]*$'), Validators.maxLength(5), Validators.minLength(5)]]
+      'zipcode': [this.home.zipcode,[Validators.required, Validators.pattern('^[0-9]*$'), Validators.maxLength(5), Validators.minLength(5)]],
+      'date': [this.date,[Validators.required]]
     });
   }
 
   goToServiceBooking() {
     const self = this;
     const status = self.homeForm.status;
+    console.log(this.homeForm.get('date').value)
     if(status == 'VALID'){
       //navigate to service booking
       self._ServiceRequest.setHomeData(self.homeForm.value);

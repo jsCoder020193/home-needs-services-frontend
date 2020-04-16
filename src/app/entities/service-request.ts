@@ -7,7 +7,12 @@ export class ServiceRequest {
 
   // _id: string;
 email: string;
-zipcode: number;
+zipcode: any;
+date: {
+  year: any
+  month: any
+  day: any
+}
 // description: string;
 // location: {
 //     locationId: string;
@@ -26,12 +31,14 @@ zipcode: number;
   setHomeData(data){
       this.email = data.email;
       this.zipcode = data.zipcode;
+      this.date = data.date;
   }
 
   getHomeData(){
       return{
           email: this.email,
-          zipcode: this.zipcode
+          zipcode: this.zipcode,
+          date: this.date
       }
   }
 //   setServiceRequest(holiday) {
