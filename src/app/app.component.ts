@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import {AuthenticationService} from './services/authentication.service';
-import {AppService} from './services/app.service';
+import {ServicesService} from './services/services.service';
+import {Services} from './entities/services';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -8,24 +10,15 @@ import {AppService} from './services/app.service';
 })
 
 export class AppComponent {
-  constructor(public appService:AppService, public auth: AuthenticationService) {
+  constructor(public servicesService:ServicesService, public auth: AuthenticationService, public _services:Services) {
     this.getServices();
   }
   services = ['Plumbing', 'Electrical', 'House Cleaning', 'Home Improvement'];
-  serviceCategoeies = [];
-  serviceSubCategories = [];
 
   getServices() {
-    this.appService.getServices().subscribe(
+    this.servicesService.getServices().subscribe(
       (result) => {
-        result.forEach(element => {
-          var path = element['path'].toString().split('>')[0];
-          var subPath = element['path'].toString().split('>')[1];
-          if(subPath)
-            this.serviceSubCategories.push({parent: path, title: subPath});
-          else
-            this.serviceCategoeies.push({title: path});
-        });
+        this._services.setServices(result);
         this.services = result;
       },
       err => {

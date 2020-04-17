@@ -6,6 +6,7 @@ import {NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
 import {NgbTimeStruct} from '@ng-bootstrap/ng-bootstrap';
 
 import {ServiceRequest} from '../../entities/service-request';
+import {Services} from '../../entities/services';
 
 @Component({
   templateUrl: './home.component.html',
@@ -25,13 +26,17 @@ export class HomeComponent implements OnInit{
   
   homeForm: FormGroup;
   formSubmitted;
+  serviceCategoeies = [];
+  serviceSubCategories = [];
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private _ServiceRequest: ServiceRequest){}
+  constructor(private formBuilder: FormBuilder, private router: Router, private _ServiceRequest: ServiceRequest, public _services:Services){}
 
   ngOnInit() {
     const self = this;
     self.buildHomeForm();
     self.formSubmitted = false;
+    self.serviceCategoeies = self._services.getParentServices();
+    self.serviceSubCategories = self._services.getChildServices();
   }
 
   buildHomeForm() {

@@ -72,3 +72,8 @@ h1 {
   height: 48px;
   background-color: white;
 }
+
+.btn-primary{
+  background-color: #0062c7;
+    border-color: #0062c7;
+}

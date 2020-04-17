@@ -7,8 +7,11 @@ import { Router } from '@angular/router'
 @Injectable({
   providedIn: 'root'
 })
-export class AppService {
+export class ServicesService {
 
   constructor(private http: HttpClient, private router: Router) {}
 
+  public getServices(): Observable<any> {
+    return this.http.get(`/api/services`);
+  }
 }
