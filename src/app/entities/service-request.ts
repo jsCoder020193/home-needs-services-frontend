@@ -13,6 +13,11 @@ date: {
   month: any
   day: any
 }
+time: {
+  hour: any,
+  minute: any,
+  second: any
+}
 // description: string;
 // location: {
 //     locationId: string;
@@ -32,13 +37,15 @@ date: {
       this.email = data.email;
       this.zipcode = data.zipcode;
       this.date = data.date;
+      this.time = data.time;
   }
 
   getHomeData(){
       return{
           email: this.email,
           zipcode: this.zipcode,
-          date: this.date
+          date: this.date,
+          time: this.time
       }
   }
 //   setServiceRequest(holiday) {

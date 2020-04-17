@@ -15,7 +15,7 @@ import { RegisterComponent } from './modules/register/register.component'
 import { HomeComponent } from './modules/home/home.component'
 import { AuthenticationService } from './services/authentication.service'
 import { AuthGuardService } from './services/auth-guard.service';
-import { ServiceBookingComponent } from './modules/service-booking/service-booking.component'
+import { ServiceBookingComponent } from './modules/service-booking/service-booking.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },

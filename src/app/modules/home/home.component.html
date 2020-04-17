@@ -10,7 +10,7 @@
                 <div class="form-row">
                   <div class="col-7">
                     <input [ngClass]= "homeForm.get('email').invalid && (homeForm.get('email').dirty || homeForm.get('email').touched)?'invalid':''" id="email" type="text" class="form-control form-control-lg" placeholder="Email" formControlName="email" required>
-                    <div *ngIf="homeForm.get('email').invalid && (homeForm.get('email').dirty || homeForm.get('email').touched)">
+                    <div *ngIf="homeForm.get('email').invalid && (homeForm.get('email').dirty || homeForm.get('email').touched || formSubmitted)">
 
                       <div class="error-msg" *ngIf="homeForm.get('email').errors.required">
                         Please enter an Email.
@@ -24,7 +24,7 @@
                   <div class="col-3">
                     <input [ngClass]= "homeForm.get('zipcode').invalid && (homeForm.get('zipcode').dirty || homeForm.get('zipcode').touched)?'invalid':''" id="zipcode" type="text" class="form-control form-control-lg" placeholder="Zipcode" formControlName="zipcode" required>
 
-                    <div *ngIf="homeForm.get('zipcode').invalid && (homeForm.get('zipcode').dirty || homeForm.get('zipcode').touched)">
+                    <div *ngIf="homeForm.get('zipcode').invalid && (homeForm.get('zipcode').dirty || homeForm.get('zipcode').touched || formSubmitted)">
 
                     <div class="error-msg" *ngIf="homeForm.get('zipcode').errors.required">
                       Zipcode is required.
@@ -32,7 +32,7 @@
                     <div class="error-msg" *ngIf="homeForm.get('zipcode').errors.minlength">
                       Zipcode must be at least 5 characters long.
                     </div>
-                    <div class="error-msg" *ngIf="homeForm.get('zipcode').errors.maxength">
+                    <div class="error-msg" *ngIf="homeForm.get('zipcode').errors.maxlength">
                       Zipcode must be at most 5 characters long.
                     </div>
                     <div class="error-msg" *ngIf="homeForm.get('zipcode').errors.pattern">
@@ -46,23 +46,35 @@
                   </div>
                 </div>
                 <div class="form-row">
-                      <div class="input-group col-4">
+                      <div class="input-group col-4" style="margin-top: 32px;">
                         <input [ngClass]= "homeForm.get('date').invalid && (homeForm.get('date').dirty || homeForm.get('date').touched)?'invalid':''" class="form-control form-control-lg" placeholder="yyyy-mm-dd"
                                name="dp" ngbDatepicker #d="ngbDatepicker" id="date" type="text" formControlName="date" required>
                                 <div class="input-group-append">
                                   <button class="btn btn-lg calendar" (click)="d.toggle()" type="button"></button>
                                 </div>
                       </div> 
+                      <div class="form-group col-3">
+                        <ngb-timepicker [ngClass]= "homeForm.get('time').invalid && (homeForm.get('time').dirty || homeForm.get('time').touched)?'invalid':''" id="time" type="text" [hourStep]="hourStep" [minuteStep]="minuteStep" formControlName="time" required></ngb-timepicker>
+                      </div>
                 </div>
                 <div class="form-row">
                   <div class="input-group col-4">
-                    <div *ngIf="homeForm.get('date').invalid && (homeForm.get('date').dirty || homeForm.get('date').touched)">
+                    <div *ngIf="homeForm.get('date').invalid && (homeForm.get('date').dirty || homeForm.get('date').touched || formSubmitted)">
 
                       <div class="error-msg" *ngIf="homeForm.get('date').errors.required">
                         Please pick a date.
                       </div>
+                      <div class="error-msg" *ngIf="homeForm.get('date').errors['tooEarly']">Please pick a later date.</div>
+                  
                     </div> 
                   </div>
+                  <div class="input-group col-4">
+                  <div *ngIf="homeForm.get('time').invalid && (homeForm.get('time').dirty || homeForm.get('time').touched || formSubmitted)">
+                    <div class="error-msg" *ngIf="homeForm.get('time').errors['required']">Please select a time</div>
+                    <div class="error-msg" *ngIf="homeForm.get('time').errors['tooLate']">Please pick a time before 5 pm.</div>
+                    <div class="error-msg" *ngIf="homeForm.get('time').errors['tooEarly']">Please pick a time after 9 am.</div>
+                  </div>
+                </div>
                 </div>
               </form>
             </div>
