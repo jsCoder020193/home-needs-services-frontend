@@ -1,347 +1,171 @@
 <section class="booking-details center-block main-block">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <h2>Book your Service</h2>
-          <h6>Its time to book a service for your home or apartment.</h6>
-        </div>
-      </div>
-      <div class="row mt-5">
-        <div class="col-md-8 set-sm-fit mb-4">
-          <form action="#">
-            <div class="preference-title">
-              <h4>Service Details</h4>
-            </div>
-            <!-- preferences Wrap -->
-            <div class="preferences">
-              <!-- Styled radio btn 1 -->
-              <div class="preference-radio">
-                <p>What type of Service?</p>
-                <div class="row">
-                  <div *ngFor="let service of serviceCategoeies; index as i;" class="col-xs-12 col-md-4 sm-box">
-                    <div class="styled-radio">
-                      <input type="radio" (change)="handleChange(service)" id="service+{{i}}" name="selector">
-                      <label for="service+{{i}}">{{service.title}}</label>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div *ngIf="subCategoryVisibile" class="preference-radio">
-                <p>What type of Sub Service?</p>
-                <div class="row">
-                  <div *ngFor="let service of selectedSubCategories; index as i;" class="col-xs-12 col-md-4 sm-box">
-                    <div class="styled-radio">
-                      <input type="radio" id="{{i}}" name="selector">
-                      <label for="{{i}}">{{service.title}}</label>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!-- Styled radio btn 2 -->
-              <div class="preference-radio mt-4">
-                <p>How often would you like the service?</p>
-                <div class="row">
-                  <div class="col-md-3 sm-box">
-                    <div class="styled-radio styled-radio2">
-                      <input type="radio" id="one-time" name="selector1">
-                      <label for="one-time">ONE TIME</label>
-                    </div>
-                  </div>
-                  <div class="col-md-3 sm-box">
-                    <div class="styled-radio styled-radio2">
-                      <input type="radio" id="weekly" name="selector1">
-                      <label for="weekly" class="radio-offer" data-toggle="tooltip" data-placement="bottom"
-                        title="SAVE UP TO 15%">WEEKLY</label>
-                      <span><i class="fa fa-star" aria-hidden="true"></i></span>
-                    </div>
-                  </div>
-                  <div class="col-md-3 sm-box">
-                    <div class="styled-radio styled-radio2">
-                      <input type="radio" id="bi-weekly" name="selector1">
-                      <label for="bi-weekly">BI-WEEKLY</label>
-                    </div>
-                  </div>
-                  <div class="col-md-3 sm-box">
-                    <div class="styled-radio styled-radio2">
-                      <input type="radio" id="monthly" name="selector1">
-                      <label for="monthly">MONTHLY</label>
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-3 sm-box">
-                    <div class="styled-radio styled-radio2">
-                      <input type="radio" id="monthly" name="selector1">
-                      <label for="monthly">QUARTERLY</label>
-                    </div>
-                  </div>
-                  <div class="col-md-3 sm-box">
-                    <div class="styled-radio styled-radio2">
-                      <input type="radio" id="monthly" name="selector1">
-                      <label for="monthly">HALF YEARLY</label>
-                    </div>
-                  </div>
-                  <div class="col-md-3 sm-box">
-                    <div class="styled-radio styled-radio2">
-                      <input type="radio" id="monthly" name="selector1">
-                      <label for="monthly">YEARLY</label>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!-- //Styled radio btn 2 -->
-              <div class="row">
-                <!-- Home about -->
-                <div class="col-md-12">
-                  <div class="preference-about_home">
-                    <h4>Tell us about your home</h4>
-                  </div>
-                </div>
-              </div>
-              <!--// Styled Check box -->
-              <div class="preference-radio mt-4">
-                <!-- Comment box -->
-                <p>Give a brief description of the job. <span class="optional-fade">(optional)</span></p>
-                <div class="row">
-                  <div class="col-md-12">
-                    <textarea class="optinal-textarea"></textarea>
-                  </div>
-                </div>
-              </div>
-              <!--// Comment box -->
-              <div class="row">
-                <div class="col-md-12">
-                  <div class="preference-about_home">
-                    <h4>Choose hours and dates</h4>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <!-- Houres and Calendar -->
-                <div class="col-md-6">
-                  <div class="preference-radio mt-4">
-                    <p>How many hours?</p>
-                    <div class="preference-quantity houres">
-                      <div class="counter js-counter">
-                        <div class="counter__item">
-                          <a class="counter__minus js-counter-btn fa fa-minus" aria-hidden="true" data-action="minus"></a>
-                        </div>
-                        <div class="counter__item counter__item--center">
-                          <input class="counter__value js-counter-value" type="text" value="1" disabled="disabled"
-                            tabindex="-1" />
-                        </div>
-                        <div class="counter__item">
-                          <a class="counter__plus js-counter-btn fa fa-plus" aria-hidden="true" data-action="plus"></a>
-                        </div>
-                      </div>
-                      <p>his is what we think the best based on your preferences. Feel free to change it if you want.</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="preference-radio mt-4">
-                    <p>Choose a date?</p>
-                    <div class="form-group">
-                      <div class="col-xs-5 date">
-                        <div class="input-group input-append date" id="datePicker">
-                          <input type="text" class="form-control" name="date" />
-                          <span class="input-group-addon add-on"><i class="fa fa-calendar" aria-hidden="true"></i></span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!--// Houres and Calendar -->
-              <div class="preference-radio mt-4">
-                <!-- Styled radio btn 3 -->
-                <p>When do you like to start?</p>
-                <div class="row">
-                  <div class="col-md-3 sm-box">
-                    <div class="styled-radio styled-radio2">
-                      <input type="radio" id="timer1" name="selector2">
-                      <label for="timer1">7:00 AM</label>
-                    </div>
-                  </div>
-                  <div class="col-md-3 sm-box">
-                    <div class="styled-radio styled-radio2">
-                      <input type="radio" id="timer2" name="selector2">
-                      <label for="timer2">9:00 AM</label>
-                    </div>
-                  </div>
-                  <div class="col-md-3 sm-box">
-                    <div class="styled-radio styled-radio2 radio-disable">
-                      <input type="radio" id="timer3" name="selector2" disabled>
-                      <label for="timer3" disabled>11:00 PM</label>
-                    </div>
-                  </div>
-                  <div class="col-md-3 sm-box">
-                    <div class="styled-radio styled-radio2">
-                      <input type="radio" id="timer4" name="selector2">
-                      <label for="timer4">1:00 PM</label>
-                    </div>
-                  </div>
-                </div>
-                <div class="row mt-2">
-                  <div class="col-md-3 sm-box">
-                    <div class="styled-radio styled-radio2">
-                      <input type="radio" id="timer5" name="selector2">
-                      <label for="timer5">3:00 PM</label>
-                    </div>
-                  </div>
-                  <div class="col-md-3 sm-box">
-                    <div class="styled-radio styled-radio2">
-                      <input type="radio" id="timer6" name="selector2">
-                      <label for="timer6">5:00 PM</label>
-                    </div>
-                  </div>
-                  <div class="col-md-3 sm-box">
-                    <div class="styled-radio styled-radio2">
-                      <input type="radio" id="timer7" name="selector2">
-                      <label for="timer7">7:00 PM</label>
-                    </div>
-                  </div>
-                  <div class="col-md-3 sm-box">
-                    <div class="styled-radio styled-radio2 radio-disable">
-                      <input type="radio" id="timer8" name="selector2" disabled>
-                      <label for="timer8" disabled>9:00 PM</label>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!--// Styled radio btn 3 -->
-              <div class="row">
-                <div class="col-md-12">
-                  <div class="preference-about_home">
-                    <h4>Payment Method</h4>
-                    <div class="payment-icon">
-                      <i class="fa fa-lock" aria-hidden="true"></i>
-                      <p>256 bit Secure<br> SSL Encryption</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="preference-radio mt-4">
-                <!-- Card Details -->
-                <p>Credit Card details</p>
-                <div class="row">
-                  <div class="col-md-12">
-                    <div class="card-details">
-                      <input type="number" placeholder="Card number" class="card-number card-num">
-                      <img src="images/visa.png" class="visa-img" alt="visa-icon">
-                    </div>
-                  </div>
-                </div>
-                <div class="row mt-3">
-                  <div class="col-md-3">
-                    <div class="card-details">
-                      <input type="number" placeholder="MM/YY" class="card-number">
-                    </div>
-                  </div>
-                  <div class="col-md-3">
-                    <div class="card-details">
-                      <input type="number" placeholder="CVV" class="card-number">
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="card-details">
-                      <input type="text" placeholder="Name as on Card" class="card-number">
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!--// Card Details -->
-              <div class="preference-radio mt-5">
-                <!-- Personal Details -->
-                <p>Pesonal Details</p>
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="card-details">
-                      <input type="email" placeholder="Email Address" class="card-number">
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="card-details">
-                      <input type="number" placeholder="Phone Number" class="card-number">
-                    </div>
-                  </div>
-                </div>
-                <div class="row mt-3">
-                  <div class="col-md-9">
-                    <div class="card-details">
-                      <input type="text" placeholder="Your Full Address" class="card-number">
-                    </div>
-                  </div>
-                  <div class="col-md-3">
-                    <div class="card-details">
-                      <input type="number" placeholder="10023" class="card-number">
-                    </div>
-                  </div>
-                </div>
-                <div class="row mt-3">
-                  <div class="col-md-12">
-                    <div class="terms-reminder">
-                      <label class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input">
-                        <span class="custom-control-indicator"></span>
-                        <span class="custom-control-description">Check this custom checkbox</span>
-                      </label>
-                    </div>
-                    <div class="terms-reminder">
-                      <label class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input">
-                        <span class="custom-control-indicator"></span>
-                        <span class="custom-control-description">I read and agree to the <a href="#">terms &
-                            conditions</a></span>
-                      </label>
-                    </div>
-                  </div>
-                </div>
-                <div class="row mt-4">
-                  <div class="col-md-12">
-                    <button class="btn btn-block complete-booking" type="submit"><span
-                        class="pe-7s-unlock"></span>Complete Booking <span class="d-none d-md-inline-block">via Secure
-                        Server</span></button>
-                  </div>
-                </div>
-              </div>
-              <!--// Personal Details -->
-            </div>
-            <!--// preferences Wrap -->
-          </form>
-        </div>
-  
-        <!-- Booking Summary -->
-        <!-- <div class="col-md-4 set-sm-fit">
-          <div data-toggle="affix">
-            <div class="preference-title">
-              <h4>Booking Summary</h4>
-            </div>
-            <div class="fesilities">
-              <ul>
-                <li><i class="fa fa-paint-brush" aria-hidden="true"></i>
-                  <p>Standard Cleaning</p>
-                </li>
-                <li><i class="fa fa-calendar" aria-hidden="true"></i>
-                  <p>Tues. 12/31/2016 @ 9:00 AM</p>
-                </li>
-                <li><i class="fa fa-clock-o" aria-hidden="true"></i>
-                  <p>4 hours</p>
-                </li>
-                <li><i class="fa fa-refresh" aria-hidden="true"></i>
-                  <p>One time</p>
-                </li>
-                <li><i class="fa fa-map-marker" aria-hidden="true"></i>
-                  <p>1650 Broadway Apt. 23B New York, NY 10023</p>
-                </li>
-              </ul>
-              <h4>Total cost<span>$329</span></h4>
-            </div>
-          </div>
-  
-        </div> -->
-        <!--// Booking Summary -->
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h2>Book your Service</h2>
+        <h6>Its time to book a service for your home or apartment.</h6>
       </div>
     </div>
-  </section>
-  
+    <div class="row mt-5 justify-content-center">
+      <div class="col-md-8 set-sm-fit mb-4">
+        <form [formGroup]="serviceBookingForm" (ngSubmit)="onSubmit()">
+          <div class="preference-title">
+            <h4>Service Details</h4>
+          </div>
+          <div class="preferences">
+            <div class="preference-radio">
+              <p>What type of Service?</p>
+              <div class="row">
+                <div *ngFor="let service of serviceCategoeies; index as i;" class="col-xs-12 col-md-4 sm-box">
+                  <div class="styled-radio">
+                    <input type="radio" (change)="handleChange(service)" id="service+{{i}}" name="selector">
+                    <label for="service+{{i}}">{{service.title}}</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              *ngIf="!subCategoryVisibile && serviceBookingForm.get('service_id').invalid && (serviceBookingForm.get('service_id').dirty || serviceBookingForm.get('service_id').touched || formSubmitted)">
+              <div class="error-msg" *ngIf="serviceBookingForm.get('service_id').errors.required">
+                Please select a service.
+              </div>
+            </div>
+            <div *ngIf="subCategoryVisibile" class="preference-radio">
+              <p>What type of Sub Service?</p>
+              <div class="row">
+                <div *ngFor="let service of selectedSubCategories; index as i;" class="col-xs-12 col-md-4 sm-box">
+                  <div class="styled-radio">
+                    <input type="radio" id="{{i}}" name="selector" (change)="handleSubServiceChange(service)">
+                    <label for="{{i}}">{{service.title}}</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="subCategoryVisibile && serviceBookingForm.get('service_id').invalid && (serviceBookingForm.get('service_id').dirty || serviceBookingForm.get('service_id').touched || formSubmitted)">
+              <div class="error-msg" *ngIf="serviceBookingForm.get('service_id').errors.required">
+                Please select a sub service.
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="preference-about_home">
+                  <h4>Tell us about your home</h4>
+                </div>
+              </div>
+            </div>
+            <div class="preference-radio mt-4">
+              <!-- Comment box -->
+              <p>Give a brief description of the job. <span class="optional-fade">(optional)</span></p>
+              <div class="row">
+                <div class="col-md-12">
+                  <textarea class="optinal-textarea" formControlName="description"></textarea>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="preference-about_home">
+                  <h4>Choose hours and dates</h4>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="preference-radio mt-4">
+                  <p>Choose a date?</p>
+                  <div class="form-group">
+                    <div class="col-xs-5 date">
+                      <!-- <div class="input-group input-append date" id="datePicker">
+                        <input type="text" class="form-control" name="date" />
+                        <span class="input-group-addon add-on"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+                      </div> -->
+                      <div class="input-group input-append" style="margin-top: 50px;">
+                        <input
+                          [ngClass]="serviceBookingForm.get('date').invalid && (serviceBookingForm.get('date').dirty || serviceBookingForm.get('date').touched)?'invalid':''"
+                          class="form-control form-control-lg" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker
+                          #d="ngbDatepicker" id="date" type="text" formControlName="date" required>
+                        <div class="input-group-append">
+                          <button class="btn btn-lg calendar" (click)="d.toggle()" type="button"></button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div *ngIf="serviceBookingForm.get('date').invalid && (serviceBookingForm.get('date').dirty || serviceBookingForm.get('date').touched || formSubmitted)">
+                  <div class="error-msg" *ngIf="serviceBookingForm.get('date').errors.required">
+                    Please pick a date.
+                  </div>
+                  <div class="error-msg" *ngIf="serviceBookingForm.get('date').errors['tooEarly']">Please pick a later date.
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="preference-radio mt-4">
+                  <p>When would you like to start?</p>
+                  <div class="form-group">
+                    <ngb-timepicker
+                      [ngClass]="serviceBookingForm.get('time').invalid && (serviceBookingForm.get('time').dirty || serviceBookingForm.get('time').touched)?'invalid':''"
+                      id="time" type="text" [hourStep]="hourStep" [minuteStep]="minuteStep" formControlName="time"
+                      required></ngb-timepicker>
+                  </div>
+                </div>
+                <div *ngIf="serviceBookingForm.get('time').invalid && (serviceBookingForm.get('time').dirty || serviceBookingForm.get('time').touched || formSubmitted)">
+                  <div class="error-msg" *ngIf="serviceBookingForm.get('time').errors['required']">Please select a time</div>
+                  <div class="error-msg" *ngIf="serviceBookingForm.get('time').errors['tooLate']">Please pick a time before 5 pm.</div>
+                  <div class="error-msg" *ngIf="serviceBookingForm.get('time').errors['tooEarly']">Please pick a time after 9 am.</div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="preference-radio mt-4">
+                  <!-- Styled radio btn 3 -->
+                  <p>How many hours?</p>
+                  <div class="preference-quantity houres">
+                    <div class="counter js-counter">
+                      <div class="counter__item">
+                        <a class="counter__minus js-counter-btn fa fa-minus" aria-hidden="true" data-action="minus"></a>
+                      </div>
+                      <div class="counter__item counter__item--center">
+                        <input class="counter__value js-counter-value" type="text" tabindex="-1"
+                          formControlName="no_of_hours" required />
+                      </div>
+                      <div class="counter__item">
+                        <a class="counter__plus js-counter-btn fa fa-plus" aria-hidden="true" data-action="plus"></a>
+                      </div>
+                    </div>
+                    <p>This is what we think the best based on your preferences. Feel free to change it if you want.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="preference-radio mt-4">
+              <p>How often would you like the service?</p>
+              <div class="row">
+                <div *ngFor="let f of frequency; index as i;" class="col-md-3 sm-box">
+                  <div class="styled-radio styled-radio2">
+                    <input type="radio" (change)="handleFrequencyChange(f)" id="f+{{i}}" name="selector1">
+                    <label for="f+{{i}}">{{f}}</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="serviceBookingForm.get('frequency').invalid && (serviceBookingForm.get('frequency').dirty || serviceBookingForm.get('frequency').touched || formSubmitted)">
+              <div class="error-msg" *ngIf="serviceBookingForm.get('frequency').errors.required">
+                Please select a value.
+              </div>
+            </div>
+          </div>
+          <div class="row mt-4 justify-content-center">
+            <div class="col-md-8">
+              <button type="submit" class="btn btn-block complete-booking"><span class="pe-7s-unlock"></span>Complete
+                Booking <span class="d-none d-md-inline-block">via Secure
+                  Server</span></button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

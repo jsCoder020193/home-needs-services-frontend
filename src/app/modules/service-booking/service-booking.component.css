@@ -1,0 +1,44 @@
+.complete-booking {
+    background: #88ce43;
+    -webkit-transition: 0.3s;
+    -o-transition: 0.3s;
+    transition: 0.3s;
+    padding: 10px;
+    text-align: center;
+    display: block;
+    color: #ffffff;
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin: 0;
+    -webkit-appearance: none !important;
+    border: none;
+}
+
+.fa {
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.invalid{
+    border: 2px solid #a94442;
+  }
+  .error-msg{
+      color: #a94442;
+  }
+  
+  .calendar{
+    background-image: url("../../../assets/images/date_icon2.png");
+    background-size: cover;
+    width: 48px;
+    height: 48px;
+    background-color: white;
+  }
+  
+  .btn-primary{
+    background-color: #0062c7;
+      border-color: #0062c7;
+  }

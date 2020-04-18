@@ -18,14 +18,10 @@ time: {
   minute: any,
   second: any
 }
-// description: string;
-// location: {
-//     locationId: string;
-//     processingUnitId: string;
-//     locationName: any[];
-//     locationType: string;
-//     locationDescription: string;
-// };
+service_id: string;
+description: string;
+no_of_hours: any;
+frequency: any;
 
 //   isEdit: boolean;
 
@@ -33,19 +29,35 @@ time: {
 
   constructor() { }
 
+  setEmailZipcode(data){
+    this.email = data.email;
+    this.zipcode = data.zipcode;
+  }
+
+  getEmailZipcode(){
+    return{
+      email: this.email,
+      zipcode: this.zipcode,
+    }
+  }
+
   setHomeData(data){
-      this.email = data.email;
-      this.zipcode = data.zipcode;
       this.date = data.date;
       this.time = data.time;
+      this.service_id = data.service_id;
+      this.description = data.description;
+      this.no_of_hours = data.no_of_hours;
+      this.frequency = data.frequency;
   }
 
   getHomeData(){
       return{
-          email: this.email,
-          zipcode: this.zipcode,
           date: this.date,
-          time: this.time
+          time: this.time,
+          service_id: this.service_id,
+          description: this.description,
+          no_of_hours: this.no_of_hours,
+          frequency: this.frequency
       }
   }
 //   setServiceRequest(holiday) {

@@ -42,7 +42,7 @@ export class HomeComponent implements OnInit{
 
     if(status == 'VALID'){
       //navigate to service booking
-        self._ServiceRequest.setHomeData(self.homeForm.value);
+        self._ServiceRequest.setEmailZipcode(self.homeForm.value);
         this.router.navigateByUrl('/service-request');
     }else{
       //form has errors
