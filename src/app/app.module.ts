@@ -16,11 +16,13 @@ import { HomeComponent } from './modules/home/home.component'
 import { AuthenticationService } from './services/authentication.service'
 import { AuthGuardService } from './services/auth-guard.service';
 import { ServiceBookingComponent } from './modules/service-booking/service-booking.component';
+import { CustomerRegistrationComponent } from './modules/customer-registration/customer-registration/customer-registration.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
+  { path: 'register/sp', component: RegisterComponent },
+  { path: 'register/customer', component: CustomerRegistrationComponent },
   {
     path: 'profile',
     component: ProfileComponent,
@@ -39,7 +41,8 @@ const routes: Routes = [
     LoginComponent,
     RegisterComponent,
     HomeComponent,
-    ServiceBookingComponent
+    ServiceBookingComponent,
+    CustomerRegistrationComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,15 @@
+.complete-booking {
+    background: #88ce43;
+    -webkit-transition: 0.3s;
+    -o-transition: 0.3s;
+    transition: 0.3s;
+    padding: 10px;
+    text-align: center;
+    display: block;
+    color: #ffffff;
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin: 0;
+    -webkit-appearance: none !important;
+    border: none;
+}
