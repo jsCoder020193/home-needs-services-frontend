@@ -17,6 +17,7 @@ import { AuthenticationService } from './services/authentication.service'
 import { AuthGuardService } from './services/auth-guard.service';
 import { ServiceBookingComponent } from './modules/service-booking/service-booking.component';
 import { CustomerRegistrationComponent } from './modules/customer-registration/customer-registration/customer-registration.component';
+import { ModalComponent } from './modules/modal/modal.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -42,7 +43,8 @@ const routes: Routes = [
     RegisterComponent,
     HomeComponent,
     ServiceBookingComponent,
-    CustomerRegistrationComponent
+    CustomerRegistrationComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule,
