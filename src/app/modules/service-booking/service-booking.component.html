@@ -215,7 +215,7 @@
                   <div class="col-md-4">
                     <div class="card-details">
                       <!-- <input type="text" placeholder="State" class="card-number"> -->
-                      <select class="card-number" id="statesDropdown" style="height: 68px;" [ngClass]="serviceBookingForm.get('service_state').invalid && (serviceBookingForm.get('service_state').dirty || serviceBookingForm.get('service_state').touched || formSubmitted)?'invalid':''" formControlName="service_state">
+                      <select class="card-number" id="statesDropdown" style="height: 48px;" [ngClass]="serviceBookingForm.get('service_state').invalid && (serviceBookingForm.get('service_state').dirty || serviceBookingForm.get('service_state').touched || formSubmitted)?'invalid':''" formControlName="service_state">
                         <option selected>State</option>
                         <option *ngFor="let state of states; index as i;" value="{{i}}">{{state['name']}}</option>
                       </select>

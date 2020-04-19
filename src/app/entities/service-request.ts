@@ -38,6 +38,10 @@ service_state: any;
       this.description = data.description;
       this.no_of_hours = data.no_of_hours;
       this.frequency = data.frequency;
+      this.service_address_line_1 = data.service_address_line_1;
+      this.service_address_line_2 = data.service_address_line_2;
+      this.service_city = data.service_city;
+      this.service_state = data.service_state;
   }
 
   getHomeData(){
@@ -49,12 +53,17 @@ service_state: any;
           service_id: this.service_id || '',
           description: this.description || '',
           no_of_hours: this.no_of_hours || '',
-          frequency: this.frequency
+          frequency: this.frequency,
+          service_address_line_1: this.service_address_line_1 || '',
+          service_address_line_2: this.service_address_line_2 || '',
+          service_city: this.service_city || '',
+          service_state: this.service_state || ''
       }
   }
 
   generatePayload(serviceRequest) {
-
+    //if service and home address same create home address payload 
+    //modify field values
     const payload = {
       _id: serviceRequest._id,
       name: serviceRequest.name,
