@@ -178,6 +178,63 @@
                 Please select a value.
               </div>
             </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="preference-about_home">
+                  <h4>Service Location</h4>
+                </div>
+              </div>
+            </div>
+            <div class="preference-radio mt-5">
+              <!-- Personal Details -->
+              <p>Give us a few more details about your service location</p>
+              <div class="row">
+                  <div class="col-md-12">
+                      <div class="card-details">
+                          <input type="text" placeholder="Address Line 1" class="card-number" [ngClass]="serviceBookingForm.get('service_address_line_1').invalid && (serviceBookingForm.get('service_address_line_1').dirty || serviceBookingForm.get('service_address_line_1').touched || formSubmitted)?'invalid':''" formControlName="service_address_line_1">
+                      </div>
+                  </div>
+                  <div *ngIf="serviceBookingForm.get('service_address_line_1').invalid && (serviceBookingForm.get('service_address_line_1').dirty || serviceBookingForm.get('service_address_line_1').touched || formSubmitted)">
+                  <div class="error-msg" *ngIf="serviceBookingForm.get('service_address_line_1').errors['required']">Please enter a address.
+                  </div>
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-md-12">
+                  <div class="card-details">
+                      <input type="text" placeholder="Address Line 2" class="card-number" formControlName="service_address_line_2">
+                  </div>
+              </div>
+              </div>
+              <div class="row mt-3">
+                  <div class="col-md-4">
+                      <div class="card-details">
+                          <input type="text" placeholder="City" class="card-number" [ngClass]="serviceBookingForm.get('service_city').invalid && (serviceBookingForm.get('service_city').dirty || serviceBookingForm.get('service_city').touched || formSubmitted)?'invalid':''" formControlName="service_city">
+                      </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="card-details">
+                      <!-- <input type="text" placeholder="State" class="card-number"> -->
+                      <select class="card-number" id="statesDropdown" style="height: 68px;" [ngClass]="serviceBookingForm.get('service_state').invalid && (serviceBookingForm.get('service_state').dirty || serviceBookingForm.get('service_state').touched || formSubmitted)?'invalid':''" formControlName="service_state">
+                        <option selected>State</option>
+                        <option *ngFor="let state of states; index as i;" value="{{i}}">{{state['name']}}</option>
+                      </select>
+                  </div>
+                  </div>
+                  <div class="col-md-4">
+                      <div class="card-details">
+                          <input type="text" placeholder="Zipcode" class="card-number" [ngClass]="serviceBookingForm.get('service_zipcode').invalid && (serviceBookingForm.get('service_zipcode').dirty || serviceBookingForm.get('service_zipcode').touched || formSubmitted)?'invalid':''" formControlName="service_zipcode">
+                      </div>
+                  </div>
+              </div>
+
+              <div class="row mt-3">
+                <div *ngIf="serviceBookingForm.get('service_city').invalid && (serviceBookingForm.get('service_city').dirty || serviceBookingForm.get('service_city').touched || formSubmitted)">
+                  <div class="error-msg" *ngIf="serviceBookingForm.get('service_city').errors['required']">Please enter a city.
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
           <div class="row mt-4 justify-content-center">
             <div class="col-md-8">

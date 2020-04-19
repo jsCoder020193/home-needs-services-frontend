@@ -22,20 +22,20 @@
                     
                   </div>
                   <div class="col-3">
-                    <input [ngClass]= "homeForm.get('zipcode').invalid && (homeForm.get('zipcode').dirty || homeForm.get('zipcode').touched)?'invalid':''" id="zipcode" type="text" class="form-control form-control-lg" placeholder="Zipcode" formControlName="zipcode" required>
+                    <input [ngClass]= "homeForm.get('service_zipcode').invalid && (homeForm.get('service_zipcode').dirty || homeForm.get('service_zipcode').touched)?'invalid':''" id="zipcode" type="text" class="form-control form-control-lg" placeholder="Zipcode" formControlName="service_zipcode" required>
 
-                    <div *ngIf="homeForm.get('zipcode').invalid && (homeForm.get('zipcode').dirty || homeForm.get('zipcode').touched || formSubmitted)">
+                    <div *ngIf="homeForm.get('service_zipcode').invalid && (homeForm.get('service_zipcode').dirty || homeForm.get('service_zipcode').touched || formSubmitted)">
 
-                    <div class="error-msg" *ngIf="homeForm.get('zipcode').errors.required">
+                    <div class="error-msg" *ngIf="homeForm.get('service_zipcode').errors.required">
                       Zipcode is required.
                     </div>
-                    <div class="error-msg" *ngIf="homeForm.get('zipcode').errors.minlength">
+                    <div class="error-msg" *ngIf="homeForm.get('service_zipcode').errors.minlength">
                       Zipcode must be at least 5 characters long.
                     </div>
-                    <div class="error-msg" *ngIf="homeForm.get('zipcode').errors.maxlength">
+                    <div class="error-msg" *ngIf="homeForm.get('service_zipcode').errors.maxlength">
                       Zipcode must be at most 5 characters long.
                     </div>
-                    <div class="error-msg" *ngIf="homeForm.get('zipcode').errors.pattern">
+                    <div class="error-msg" *ngIf="homeForm.get('service_zipcode').errors.pattern">
                       Zipcode can only be numbers.
                     </div>
                   </div>

@@ -7,7 +7,7 @@ export class ServiceRequest {
 
   // _id: string;
 email: string;
-zipcode: any;
+service_zipcode: any;
 date: {
   year: any
   month: any
@@ -22,22 +22,16 @@ service_id: string;
 description: string;
 no_of_hours: any;
 frequency: any;
+service_address_line_1: any;
+service_address_line_2: any;
+service_city: any;
+service_state: any;
 
   constructor() { }
 
-  setEmailZipcode(data){
-    this.email = data.email;
-    this.zipcode = data.zipcode;
-  }
-
-  getEmailZipcode(){
-    return{
-      email: this.email || '',
-      zipcode: this.zipcode || '',
-    }
-  }
-
   setHomeData(data){
+      this.email = data.email;
+      this.service_zipcode = data.zipcode;
       this.date = data.date;
       this.time = data.time;
       this.service_id = data.service_id;
@@ -48,6 +42,8 @@ frequency: any;
 
   getHomeData(){
       return{
+          email: this.email || '',
+          zipcode: this.service_zipcode || '',
           date: this.date || '',
           time: this.time || '',
           service_id: this.service_id || '',

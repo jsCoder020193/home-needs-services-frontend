@@ -10,6 +10,7 @@ import {ServiceRequest} from '../../entities/service-request';
 import {Services} from '../../entities/services';
 import {ServiceBookingService} from '../../services/service-booking.service';
 import{ModalComponent} from '../modal/modal.component';
+import {States} from '../../entities/states';
 
 @Component({
   selector: 'app-service-booking',
@@ -35,6 +36,7 @@ export class ServiceBookingComponent implements OnInit {
   selectedSubService;
   emergencyValues = ['YES','NO'];
   isEmergency;
+  states = [];
 
   frequency = ['ONE TIME','WEEKLY','BI-WEEKLY','MONTHLY','QUARTERLY','HALF YEARLY','YEARLY'];
   selectedFrequency;
@@ -46,14 +48,16 @@ export class ServiceBookingComponent implements OnInit {
     private _services:Services, 
     private router: Router,
     private serviceBookingService: ServiceBookingService,
-    private modalService: NgbModal) { }
+    private modalService: NgbModal,
+    private _states: States) { }
 
   ngOnInit(): void {
     const self = this;
-    self.homeData = self._ServiceRequest.getEmailZipcode();
+    self.homeData = self._ServiceRequest.getHomeData();
     self.buildForm();
     self.formSubmitted = false;
     self.isEmergency = true;
+    self.states = self._states.getStates();
     self.serviceCategoeies = self._services.getParentServices();
     self.serviceSubCategories = self._services.getChildServices();
     self.subCategoryVisibile = false;
@@ -68,10 +72,15 @@ export class ServiceBookingComponent implements OnInit {
       'time': [this.time,[Validators.required]],
       'emergency': ['',[Validators.required]],
       'no_of_hours': [{value: '1', disabled: true}],
-      'frequency': ['', [Validators.required]]
+      'frequency': ['', [Validators.required]],
+      'service_zipcode': [{value: self.homeData['service_zipcode']?self.homeData['service_zipcode']:''}],
+      'service_address_line_1': ['', [Validators.required]],
+      'service_address_line_2': [''],
+      'service_city': ['', [Validators.required]],
+      'service_state': ['State', [Validators.required]]
     });
     self.serviceBookingForm.patchValue({email: self.homeData['email']});
-    self.serviceBookingForm.patchValue({zipcode: self.homeData['zipcode']});
+    self.serviceBookingForm.patchValue({service_zipcode: self.homeData['service_zipcode']});
   }
 
   handleChange(service){
@@ -106,8 +115,8 @@ export class ServiceBookingComponent implements OnInit {
     const status = self.serviceBookingForm.status;
     const formData = this.serviceBookingForm.value;
     formData['email'] = self.homeData['email'];
-    formData['zipcode'] = self.homeData['zipcode'];
 
+    console.log(formData);
     if(status == 'VALID'){
       var dateValid = self.validateDate();
       var timeValid = self.validateTime();
