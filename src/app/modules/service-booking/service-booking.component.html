@@ -41,7 +41,8 @@
                 </div>
               </div>
             </div>
-            <div *ngIf="subCategoryVisibile && serviceBookingForm.get('service_id').invalid && (serviceBookingForm.get('service_id').dirty || serviceBookingForm.get('service_id').touched || formSubmitted)">
+            <div
+              *ngIf="subCategoryVisibile && serviceBookingForm.get('service_id').invalid && (serviceBookingForm.get('service_id').dirty || serviceBookingForm.get('service_id').touched || formSubmitted)">
               <div class="error-msg" *ngIf="serviceBookingForm.get('service_id').errors.required">
                 Please select a sub service.
               </div>
@@ -91,11 +92,13 @@
                     </div>
                   </div>
                 </div>
-                <div *ngIf="serviceBookingForm.get('date').invalid && (serviceBookingForm.get('date').dirty || serviceBookingForm.get('date').touched || formSubmitted)">
+                <div
+                  *ngIf="serviceBookingForm.get('date').invalid && (serviceBookingForm.get('date').dirty || serviceBookingForm.get('date').touched || formSubmitted)">
                   <div class="error-msg" *ngIf="serviceBookingForm.get('date').errors.required">
                     Please pick a date.
                   </div>
-                  <div class="error-msg" *ngIf="serviceBookingForm.get('date').errors['tooEarly']">Please pick a later date.
+                  <div class="error-msg" *ngIf="serviceBookingForm.get('date').errors['tooEarly']">Please pick a later
+                    date.
                   </div>
                 </div>
               </div>
@@ -109,15 +112,33 @@
                       required></ngb-timepicker>
                   </div>
                 </div>
-                <div *ngIf="serviceBookingForm.get('time').invalid && (serviceBookingForm.get('time').dirty || serviceBookingForm.get('time').touched || formSubmitted)">
-                  <div class="error-msg" *ngIf="serviceBookingForm.get('time').errors['required']">Please select a time</div>
-                  <div class="error-msg" *ngIf="serviceBookingForm.get('time').errors['tooLate']">Please pick a time before 5 pm.</div>
-                  <div class="error-msg" *ngIf="serviceBookingForm.get('time').errors['tooEarly']">Please pick a time after 9 am.</div>
+                <div
+                  *ngIf="serviceBookingForm.get('time').invalid && (serviceBookingForm.get('time').dirty || serviceBookingForm.get('time').touched || formSubmitted)">
+                  <div class="error-msg" *ngIf="serviceBookingForm.get('time').errors['required']">Please select a time
+                  </div>
+                  <div class="error-msg" *ngIf="serviceBookingForm.get('time').errors['tooLate']">Please pick a time
+                    before 5 pm.</div>
+                  <div class="error-msg" *ngIf="serviceBookingForm.get('time').errors['tooEarly']">Please pick a time
+                    after 9 am.</div>
                 </div>
               </div>
             </div>
             <div class="row">
               <div class="col-md-6">
+                <div class="preference-radio mt-4">
+                  <!-- Styled radio btn 3 -->
+                  <p>Is this an emergency?</p>
+                  <div class="row">
+                  <div *ngFor="let e of emergencyValues; index as i;" class="col-md-6 sm-box">
+                    <div class="styled-radio styled-radio2">
+                      <input type="radio" (change)="changeEmergencyOption(e)" id="e+{{i}}" name="selector2">
+                      <label for="e+{{i}}">{{e}}</label>
+                    </div>
+                  </div>
+                </div>
+                </div>
+              </div>
+              <div *ngIf="!isEmergency" class="col-md-6">
                 <div class="preference-radio mt-4">
                   <!-- Styled radio btn 3 -->
                   <p>How many hours?</p>
@@ -151,7 +172,8 @@
                 </div>
               </div>
             </div>
-            <div *ngIf="serviceBookingForm.get('frequency').invalid && (serviceBookingForm.get('frequency').dirty || serviceBookingForm.get('frequency').touched || formSubmitted)">
+            <div
+              *ngIf="serviceBookingForm.get('frequency').invalid && (serviceBookingForm.get('frequency').dirty || serviceBookingForm.get('frequency').touched || formSubmitted)">
               <div class="error-msg" *ngIf="serviceBookingForm.get('frequency').errors.required">
                 Please select a value.
               </div>
@@ -159,9 +181,9 @@
           </div>
           <div class="row mt-4 justify-content-center">
             <div class="col-md-8">
-              <button type="submit" class="btn btn-block complete-booking"><span class="pe-7s-unlock"></span>Complete
-                Booking <span class="d-none d-md-inline-block">via Secure
-                  Server</span></button>
+              <button type="submit" class="btn btn-block complete-booking">
+                <span class="pe-7s-unlock"></span>Complete Booking <span class="d-none d-md-inline-block">via Secure Server</span>
+                </button>
             </div>
           </div>
         </form>

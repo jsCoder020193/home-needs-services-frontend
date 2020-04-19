@@ -4,9 +4,12 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 import {NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
 import {NgbTimeStruct} from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import {ServiceRequest} from '../../entities/service-request';
 import {Services} from '../../entities/services';
+import {ServiceBookingService} from '../../services/service-booking.service';
+import{ModalComponent} from '../modal/modal.component';
 
 @Component({
   selector: 'app-service-booking',
@@ -30,6 +33,8 @@ export class ServiceBookingComponent implements OnInit {
   selectedSubCategories = [];
   subCategoryVisibile;
   selectedSubService;
+  emergencyValues = ['YES','NO'];
+  isEmergency;
 
   frequency = ['ONE TIME','WEEKLY','BI-WEEKLY','MONTHLY','QUARTERLY','HALF YEARLY','YEARLY'];
   selectedFrequency;
@@ -39,13 +44,16 @@ export class ServiceBookingComponent implements OnInit {
     private activatedRoute: ActivatedRoute, 
     private _ServiceRequest: ServiceRequest, 
     private _services:Services, 
-    private router: Router) { }
+    private router: Router,
+    private serviceBookingService: ServiceBookingService,
+    private modalService: NgbModal) { }
 
   ngOnInit(): void {
     const self = this;
     self.homeData = self._ServiceRequest.getEmailZipcode();
     self.buildForm();
     self.formSubmitted = false;
+    self.isEmergency = true;
     self.serviceCategoeies = self._services.getParentServices();
     self.serviceSubCategories = self._services.getChildServices();
     self.subCategoryVisibile = false;
@@ -58,7 +66,8 @@ export class ServiceBookingComponent implements OnInit {
       'description': [''],
       'date': [this.date,[Validators.required]],
       'time': [this.time,[Validators.required]],
-      'no_of_hours': [{value: '1', disabled: true}, [Validators.required]],
+      'emergency': ['',[Validators.required]],
+      'no_of_hours': [{value: '1', disabled: true}],
       'frequency': ['', [Validators.required]]
     });
     self.serviceBookingForm.patchValue({email: self.homeData['email']});
@@ -82,9 +91,14 @@ export class ServiceBookingComponent implements OnInit {
     this.serviceBookingForm.patchValue({frequency: this.selectedFrequency});
   }
 
-  // goToCustomerRegistration(){
-  //   console.log("from submit")
-  // }
+  changeEmergencyOption(option){
+    if(option == 'NO')
+      this.isEmergency = false;
+    else
+      this.isEmergency = true;
+
+    this.serviceBookingForm.patchValue({emergency: option.toString().toLowerCase()});
+  }
 
   onSubmit() {
     const self = this;
@@ -93,14 +107,39 @@ export class ServiceBookingComponent implements OnInit {
     const formData = this.serviceBookingForm.value;
     formData['email'] = self.homeData['email'];
     formData['zipcode'] = self.homeData['zipcode'];
-    console.log('Your order has been submitted', formData);
+
     if(status == 'VALID'){
-      //navigate to service booking
       var dateValid = self.validateDate();
       var timeValid = self.validateTime();
       if(dateValid && timeValid){
-        // self._ServiceRequest.setHomeData(self.serviceBookingForm.value);
-        // this.router.navigateByUrl('/register/customer');
+        /*make api call
+        //if true then
+        //set service data &
+        //navigate to service booking
+        //if false prompt user-modal*/
+        // self.serviceBookingService.getQuotesExist(formData)
+        self.serviceBookingService.getQuotesExist({flag: 'true'}).subscribe(
+          (result) => {
+            if(result['exist'] && result['exist'] == true){
+              self._ServiceRequest.setHomeData(formData);
+              self.router.navigateByUrl('/register/customer');
+            }else{
+              const msg = "We are unable to find availables service providers to match your request at this time! Please select a different date or time!";
+              const title = "Sorry!";
+              self.open(title,msg);
+              //reset date and time
+              self.serviceBookingForm.patchValue({date: ''});
+              self.serviceBookingForm.patchValue({time: ''});
+            }
+          },
+          err => {
+            console.error(err)
+            //something went wrong-modal
+            const msg = "We are experiencing some error! Please try again.";
+            const title = "Sorry!";
+            self.open(title,msg);
+          }
+        )
       }
     }else{
       //form has errors
@@ -134,6 +173,12 @@ export class ServiceBookingComponent implements OnInit {
       return false;
     }
     return true;
+  }
+
+  open(title,msg) {
+    const modalRef = this.modalService.open(ModalComponent);
+    modalRef.componentInstance.message = msg;
+    modalRef.componentInstance.title = title;
   }
 
 }
