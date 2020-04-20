@@ -25,6 +25,8 @@ export class HomeComponent implements OnInit{
     const self = this;
     self.buildHomeForm();
     self.formSubmitted = false;
+    //delete cookies
+    self._ServiceRequest.deleteCookies();
   }
 
   buildHomeForm() {
@@ -43,6 +45,7 @@ export class HomeComponent implements OnInit{
     if(status == 'VALID'){
       //navigate to service booking
         self._ServiceRequest.setHomeData(self.homeForm.value);
+        self._ServiceRequest.setCookies(self.homeForm.value);
         this.router.navigateByUrl('/service-request');
     }else{
       //form has errors

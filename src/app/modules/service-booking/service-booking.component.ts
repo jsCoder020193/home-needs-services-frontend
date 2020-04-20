@@ -116,7 +116,6 @@ export class ServiceBookingComponent implements OnInit {
     const formData = this.serviceBookingForm.value;
     formData['email'] = self.homeData['email'];
 
-    console.log(formData);
     if(status == 'VALID'){
       var dateValid = self.validateDate();
       var timeValid = self.validateTime();
@@ -131,8 +130,10 @@ export class ServiceBookingComponent implements OnInit {
           (result) => {
             if(result['exist'] && result['exist'] == true){
               self._ServiceRequest.setHomeData(formData);
+              self._ServiceRequest.setCookies(formData);
               self.router.navigateByUrl('/register/customer');
             }else{
+              /*******************TO-DO reset cookies except email and zipcode*/
               const msg = "We are unable to find availables service providers to match your request at this time! Please select a different date or time!";
               const title = "Sorry!";
               self.open(title,msg);

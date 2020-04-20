@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import {CookieService} from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +28,7 @@ service_address_line_2: any;
 service_city: any;
 service_state: any;
 
-  constructor() { }
+  constructor(private cookieService: CookieService) { }
 
   setHomeData(data){
       this.email = data.email;
@@ -61,6 +62,22 @@ service_state: any;
       }
   }
 
+  setCookies(data){
+    const keys = Object.keys(data);
+    keys.forEach(key => {
+      this.cookieService.set(key,data[key]);
+    });
+  }
+
+  getCookies(){
+    const v = this.cookieService.getAll();
+    return v;
+  }
+
+  deleteCookies(){
+    this.cookieService.deleteAll();
+  }
+
   generatePayload(serviceRequest) {
     //if service and home address same create home address payload 
     //modify field values
@@ -76,4 +93,10 @@ service_state: any;
   }
 }
 
-
+// static pattern = {
+//   email: /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/,
+//   phone: '^\\+?[0-9]{0,}(?=.*)[- ()0-9]*$',
+//   currency: '^\\+?[0-9]{0,}(?=.*)[., ()0-9]*$',
+//   percentage: '^([0-9]{1,2}([\\.][0-9]{1,2})?$|100([\\.][0]{1,2})?)$',
+//   number: '^[0-9]*$'
+// };
