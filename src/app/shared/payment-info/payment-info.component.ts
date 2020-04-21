@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, EventEmitter, Output } from '@angular/core';
 
 declare var Stripe; // : stripe.StripeStatic;
 
@@ -8,6 +8,8 @@ declare var Stripe; // : stripe.StripeStatic;
   styleUrls: ['./payment-info.component.css']
 })
 export class PaymentInfoComponent implements OnInit {
+
+  @Output() saveCCDetails = new EventEmitter<any>();
 
   constructor() { }
 
@@ -43,6 +45,7 @@ export class PaymentInfoComponent implements OnInit {
           // At this point, you should send the token ID
           // to your server so it can attach
           // the payment source to a customer
+          this.saveCCDetails.emit(result.token);
           console.log('Token acquired!');
           console.log(result.token);
           console.log(result.token.id);

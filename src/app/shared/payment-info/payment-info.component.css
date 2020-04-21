@@ -17,3 +17,17 @@ border: 2px solid #e2e6e7;
 .error-msg{
     color: #a94442;
 }
+
+.complete-booking {
+    background: #88ce43;
+    transition: 0.3s;
+    padding: 5px;
+    text-align: center;
+    display: block;
+    color: #ffffff;
+    font-size: 22px;
+    font-weight: 400;
+    margin: 0;
+    -webkit-appearance: none !important;
+    border: none;
+}
