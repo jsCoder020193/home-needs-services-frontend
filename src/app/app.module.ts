@@ -18,6 +18,7 @@ import { AuthGuardService } from './services/auth-guard.service';
 import { ServiceBookingComponent } from './modules/service-booking/service-booking.component';
 import { CustomerRegistrationComponent } from './modules/customer-registration/customer-registration/customer-registration.component';
 import { ModalComponent } from './modules/modal/modal.component';
+import { PaymentInfoComponent } from './shared/payment-info/payment-info.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -44,7 +45,8 @@ const routes: Routes = [
     HomeComponent,
     ServiceBookingComponent,
     CustomerRegistrationComponent,
-    ModalComponent
+    ModalComponent,
+    PaymentInfoComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,19 @@
+.StripeElement { 
+border: 2px solid #e2e6e7;
+    padding: 15px 15px;
+    width: 100%;
+    border-radius: 5px; 
+}
+
+.form-row{
+    display: block;
+}
+.StripeElement--invalid { 
+    border: 2px solid #a94442;
+
+    /* color: #a94442; */
+}
+
+.error-msg{
+    color: #a94442;
+}
