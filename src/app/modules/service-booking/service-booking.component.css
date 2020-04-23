@@ -46,3 +46,10 @@
   .card-number {
     padding: 10px 10px;
 }
+
+.no_of_items{
+  font-weight: 600;
+  font-size: 32px;
+  color: #0DB2E7;
+  
+}

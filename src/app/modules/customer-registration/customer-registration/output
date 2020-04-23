@@ -1,0 +1,54 @@
+//service
+{email: "msl.funky@gmail.com", zipcode: "", date: {…}, time: {…}, service_id: 49, …}
+email: "msl.funky@gmail.com"
+zipcode: ""
+date: {year: 2020, month: 4, day: 30}
+time: {hour: 12, minute: 30, second: 0}
+service_id: 49
+description: ""
+
+****************  
+
+no_of_hours: ""
+frequency: "ONE TIME"
+service_address_line_1: "1612 Deer Hls"
+service_address_line_2: "Apt 1"
+service_city: "EDINBURG"
+service_state: "50"
+
+//cookies
+{email: "msl.funky@gmail.com", service_id: "49", description: "", date: "[object Object]", time: "[object Object]", …}
+email: "msl.funky@gmail.com"
+service_id: "49"
+description: ""
+date: "[object Object]"
+time: "[object Object]"
+emergency: "yes"
+frequency: "ONE TIME"
+service_zipcode: "78541"
+service_address_line_1: "1612 Deer Hls"
+service_address_line_2: "Apt 1"
+service_city: "EDINBURG"
+service_state: "50"
+
+
+quotes: "q1,q2,q3,q4,q5"
+
+
+//form data 
+first_name: "Subbalakshmi"
+last_name: "Mandapaka"
+middle_name: ""
+
+****************  
+
+phone_number: "9155453310"
+phone_number_type: "work"
+user_address_line_1: "1612 Deer Hls"
+user_address_line_2: "Apt 1"
+user_city: "EDINBURG"
+user_state: "50"
+user_zipcode: "78541"
+password
+
+tok_1Gb8D1L2cmN4yt0SBR3rk59c

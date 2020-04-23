@@ -10,8 +10,13 @@ export class ServiceBookingService {
 
   constructor(private http: HttpClient, private router: Router) {}
 
+  //get quotes w/ an array of quotes ID + store this array as cookies
   public getQuotesExist(payload): Observable<any> {
     return this.http.post(`/api/quotes/exist`, payload);
+  }
+
+  public getQuotes(payload): Observable<any> {
+    return this.http.post(`/api/quotes`, payload);
   }
 }
 

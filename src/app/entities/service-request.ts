@@ -74,23 +74,82 @@ service_state: any;
     return v;
   }
 
+  getCookieByName(name){
+    return this.cookieService.get(name);
+  }
+
   deleteCookies(){
     this.cookieService.deleteAll();
   }
 
-  generatePayload(serviceRequest) {
-    //if service and home address same create home address payload 
-    //modify field values
+  generateUserPayload(user,stripe_token) {
     const payload = {
-      _id: serviceRequest._id,
-      name: serviceRequest.name,
-      description: serviceRequest.description || '',
-      date: serviceRequest.date,
-      location: location,
-      type: 'user'
+      email: user.email || '',
+      password: user.password || '',
+      first_name: user.first_name || '',
+      middle_name: user.middle_name || '',
+      last_name: user.last_name || '',
+      phone_number: user.phone_number || '',
+      phone_number_type: user.phone_number_type || '',
+      user_address_line_1: user.user_address_line_1|| '',
+      user_address_line_2: user.user_address_line_2|| '',
+      user_city: user.user_city|| '',
+      user_state: user.user_state|| '',
+      user_zipcode: user.user_zipcode|| '',
+      stripe_token: stripe_token || ''
     };
     return payload;
   }
+
+  generateSRPayload(SR){
+    const payload = {
+      is_emergency: SR.emergency || '',
+      service_description: SR.description || '',
+      services_id_fk: SR.service_id || ''
+    };
+    return payload;
+  }
+
+  generateSRSchedulePayload(SR,SRID){
+    const payload = {
+      date: SR.date || {},
+      time: SR.time || {},
+      frequency: SR.frequency || '',
+      no_of_hours: SR.no_of_hours || '',
+      service_request_id_fk: SRID || ''
+    };
+    return payload;
+  }
+
+  generateSRLocationPayload(SR,SRID){
+    const payload = {
+      service_zipcode: SR.service_zipcode || '',
+      service_address_line_1: SR.service_address_line_1 || '',
+      service_address_line_2: SR.service_address_line_2 || '',
+      service_city: SR.service_city || '',
+      service_state: SR.service_state || '',
+      service_request_id_fk: SRID || ''
+    };
+    return payload;
+  }
+
+  generateQuotesRequestPayload(SR){
+    const payload = {
+      emergency: SR.emergency || '',
+      serviceID: SR.service_id || '',
+      date: SR.date || {},
+      time: SR.time || {},
+      frequency: SR.frequency || '',
+      no_of_hours: SR.no_of_hours || '' ,
+      location: {
+        city: SR.service_city || '',
+        state: SR.service_state || '',
+        zipcode: SR.service_zipcode || ''
+      }
+    };
+    return payload;
+  }
+
 }
 
 // static pattern = {

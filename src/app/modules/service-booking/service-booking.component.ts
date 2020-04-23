@@ -113,9 +113,8 @@ export class ServiceBookingComponent implements OnInit {
     const self = this;
     self.formSubmitted = true;
     const status = self.serviceBookingForm.status;
-    const formData = this.serviceBookingForm.value;
+    const formData = this.serviceBookingForm.getRawValue();
     formData['email'] = self.homeData['email'];
-
     if(status == 'VALID'){
       var dateValid = self.validateDate();
       var timeValid = self.validateTime();
@@ -125,15 +124,24 @@ export class ServiceBookingComponent implements OnInit {
         //set service data &
         //navigate to service booking
         //if false prompt user-modal*/
-        // self.serviceBookingService.getQuotesExist(formData)
+        const quotePayload = self._ServiceRequest.generateQuotesRequestPayload(formData);
+        //TO-DO
+        // self.serviceBookingService.getQuotes(quotePayload)
+        // .subscribe((result)=>{
+
+        // })
         self.serviceBookingService.getQuotesExist({flag: 'true'}).subscribe(
           (result) => {
             if(result['exist'] && result['exist'] == true){
               self._ServiceRequest.setHomeData(formData);
               self._ServiceRequest.setCookies(formData);
+              const quotesArray = {
+                quotes: ['q1','q2','q3','q4','q5']
+              };
+              self._ServiceRequest.setCookies(quotesArray);
               self.router.navigateByUrl('/register/customer');
             }else{
-              /*******************TO-DO reset cookies except email and zipcode*/
+              /*******************TO-DO reset all cookies except email and zipcode*/
               const msg = "We are unable to find availables service providers to match your request at this time! Please select a different date or time!";
               const title = "Sorry!";
               self.open(title,msg);
@@ -183,6 +191,15 @@ export class ServiceBookingComponent implements OnInit {
       return false;
     }
     return true;
+  }
+
+  incrementCount(){
+    var value = +(this.serviceBookingForm.get('no_of_hours').value);
+    this.serviceBookingForm.patchValue({no_of_hours: (++value).toString()});
+  }
+  decrementCount(){
+    var value = +(this.serviceBookingForm.get('no_of_hours').value);
+    this.serviceBookingForm.patchValue({no_of_hours: (--value).toString()});
   }
 
   open(title,msg) {

@@ -7,6 +7,8 @@ import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import{ModalComponent} from '../../modal/modal.component';
 import {ServiceRequest} from '../../../entities/service-request';
 import {States} from '../../../entities/states';
+import {CustomerRegistrationService} from '../../../services/customer-registration.service';
+declare var Stripe; // : stripe.StripeStatic;
 
 @Component({
   selector: 'app-customer-registration',
@@ -14,6 +16,11 @@ import {States} from '../../../entities/states';
   styleUrls: ['./customer-registration.component.css']
 })
 export class CustomerRegistrationComponent implements OnInit {
+
+
+    // Your Stripe public key
+  stripe;
+  card;
 
   serviceBookingFormValues;
   cookieValues;
@@ -28,7 +35,8 @@ export class CustomerRegistrationComponent implements OnInit {
     private router: Router,
     private modalService: NgbModal,
     private _ServiceRequest: ServiceRequest,
-    private _states: States) { }
+    private _states: States,
+    private customerRegistrationService: CustomerRegistrationService) { }
 
   ngOnInit(): void {
     const self = this;
@@ -41,14 +49,16 @@ export class CustomerRegistrationComponent implements OnInit {
     self.buildHomeForm();
     self.termsAccepted = false;
     self.showTnCError = false;
+    self.initiateStripe();
   }
 
   buildHomeForm() {
     const self = this;
     self.registrationForm = self.formBuilder.group({
       'email': ['',[Validators.required]],
+      'password': ['',[Validators.required]],
       'first_name': ['',[Validators.required]],
-      'middle_name': ['',[Validators.required]],
+      'middle_name': [''],
       'last_name': ['',[Validators.required]],
       'phone_number' : ['',[Validators.required, Validators.pattern('^\\+?[0-9]{0,}(?=.*)[- ()0-9]*$')]],
       'phone_number_type' : ['',[Validators.required]],
@@ -56,11 +66,7 @@ export class CustomerRegistrationComponent implements OnInit {
       'user_address_line_2': [''],
       'user_city': ['', [Validators.required]],
       'user_state': ['State', [Validators.required]],
-      'user_zipcode': ['',[Validators.required, Validators.pattern('^[0-9]*$'), Validators.maxLength(5), Validators.minLength(5)]],
-      'cc_number': ['', [Validators.required]],
-      'cc_expiry': ['', [Validators.required]],
-      'cc_cvv': ['', [Validators.required]],
-      'cc_name': ['', [Validators.required]]
+      'user_zipcode': ['',[Validators.required, Validators.pattern('^[0-9]*$'), Validators.maxLength(5), Validators.minLength(5)]]
     });
     const emailValue = self.serviceBookingFormValues['email']?self.serviceBookingFormValues['email']:self.cookieValues['email'];
     self.registrationForm.patchValue({email: emailValue});
@@ -112,17 +118,64 @@ export class CustomerRegistrationComponent implements OnInit {
     const self = this;
     self.formSubmitted = true;
     const status = self.registrationForm.status;
-    console.log(self.registrationForm.value)
+    const formValue = self.registrationForm.getRawValue();
+    console.log(formValue)
     if(self.termsAccepted){
       self.showTnCError = false;
       if(status == 'VALID'){
-        //register customer 
-        //add service request to db
-        //delete all cookies
         //send twilio request
+
         // save cc to stripe
-          // self._ServiceRequest.setHomeData(self.registrationForm.value);
-          // this.router.navigateByUrl('/service-request');
+        self.saveStripeToken().then(function(stripe_token){
+          console.log("from call:::"+stripe_token);
+          //register customer 
+          const userPayload = self._ServiceRequest.generateUserPayload(formValue,stripe_token);
+          self.customerRegistrationService.registerCustomer(userPayload)
+          .subscribe((result)=>{
+            if(result && result['customerID']){
+              //add service request to db
+              const SRpayload = self._ServiceRequest.generateSRPayload(self.serviceBookingFormValues['email']?self.serviceBookingFormValues:self.cookieValues);
+              SRpayload['customer_id_fk'] = result['customerID'];
+              self.customerRegistrationService.createServiceRequest(SRpayload)
+              .subscribe((SRResult)=>{
+                //add sr_location
+                var SRID;
+                if(SRResult && SRResult['SRID'])
+                  SRID = SRResult['SRID'];
+                const SRLocationPayload = self._ServiceRequest.generateSRLocationPayload(self.serviceBookingFormValues['email']?self.serviceBookingFormValues:self.cookieValues,SRID);
+                self.customerRegistrationService.createServiceRequestLocation(SRLocationPayload)
+                .subscribe((SRLResult)=>{
+                  //add sr_schedule
+                  var SRID;
+                  if(SRResult && SRResult['SRID'])
+                    SRID = SRResult['SRID'];
+                  const SRSchedulePayload = self._ServiceRequest.generateSRSchedulePayload(self.serviceBookingFormValues['email']?self.serviceBookingFormValues:self.cookieValues,SRID);
+                  self.customerRegistrationService.createServiceRequestSchedule(SRSchedulePayload)
+                  .subscribe((SRSResult)=>{
+                    const updateQuotesPayload = {
+                      service_request_id : SRResult['SRID'] || '',
+                      quotes_array: self.cookieValues['quotes']
+                    }
+                    self.customerRegistrationService.updateQuotes(updateQuotesPayload)
+                    .subscribe((result)=>{
+                      //delete all cookies
+                      self._ServiceRequest.deleteCookies();
+                      //Navigate to quotes page
+                      // self._ServiceRequest.setHomeData(self.registrationForm.value);
+                      // this.router.navigateByUrl('/service-request');
+                    },(error)=>{
+                      //reload page
+                    })
+                  })
+                })
+              })
+            }
+          })
+        })
+        .catch((err)=>{
+          console.log(err)
+        })
+        
       }else{
         //form has errors
       }
@@ -130,6 +183,42 @@ export class CustomerRegistrationComponent implements OnInit {
       self.showTnCError = true;
     }
 
+  }
+
+  initiateStripe(){
+
+    this.stripe = Stripe('pk_test_4nPehc8vZrCWL72wwGn9CVUF00RbQ6FyD1');
+
+    // Create `card` element that will watch for updates
+    // and display error messages
+    const elements = this.stripe.elements();
+    this.card = elements.create('card');
+    this.card.mount('#card-element');
+    this.card.addEventListener('change', event => {
+      const displayError = document.getElementById('card-errors');
+      if (event.error) {
+        displayError.textContent = event.error.message;
+      } else {
+        displayError.textContent = '';
+      }
+    });
+  }
+
+  saveStripeToken(){
+    return new Promise((resolve, reject) => {
+    this.stripe.createToken(this.card).then(result => {
+          if (result.error) {
+            console.log('Error creating payment method.');
+            const errorElement = document.getElementById('card-errors');
+            errorElement.textContent = result.error.message;
+            reject(result.error);
+          } else {
+            console.log('Token acquired!');
+            console.log(result.token.id);
+            resolve(result.token.id);
+          }
+        });
+    });
   }
 
   openModal() {

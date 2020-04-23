@@ -145,14 +145,14 @@
                   <div class="preference-quantity houres">
                     <div class="counter js-counter">
                       <div class="counter__item">
-                        <a class="counter__minus js-counter-btn fa fa-minus" aria-hidden="true" data-action="minus"></a>
+                        <a (click)="decrementCount()" class="no_of_items counter__minus js-counter-btn fa fa-minus" aria-hidden="true" data-action="minus">-</a>
                       </div>
                       <div class="counter__item counter__item--center">
                         <input class="counter__value js-counter-value" type="text" tabindex="-1"
                           formControlName="no_of_hours" required />
                       </div>
                       <div class="counter__item">
-                        <a class="counter__plus js-counter-btn fa fa-plus" aria-hidden="true" data-action="plus"></a>
+                        <a (click)="incrementCount()" class="no_of_items counter__plus js-counter-btn fa fa-plus" aria-hidden="true" data-action="plus">+</a>
                       </div>
                     </div>
                     <p>This is what we think the best based on your preferences. Feel free to change it if you want.
@@ -217,7 +217,7 @@
                       <!-- <input type="text" placeholder="State" class="card-number"> -->
                       <select class="card-number" id="statesDropdown" style="height: 48px;" [ngClass]="serviceBookingForm.get('service_state').invalid && (serviceBookingForm.get('service_state').dirty || serviceBookingForm.get('service_state').touched || formSubmitted)?'invalid':''" formControlName="service_state">
                         <option selected>State</option>
-                        <option *ngFor="let state of states; index as i;" value="{{i}}">{{state['name']}}</option>
+                        <option *ngFor="let state of states; index as i;" value="{{state['abbreviation']}}">{{state['name']}}</option>
                       </select>
                   </div>
                   </div>
