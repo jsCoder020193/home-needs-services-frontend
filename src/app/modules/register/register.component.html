@@ -1,4 +1,4 @@
-<div class="container">
+<!-- <div class="container">
     <div class="row" style="margin-top: 40px;">
       <div class="col-md-6 mt-5 mx-auto">
         <form (submit)="register()">
@@ -23,4 +23,208 @@
         </form>
       </div>
     </div>
+  </div> -->
+<section class="booking-details center-block main-block">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h2>Register with us!</h2>
+        <h6>Please provide us with some details and we will match you with customers in your area...</h6>
+      </div>
+    </div>
+    <div class="row mt-5 justify-content-center">
+      <div class="col-md-12 set-sm-fit mb-4">
+
+        <div class="d-flex">
+          <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-pills" orientation="vertical">
+            <li ngbNavItem="Personal Details">
+              <a ngbNavLink>Personal Details</a>
+              <ng-template ngbNavContent>
+                <div class="preference-title">
+                  <h4>{{ active }}</h4>
+              </div>
+                <div class="preferences">
+                  <div class="preference-radio mt-3">
+                    <p>Tell us a bit about yourself.</p>
+                    <div class="row mt-3">
+                      <div class="col-md-12">
+                        <div class="card-details">
+                          <input type="text" placeholder="Email" class="card-number">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row mt-3">
+                      <div class="col-md-12">
+                        <div class="card-details">
+                          <input type="password" placeholder="Password" class="card-number">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row mt-3">
+                      <div class="col-md-4">
+                        <div class="card-details">
+                          <input type="text" placeholder="First Name" class="card-number">
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="card-details">
+                          <input type="text" placeholder="Middle Name" class="card-number">
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="card-details">
+                          <input type="text" placeholder="Last Name" class="card-number">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </ng-template>
+            </li>
+            <li ngbNavItem="Services">
+              <a ngbNavLink>Services</a>
+              <ng-template ngbNavContent>
+                <div class="preference-title">
+                  <h4>{{ active }}</h4>
+              </div>
+                <div class="preferences">
+                  <div class="preference-radio mt-3">
+                    <p>Tell us a bit about yourself.</p>
+                    <div class="row mt-3">
+                      <div class="col-md-12">
+                        <div class="card-details">
+                          <input type="text" placeholder="Email" class="card-number">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row mt-3">
+                      <div class="col-md-12">
+                        <div class="card-details">
+                          <input type="password" placeholder="Password" class="card-number">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row mt-3">
+                      <div class="col-md-4">
+                        <div class="card-details">
+                          <input type="text" placeholder="First Name" class="card-number">
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="card-details">
+                          <input type="text" placeholder="Middle Name" class="card-number">
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="card-details">
+                          <input type="text" placeholder="Last Name" class="card-number">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </ng-template>
+            </li>
+            <li ngbNavItem="Background Info">
+              <a ngbNavLink>Background Info</a>
+              <ng-template ngbNavContent>
+                <div class="preference-title">
+                  <h4>{{ active }}</h4>
+              </div>
+                <div class="preferences">
+                  <div class="preference-radio mt-3">
+                    <p>Tell us a bit about yourself.</p>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="card-details">
+                          <input type="text" placeholder="Email" class="card-number">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row mt-3">
+                      <div class="col-md-12">
+                        <div class="card-details">
+                          <input type="password" placeholder="Password" class="card-number">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row mt-3">
+                      <div class="col-md-4">
+                        <div class="card-details">
+                          <input type="text" placeholder="First Name" class="card-number">
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="card-details">
+                          <input type="text" placeholder="Middle Name" class="card-number">
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="card-details">
+                          <input type="text" placeholder="Last Name" class="card-number">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </ng-template>
+            </li>
+            <li ngbNavItem="Confirm">
+              <a ngbNavLink>Confirm</a>
+              <ng-template ngbNavContent>
+                <div class="preference-title">
+                  <h4>{{ active }}</h4>
+              </div>
+                <div class="preferences">
+                  <div class="preference-radio mt-3">
+                    <p>Tell us a bit about yourself.</p>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="card-details">
+                          <input type="text" placeholder="Email" class="card-number">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row mt-3">
+                      <div class="col-md-12">
+                        <div class="card-details">
+                          <input type="password" placeholder="Password" class="card-number">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row mt-3">
+                      <div class="col-md-4">
+                        <div class="card-details">
+                          <input type="text" placeholder="First Name" class="card-number">
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="card-details">
+                          <input type="text" placeholder="Middle Name" class="card-number">
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="card-details">
+                          <input type="text" placeholder="Last Name" class="card-number">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                  <div class="row mt-4 justify-content-center">
+                    <div class="col-md-6">
+                      <button type="submit" class="btn btn-block complete-booking">
+                        <span class="pe-7s-unlock"></span>Submit Application
+                        </button>
+                    </div>
+                  </div>
+              </ng-template>
+            </li>
+          </ul>
+
+          <div [ngbNavOutlet]="nav" class="ml-4"></div>
+        </div>
+      </div>
+    </div>
   </div>
+</section>

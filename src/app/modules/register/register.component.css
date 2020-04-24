@@ -1,0 +1,50 @@
+.complete-booking {
+    background: #88ce43;
+    -webkit-transition: 0.3s;
+    -o-transition: 0.3s;
+    transition: 0.3s;
+    padding: 10px;
+    text-align: center;
+    display: block;
+    color: #ffffff;
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin: 0;
+    -webkit-appearance: none !important;
+    border: none;
+}
+
+.card-number {
+    padding: 10px 10px;
+}
+
+.invalid{
+    border: 2px solid #a94442;
+  }
+  .error-msg{
+      color: #a94442;
+  }
+
+  .link{
+
+    color: #007bff;
+    text-decoration: none;
+    background-color: transparent;
+  }
+
+.nav-pills .nav-link.active{
+    color: #fff;
+    background-color: #3579D0;
+    padding: 18px 40px;
+    font-weight: 500;
+    margin: 0;
+    width: 250px;    font-size: 18px;
+}
+
+.nav-link{
+    background-color: #E4EDF7;
+    padding: 18px 40px;
+    font-weight: 500;
+    margin: 0;
+    width: 250px;    font-size: 18px;
+}

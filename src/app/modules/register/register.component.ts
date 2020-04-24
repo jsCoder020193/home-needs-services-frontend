@@ -3,7 +3,8 @@ import { AuthenticationService, TokenPayload, CreateUserPayload } from "../../se
 import { Router } from "@angular/router";
 
 @Component({
-  templateUrl: "./register.component.html"
+  templateUrl: "./register.component.html",
+  styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
   // credentials: TokenPayload = {
@@ -13,7 +14,8 @@ export class RegisterComponent {
   //   email: "",
   //   password: ""
   // };
-  
+  active = 'Personal Details';
+
   credentials: CreateUserPayload = {
   first_name: '',
   middle_name: '',
