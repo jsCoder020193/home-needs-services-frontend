@@ -23,6 +23,7 @@ service_id: string;
 description: string;
 no_of_hours: any;
 frequency: any;
+emergency: any;
 service_address_line_1: any;
 service_address_line_2: any;
 service_city: any;
@@ -32,13 +33,14 @@ service_state: any;
 
   setHomeData(data){
       this.email = data.email;
-      this.service_zipcode = data.zipcode;
+      this.service_zipcode = data.service_zipcode;
       this.date = data.date;
       this.time = data.time;
       this.service_id = data.service_id;
       this.description = data.description;
       this.no_of_hours = data.no_of_hours;
       this.frequency = data.frequency;
+      this.emergency = data.emergency;
       this.service_address_line_1 = data.service_address_line_1;
       this.service_address_line_2 = data.service_address_line_2;
       this.service_city = data.service_city;
@@ -48,13 +50,14 @@ service_state: any;
   getHomeData(){
       return{
           email: this.email || '',
-          zipcode: this.service_zipcode || '',
+          service_zipcode: this.service_zipcode || '',
           date: this.date || '',
           time: this.time || '',
           service_id: this.service_id || '',
           description: this.description || '',
           no_of_hours: this.no_of_hours || '',
-          frequency: this.frequency,
+          frequency: this.frequency || '',
+          emergency: this.emergency || '',
           service_address_line_1: this.service_address_line_1 || '',
           service_address_line_2: this.service_address_line_2 || '',
           service_city: this.service_city || '',
@@ -102,8 +105,9 @@ service_state: any;
   }
 
   generateSRPayload(SR){
+    console.log(SR)
     const payload = {
-      is_emergency: SR.emergency || '',
+      is_emergency: SR.emergency=='yes'?'1':'0' || '',
       service_description: SR.description || '',
       services_id_fk: SR.service_id || ''
     };

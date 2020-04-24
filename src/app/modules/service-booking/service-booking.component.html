@@ -167,7 +167,7 @@
                 <div *ngFor="let f of frequency; index as i;" class="col-md-3 sm-box">
                   <div class="styled-radio styled-radio2">
                     <input type="radio" (change)="handleFrequencyChange(f)" id="f+{{i}}" name="selector1">
-                    <label for="f+{{i}}">{{f}}</label>
+                    <label for="f+{{i}}">{{f['name']}}</label>
                   </div>
                 </div>
               </div>

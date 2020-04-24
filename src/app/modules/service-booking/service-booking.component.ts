@@ -38,7 +38,13 @@ export class ServiceBookingComponent implements OnInit {
   isEmergency;
   states = [];
 
-  frequency = ['ONE TIME','WEEKLY','BI-WEEKLY','MONTHLY','QUARTERLY','HALF YEARLY','YEARLY'];
+  frequency = [{name:'ONE TIME', value: 'one_time'},
+  {name: 'WEEKLY', value: 'weekly'},
+  {name: 'BI-WEEKLY', value: 'biweekly'},
+  {name: 'MONTHLY', value: 'monthly'},
+  {name: 'QUARTERLY', value: 'quarterly'},
+  {name: 'HALF YEARLY', value: 'semi_annual'},
+  {name: 'YEARLY', value: 'annual'}];
   selectedFrequency;
 
 
@@ -97,7 +103,7 @@ export class ServiceBookingComponent implements OnInit {
 
   handleFrequencyChange(f){
     this.selectedFrequency = f;
-    this.serviceBookingForm.patchValue({frequency: this.selectedFrequency});
+    this.serviceBookingForm.patchValue({frequency: this.selectedFrequency['value']});
   }
 
   changeEmergencyOption(option){
