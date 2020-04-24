@@ -48,3 +48,16 @@
     margin: 0;
     width: 250px;    font-size: 18px;
 }
+
+.calendar{
+    background-image: url("../../../assets/images/date_icon2.png");
+    background-size: cover;
+    width: 48px;
+    height: 48px;
+    background-color: white;
+  }
+  
+  .btn-primary{
+    background-color: #0062c7;
+      border-color: #0062c7;
+  }
