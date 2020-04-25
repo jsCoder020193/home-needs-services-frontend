@@ -22,7 +22,6 @@ padding-bottom: 300px;">
     <div class="row mt-5 justify-content-center">
       <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
         <div class="col-md-12 set-sm-fit mb-4">
-
           <div class="d-flex">
             <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-pills" orientation="vertical">
               <li ngbNavItem="Personal Details">
@@ -123,7 +122,7 @@ padding-bottom: 300px;">
                           </div>
                         </div>
                       </div>
-
+        
                       <div class="row mt-3">
                         <div
                           *ngIf="registrationForm.get('user_city').invalid && (registrationForm.get('user_city').dirty || registrationForm.get('user_city').touched || formSubmitted)">
@@ -205,7 +204,7 @@ padding-bottom: 300px;">
                           </div>
                         </div>
                       </div>
-
+        
                       <div class="row mt-3">
                         <div
                           *ngIf="registrationForm.get('service_city').invalid && (registrationForm.get('service_city').dirty || registrationForm.get('service_city').touched || formSubmitted)">
@@ -494,9 +493,14 @@ padding-bottom: 300px;">
                           <div class="card-details">
                             <input type="text" placeholder="Routing Number" class="card-number" formControlName="routing_number">
                           </div>
-                        </div>
+                        </div>  
                       </div>
                     </div>
+                    <div class="preference-radio mt-4">
+                    <h6>By clicking on the Submit Application button, you affirm you have read, understand, and agree to the Home Needs 
+                      <a (click)="openModal()" class="link">Terms and Privacy Policy.</a>
+                    </h6>
+                  </div>
                   </div>
                   <div class="row mt-4 justify-content-center">
                     <div class="col-md-6">
@@ -508,9 +512,10 @@ padding-bottom: 300px;">
                 </ng-template>
               </li>
             </ul>
-
+        
             <div [ngbNavOutlet]="nav" class="ml-4"></div>
           </div>
+        
         </div>
       </form>
     </div>

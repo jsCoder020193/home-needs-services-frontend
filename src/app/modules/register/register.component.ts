@@ -3,6 +3,9 @@ import { AuthenticationService, TokenPayload, CreateUserPayload } from "../../se
 import { Router } from "@angular/router";
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
+import{ModalComponent} from '../modal/modal.component';
 import {States} from '../../entities/states';
 import {Services} from '../../entities/services';
 
@@ -29,7 +32,6 @@ export class RegisterComponent implements OnInit  {
   password: '',
   user_id: ''
   }
-  
 
   registrationForm: FormGroup; 
   formSubmitted;
@@ -65,7 +67,8 @@ export class RegisterComponent implements OnInit  {
     private router: Router,
     private _states: States,
     private _services:Services, 
-    private formBuilder: FormBuilder) {}
+    private formBuilder: FormBuilder,
+    private modalService: NgbModal) {}
 
 
   ngOnInit(): void {
@@ -214,7 +217,6 @@ export class RegisterComponent implements OnInit  {
 
   handleSubServiceChange(s_index, subService){
     this.selectedServiceID = subService;
-    // this.services_id_list.push({id: s_index, service_id: subService, price: '', day: '', start_time: '', end_time: ''});
   }
 
   incrementCount(){
@@ -271,7 +273,7 @@ export class RegisterComponent implements OnInit  {
     self.addService(self.s_list.length-1);
     self.services_id_list = self.arrayUnique(self.services_id_list);
     console.log(self.services_id_list)
-    // console.log(this.registrationForm.getRawValue())
+    console.log(this.registrationForm.getRawValue())
     // this.auth.register(this.credentials).subscribe(
     //   () => {
     //     this.router.navigateByUrl("/profile");
@@ -303,6 +305,12 @@ export class RegisterComponent implements OnInit  {
           return item;
       }
     })
+  }
+
+  openModal() {
+    const modalRef = this.modalService.open(ModalComponent);
+    modalRef.componentInstance.message = 'This is sample t&c text';
+    modalRef.componentInstance.title = 'Terms & Conditions';
   }
 
 }

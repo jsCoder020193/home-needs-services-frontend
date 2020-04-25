@@ -129,3 +129,32 @@ h1 {
   max-width: 790px;
   margin: 0 auto;
 }
+
+.tab-content {
+  display: block;
+  min-width: 768px;
+  max-width: 768px;
+}
+
+.StripeElement { 
+  border: 2px solid #e2e6e7;
+      padding: 15px 15px;
+      width: 100%;
+      border-radius: 5px; 
+  }
+  
+  .form-row{
+      display: block;
+  }
+  .StripeElement--invalid { 
+      border: 2px solid #a94442;
+  
+      /* color: #a94442; */
+  }
+
+  .link{
+
+    color: #007bff;
+    text-decoration: none;
+    background-color: transparent;
+  }
