@@ -30,7 +30,6 @@ export class RegisterComponent implements OnInit  {
   user_id: ''
   }
   
-  currentDate = new Date();
 
   registrationForm: FormGroup; 
   formSubmitted;
@@ -111,7 +110,9 @@ export class RegisterComponent implements OnInit  {
       'sub_service': ['Select Sub Category...'],
       'price': [''],
       'from_time': [{hour: 9, minute: 0}],
-      'to_time': [{hour: 17, minute: 0}]
+      'to_time': [{hour: 17, minute: 0}],
+      'account_number': ['', [Validators.required]],
+      'routing_number': ['', [Validators.required]]
 
     });
   }
@@ -267,21 +268,10 @@ export class RegisterComponent implements OnInit  {
 
   onSubmit() {
     const self = this;
-    //remove duplicated from services_id_list
-    // self.services_id_list = self.services_id_list.filter((thing, index, self) =>
-    //     index === self.findIndex((t) => (
-    //     t.place === thing.place && t.name === thing.name
-    //   ))
-    // )
-    // self.services_id_list = self.services_id_list.filter((thing, index) => {
-    //   const _thing = JSON.stringify(thing);
-    //   return index === thing.findIndex(obj => {
-    //     return JSON.stringify(obj) === _thing;
-    //   });
-    // });
-    
+    self.addService(self.s_list.length-1);
+    self.services_id_list = self.arrayUnique(self.services_id_list);
     console.log(self.services_id_list)
-    console.log(this.registrationForm.getRawValue())
+    // console.log(this.registrationForm.getRawValue())
     // this.auth.register(this.credentials).subscribe(
     //   () => {
     //     this.router.navigateByUrl("/profile");
@@ -290,5 +280,29 @@ export class RegisterComponent implements OnInit  {
     //     console.error(err);
     //   }
     // );
+
+    //reset all values on submit
   }
+
+
+  arrayUnique (arr) {
+    var service_id_arr = arr.map(a=> a['service_id']);
+    console.log(service_id_arr)
+    var parsed_array = [];
+    var indexes = [];
+    service_id_arr.forEach((item,index)=>{
+        if(parsed_array.indexOf(item) == -1){
+          console.log('y')
+          parsed_array.push(item)
+          indexes.push(index);
+        }
+    })
+    return arr.filter((item,index)=>{
+      for(var i=0;i<indexes.length;i++){
+        if(index == indexes[i])
+          return item;
+      }
+    })
+  }
+
 }

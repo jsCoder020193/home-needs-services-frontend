@@ -1,457 +1,518 @@
-<section class="booking-details center-block main-block">
+<div class="jumbotron jumbotron-fluid vertical-center" style="height: 400px;">
   <div class="container">
-    <div class="row">
+    <div class="row justify-content-center">
+      <div class="col-md-10">
+        <div class="slider-content" style="margin-top: 50px;">
+          <h1>Register with us!</h1>
+          <h3>Please provide us with some details and we will match you with customers in your area...</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<section class="booking-details center-block main-block" style="    padding-top: 0;
+padding-bottom: 300px;">
+  <div class="container">
+    <!-- <div class="row">
       <div class="col-md-12">
         <h2>Register with us!</h2>
         <h6>Please provide us with some details and we will match you with customers in your area...</h6>
       </div>
-    </div>
+    </div> -->
     <div class="row mt-5 justify-content-center">
       <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
-      <div class="col-md-12 set-sm-fit mb-4">
+        <div class="col-md-12 set-sm-fit mb-4">
 
-        <div class="d-flex">
-          <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-pills" orientation="vertical">
-            <li ngbNavItem="Personal Details">
-              <a ngbNavLink>Personal Details</a>
-              <ng-template ngbNavContent>
-                <div class="preference-title">
-                  <h4>{{ active }}</h4>
-                </div>
-                <div class="preferences">
-                  <div class="preference-radio mt-3">
-                    <p>Tell us a bit about yourself.</p>
-                    <div class="row mt-3">
-                      <div class="col-md-4">
-                        <div class="card-details">
-                          <input type="text" placeholder="First Name" class="card-number" formControlName="first_name">
+          <div class="d-flex">
+            <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-pills" orientation="vertical">
+              <li ngbNavItem="Personal Details">
+                <a ngbNavLink>Personal Details</a>
+                <ng-template ngbNavContent>
+                  <div class="preference-title">
+                    <h4>{{ active }}</h4>
+                  </div>
+                  <div class="preferences">
+                    <div class="preference-radio mt-3">
+                      <p>Tell us a bit about yourself.</p>
+                      <div class="row mt-3">
+                        <div class="col-md-4">
+                          <div class="card-details">
+                            <input type="text" placeholder="First Name" class="card-number"
+                              formControlName="first_name">
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="card-details">
+                            <input type="text" placeholder="Middle Name" class="card-number"
+                              formControlName="middle_name">
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="card-details">
+                            <input type="text" placeholder="Last Name" class="card-number" formControlName="last_name">
+                          </div>
                         </div>
                       </div>
-                      <div class="col-md-4">
-                        <div class="card-details">
-                          <input type="text" placeholder="Middle Name" class="card-number"
-                            formControlName="middle_name">
+                      <div class="row mt-3">
+                        <div class="col-md-8">
+                          <div class="card-details">
+                            <input type="text" placeholder="Phone Number" class="card-number"
+                              formControlName="phone_number">
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="card-details">
+                            <select class="card-number" id="phoneTypesDropdown" style="height: 48px;"
+                              formControlName="phone_number_type">
+                              <option selected>Phone Number Type...</option>
+                              <option value="home">Home</option>
+                              <option value="work">Work</option>
+                              <option value="mobile">Mobile</option>
+                            </select>
+                          </div>
                         </div>
                       </div>
-                      <div class="col-md-4">
-                        <div class="card-details">
-                          <input type="text" placeholder="Last Name" class="card-number" formControlName="last_name">
+                      <div class="row mt-3">
+                        <div class="col-md-12">
+                          <div class="card-details">
+                            <input type="text" placeholder="Address Line 1" class="card-number"
+                              [ngClass]="registrationForm.get('user_address_line_1').invalid && (registrationForm.get('user_address_line_1').dirty || registrationForm.get('user_address_line_1').touched || formSubmitted)?'invalid':''"
+                              formControlName="user_address_line_1">
+                          </div>
+                        </div>
+                        <div
+                          *ngIf="registrationForm.get('user_address_line_1').invalid && (registrationForm.get('user_address_line_1').dirty || registrationForm.get('user_address_line_1').touched || formSubmitted)">
+                          <div class="error-msg" *ngIf="registrationForm.get('user_address_line_1').errors['required']">
+                            Please enter a address.
+                          </div>
                         </div>
                       </div>
-                    </div>
-                    <div class="row mt-3">
-                      <div class="col-md-8">
-                        <div class="card-details">
-                          <input type="text" placeholder="Phone Number" class="card-number"
-                            formControlName="phone_number">
+                      <div class="row mt-3">
+                        <div class="col-md-12">
+                          <div class="card-details">
+                            <input type="text" placeholder="Address Line 2" class="card-number"
+                              formControlName="user_address_line_2">
+                          </div>
                         </div>
                       </div>
-                      <div class="col-md-4">
-                        <div class="card-details">
-                          <select class="card-number" id="phoneTypesDropdown" style="height: 48px;"
-                            formControlName="phone_number_type">
-                            <option selected>Phone Number Type...</option>
-                            <option value="home">Home</option>
-                            <option value="work">Work</option>
-                            <option value="mobile">Mobile</option>
-                          </select>
+                      <div class="row mt-3">
+                        <div class="col-md-4">
+                          <div class="card-details">
+                            <input type="text" placeholder="City" class="card-number"
+                              [ngClass]="registrationForm.get('user_city').invalid && (registrationForm.get('user_city').dirty || registrationForm.get('user_city').touched || formSubmitted)?'invalid':''"
+                              formControlName="user_city">
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="card-details">
+                            <!-- <input type="text" placeholder="State" class="card-number"> -->
+                            <select class="card-number" id="statesDropdown" style="height: 48px;"
+                              [ngClass]="registrationForm.get('user_state').invalid && (registrationForm.get('user_state').dirty || registrationForm.get('user_state').touched || formSubmitted)?'invalid':''"
+                              formControlName="user_state">
+                              <option selected>State</option>
+                              <option *ngFor="let state of states; index as i;" value="{{state['abbreviation']}}">
+                                {{state['name']}}</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="card-details">
+                            <input type="text" placeholder="Zipcode" class="card-number"
+                              [ngClass]="registrationForm.get('user_zipcode').invalid && (registrationForm.get('user_zipcode').dirty || registrationForm.get('user_zipcode').touched || formSubmitted)?'invalid':''"
+                              formControlName="user_zipcode">
+                          </div>
                         </div>
                       </div>
-                    </div>
-                    <div class="row mt-3">
-                      <div class="col-md-12">
-                        <div class="card-details">
-                          <input type="text" placeholder="Address Line 1" class="card-number"
-                            [ngClass]="registrationForm.get('user_address_line_1').invalid && (registrationForm.get('user_address_line_1').dirty || registrationForm.get('user_address_line_1').touched || formSubmitted)?'invalid':''"
-                            formControlName="user_address_line_1">
-                        </div>
-                      </div>
-                      <div
-                        *ngIf="registrationForm.get('user_address_line_1').invalid && (registrationForm.get('user_address_line_1').dirty || registrationForm.get('user_address_line_1').touched || formSubmitted)">
-                        <div class="error-msg" *ngIf="registrationForm.get('user_address_line_1').errors['required']">
-                          Please enter a address.
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row mt-3">
-                      <div class="col-md-12">
-                        <div class="card-details">
-                          <input type="text" placeholder="Address Line 2" class="card-number"
-                            formControlName="user_address_line_2">
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row mt-3">
-                      <div class="col-md-4">
-                        <div class="card-details">
-                          <input type="text" placeholder="City" class="card-number"
-                            [ngClass]="registrationForm.get('user_city').invalid && (registrationForm.get('user_city').dirty || registrationForm.get('user_city').touched || formSubmitted)?'invalid':''"
-                            formControlName="user_city">
-                        </div>
-                      </div>
-                      <div class="col-md-4">
-                        <div class="card-details">
-                          <!-- <input type="text" placeholder="State" class="card-number"> -->
-                          <select class="card-number" id="statesDropdown" style="height: 48px;"
-                            [ngClass]="registrationForm.get('user_state').invalid && (registrationForm.get('user_state').dirty || registrationForm.get('user_state').touched || formSubmitted)?'invalid':''"
-                            formControlName="user_state">
-                            <option selected>State</option>
-                            <option *ngFor="let state of states; index as i;" value="{{state['abbreviation']}}">
-                              {{state['name']}}</option>
-                          </select>
-                        </div>
-                      </div>
-                      <div class="col-md-4">
-                        <div class="card-details">
-                          <input type="text" placeholder="Zipcode" class="card-number"
-                            [ngClass]="registrationForm.get('user_zipcode').invalid && (registrationForm.get('user_zipcode').dirty || registrationForm.get('user_zipcode').touched || formSubmitted)?'invalid':''"
-                            formControlName="user_zipcode">
-                        </div>
-                      </div>
-                    </div>
 
-                    <div class="row mt-3">
-                      <div
-                        *ngIf="registrationForm.get('user_city').invalid && (registrationForm.get('user_city').dirty || registrationForm.get('user_city').touched || formSubmitted)">
-                        <div class="error-msg" *ngIf="registrationForm.get('user_city').errors['required']">Please enter
-                          a city.
+                      <div class="row mt-3">
+                        <div
+                          *ngIf="registrationForm.get('user_city').invalid && (registrationForm.get('user_city').dirty || registrationForm.get('user_city').touched || formSubmitted)">
+                          <div class="error-msg" *ngIf="registrationForm.get('user_city').errors['required']">Please
+                            enter
+                            a city.
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              </ng-template>
-            </li>
-            <li ngbNavItem="Services">
-              <a ngbNavLink>Services</a>
-              <ng-template ngbNavContent>
-                <div class="preference-title">
-                  <h4>{{ active }}</h4>
-                </div>
-                <div class="preferences">
-                  <div class="preference-radio mt-3">
-                    <p>Tell us about the location of your business.</p>
-                    <div class="form-check" style="margin-top: 32px;">
-                      <input (change)="changeAddress($event)" class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                      <label class="form-check-label" for="defaultCheck1">     
+                </ng-template>
+              </li>
+              <li ngbNavItem="Services">
+                <a ngbNavLink>Services</a>
+                <ng-template ngbNavContent>
+                  <div class="preference-title">
+                    <h4>{{ active }}</h4>
+                  </div>
+                  <div class="preferences">
+                    <div class="preference-radio mt-3">
+                      <p>Tell us about the location of your business.</p>
+                      <div class="form-check" style="margin-top: 32px;">
+                        <input (change)="changeAddress($event)" class="form-check-input" type="checkbox" value=""
+                          id="defaultCheck1">
+                        <label class="form-check-label" for="defaultCheck1">
                           <p>Is your business address the same as your home address?</p>
-                      </label>
-                  </div>
-                  <div class="row">
-                      <div class="col-md-12">
+                        </label>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-12">
                           <div class="card-details">
-                              <input type="text" placeholder="Address Line 1" class="card-number" [ngClass]="registrationForm.get('service_address_line_1').invalid && (registrationForm.get('service_address_line_1').dirty || registrationForm.get('service_address_line_1').touched || formSubmitted)?'invalid':''" formControlName="service_address_line_1">
+                            <input type="text" placeholder="Address Line 1" class="card-number"
+                              [ngClass]="registrationForm.get('service_address_line_1').invalid && (registrationForm.get('service_address_line_1').dirty || registrationForm.get('service_address_line_1').touched || formSubmitted)?'invalid':''"
+                              formControlName="service_address_line_1">
                           </div>
+                        </div>
+                        <div
+                          *ngIf="registrationForm.get('service_address_line_1').invalid && (registrationForm.get('service_address_line_1').dirty || registrationForm.get('service_address_line_1').touched || formSubmitted)">
+                          <div class="error-msg"
+                            *ngIf="registrationForm.get('service_address_line_1').errors['required']">Please enter a
+                            address.
+                          </div>
+                        </div>
                       </div>
-                      <div *ngIf="registrationForm.get('service_address_line_1').invalid && (registrationForm.get('service_address_line_1').dirty || registrationForm.get('service_address_line_1').touched || formSubmitted)">
-                      <div class="error-msg" *ngIf="registrationForm.get('service_address_line_1').errors['required']">Please enter a address.
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row mt-3">
-                    <div class="col-md-12">
-                      <div class="card-details">
-                          <input type="text" placeholder="Address Line 2" class="card-number" formControlName="service_address_line_2">
-                      </div>
-                  </div>
-                  </div>
-                  <div class="row mt-3">
-                      <div class="col-md-4">
+                      <div class="row mt-3">
+                        <div class="col-md-12">
                           <div class="card-details">
-                              <input type="text" placeholder="City" class="card-number" [ngClass]="registrationForm.get('service_city').invalid && (registrationForm.get('service_city').dirty || registrationForm.get('service_city').touched || formSubmitted)?'invalid':''" formControlName="service_city">
+                            <input type="text" placeholder="Address Line 2" class="card-number"
+                              formControlName="service_address_line_2">
                           </div>
+                        </div>
                       </div>
-                      <div class="col-md-4">
-                        <div class="card-details">
-                          <!-- <input type="text" placeholder="State" class="card-number"> -->
-                          <select class="card-number" id="statesDropdown" style="height: 48px;" [ngClass]="registrationForm.get('service_state').invalid && (registrationForm.get('service_state').dirty || registrationForm.get('service_state').touched || formSubmitted)?'invalid':''" formControlName="service_state">
-                            <option selected>State</option>
-                            <option *ngFor="let state of states; index as i;" value="{{state['abbreviation']}}">{{state['name']}}</option>
-                          </select>
-                      </div>
-                      </div>
-                      <div class="col-md-4">
+                      <div class="row mt-3">
+                        <div class="col-md-4">
                           <div class="card-details">
-                              <input type="text" placeholder="Zipcode" class="card-number" [ngClass]="registrationForm.get('service_zipcode').invalid && (registrationForm.get('service_zipcode').dirty || registrationForm.get('service_zipcode').touched || formSubmitted)?'invalid':''" formControlName="service_zipcode">
+                            <input type="text" placeholder="City" class="card-number"
+                              [ngClass]="registrationForm.get('service_city').invalid && (registrationForm.get('service_city').dirty || registrationForm.get('service_city').touched || formSubmitted)?'invalid':''"
+                              formControlName="service_city">
                           </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="card-details">
+                            <!-- <input type="text" placeholder="State" class="card-number"> -->
+                            <select class="card-number" id="statesDropdown" style="height: 48px;"
+                              [ngClass]="registrationForm.get('service_state').invalid && (registrationForm.get('service_state').dirty || registrationForm.get('service_state').touched || formSubmitted)?'invalid':''"
+                              formControlName="service_state">
+                              <option selected>State</option>
+                              <option *ngFor="let state of states; index as i;" value="{{state['abbreviation']}}">
+                                {{state['name']}}</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="card-details">
+                            <input type="text" placeholder="Zipcode" class="card-number"
+                              [ngClass]="registrationForm.get('service_zipcode').invalid && (registrationForm.get('service_zipcode').dirty || registrationForm.get('service_zipcode').touched || formSubmitted)?'invalid':''"
+                              formControlName="service_zipcode">
+                          </div>
+                        </div>
                       </div>
-                  </div>
-    
-                  <div class="row mt-3">
-                    <div *ngIf="registrationForm.get('service_city').invalid && (registrationForm.get('service_city').dirty || registrationForm.get('service_city').touched || formSubmitted)">
-                      <div class="error-msg" *ngIf="registrationForm.get('service_city').errors['required']">Please enter a city.
+
+                      <div class="row mt-3">
+                        <div
+                          *ngIf="registrationForm.get('service_city').invalid && (registrationForm.get('service_city').dirty || registrationForm.get('service_city').touched || formSubmitted)">
+                          <div class="error-msg" *ngIf="registrationForm.get('service_city').errors['required']">Please
+                            enter a city.
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                  </div>
-                  <p>How far from your location are you willing to travel for a job?</p>
-                  <div class="preference-quantity houres col-6">
-                    <div class="counter js-counter">
-                      <div class="counter__item">
-                        <a (click)="decrementCount()" class="no_of_items counter__minus js-counter-btn fa fa-minus" aria-hidden="true" data-action="minus">-</a>
+                      <p>How far from your location are you willing to travel for a job?</p>
+                      <div class="preference-quantity houres col-6">
+                        <div class="counter js-counter">
+                          <div class="counter__item">
+                            <a (click)="decrementCount()" class="no_of_items counter__minus js-counter-btn fa fa-minus"
+                              aria-hidden="true" data-action="minus">-</a>
+                          </div>
+                          <div class="counter__item counter__item--center">
+                            <input class="counter__value js-counter-value" type="number" tabindex="-1"
+                              formControlName="radius" required />
+                          </div>
+                          <div class="counter__item">
+                            <a (click)="incrementCount()" class="no_of_items counter__plus js-counter-btn fa fa-plus"
+                              aria-hidden="true" data-action="plus">+</a>
+                          </div>
+                        </div>
                       </div>
-                      <div class="counter__item counter__item--center">
-                        <input class="counter__value js-counter-value" type="number" tabindex="-1"
-                          formControlName="radius" required />
-                      </div>
-                      <div class="counter__item">
-                        <a (click)="incrementCount()" class="no_of_items counter__plus js-counter-btn fa fa-plus" aria-hidden="true" data-action="plus">+</a>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- <div class="row mt-3">
+                      <!-- <div class="row mt-3">
                     <div class="col-md-4">
                       <div class="card-details">
                           <input type="number" placeholder="Radius" class="card-number" step="10" min="10" max="500" formControlName="radius">
                       </div>
                   </div>
                   </div> -->
-                  <div class="row">
-                    <div class="col-md-12">
-                      <div class="preference-about_home">
-                        <h4>Tell us about the services you can provide.</h4>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="preference-radio mt-4">
-                        <!-- Styled radio btn 3 -->
-                        <p>Do you provide emergency services?</p>
-                        <div class="row">
-                        <div *ngFor="let e of emergencyValues; index as i;" class="col-md-6 sm-box">
-                          <div class="styled-radio styled-radio2">
-                            <input type="radio" (change)="changeEmergencyOption(e)" id="e+{{i}}" name="selector2">
-                            <label for="e+{{i}}">{{e}}</label>
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div class="preference-about_home">
+                            <h4>Tell us about the services you can provide.</h4>
                           </div>
                         </div>
                       </div>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="preference-radio mt-4">
+                            <!-- Styled radio btn 3 -->
+                            <p>Do you provide emergency services?</p>
+                            <div class="row">
+                              <div *ngFor="let e of emergencyValues; index as i;" class="col-md-6 sm-box">
+                                <div class="styled-radio styled-radio2">
+                                  <input type="radio" (change)="changeEmergencyOption(e)" id="e+{{i}}" name="selector2">
+                                  <label for="e+{{i}}">{{e}}</label>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                  </div>
-                    <p class="mt-3">Select the services you provide and a price estimate along with which days and time you are available for each. Use the plus icon to add more!</p>
-                  <div class="preference-service" style="margin: 0;">
-                  <div *ngFor="let s of s_list; let s_index = index;" class="preference-radio border-style">
-                  <div class="row">
-                    <div class="col-4">
-                      <div class="card-details">
-                        <select id="serviceList+{{s_index}}" formControlName="service" [ngClass]="(service_error[s_index])?'invalid':''" class="card-number" #subServiceSelect (change)="handleServiceChange(s_index,subServiceSelect.value)" style="height: 48px;">
-                          <option *ngFor="let service of serviceCategoeies; index as i;" [value]="service.id">
-                            {{service['title']}}</option>
-                        </select>
-                      </div>
-                    </div>
-                  <div class="col-4">
-                    <div class="card-details">
-                      <select id="subServiceList+{{s_index}}" formControlName="sub_service" [ngClass]="(sub_service_error[s_index])?'invalid':''" class="card-number" #serviceSelect (change)="handleSubServiceChange(s_index,serviceSelect.value)" style="height: 48px;">
-                        <option *ngFor="let service of selectedSubCategories[s_index]; index as i;" [value]="service.id">
-                          {{service['title']}}</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="col-3">
-                    <div class="card-details">
-                        <input type="text" formControlName="price" [ngClass]="(price_error[s_index])?'invalid':''" placeholder="Price Estimate" class="card-number" type="number" min="0.01" step="1">
-                    </div>
-                </div>
-                <div class="col-1 counter__item">
-                  <a (click)="addService(s_index)" class="no_of_items counter__plus js-counter-btn fa fa-plus" aria-hidden="true" data-action="plus">+</a>
-                </div>
-                </div>
-                <div class="row">
-                  <div *ngFor="let d of days_array[s_index]; index as i;" style="flex: 0 0 12.666667%;
+                      <p class="mt-3">Select the services you provide and a price estimate along with which days and
+                        time you are available for each. Use the plus icon to add more!</p>
+                      <div class="preference-service" style="margin: 0;">
+                        <div *ngFor="let s of s_list; let s_index = index;" class="preference-radio border-style">
+                          <div class="row">
+                            <div class="col-4">
+                              <div class="card-details">
+                                <select id="serviceList+{{s_index}}" formControlName="service"
+                                  [ngClass]="(service_error[s_index])?'invalid':''" class="card-number"
+                                  #subServiceSelect (change)="handleServiceChange(s_index,subServiceSelect.value)"
+                                  style="height: 48px;">
+                                  <option *ngFor="let service of serviceCategoeies; index as i;" [value]="service.id">
+                                    {{service['title']}}</option>
+                                </select>
+                              </div>
+                            </div>
+                            <div class="col-4">
+                              <div class="card-details">
+                                <select id="subServiceList+{{s_index}}" formControlName="sub_service"
+                                  [ngClass]="(sub_service_error[s_index])?'invalid':''" class="card-number"
+                                  #serviceSelect (change)="handleSubServiceChange(s_index,serviceSelect.value)"
+                                  style="height: 48px;">
+                                  <option *ngFor="let service of selectedSubCategories[s_index]; index as i;"
+                                    [value]="service.id">
+                                    {{service['title']}}</option>
+                                </select>
+                              </div>
+                            </div>
+                            <div class="col-3">
+                              <div class="card-details">
+                                <input type="text" formControlName="price"
+                                  [ngClass]="(price_error[s_index])?'invalid':''" placeholder="Price Estimate"
+                                  class="card-number" type="number" min="0.01" step="1">
+                              </div>
+                            </div>
+                            <div class="col-1 counter__item">
+                              <a (click)="addService(s_index)"
+                                class="no_of_items counter__plus js-counter-btn fa fa-plus" aria-hidden="true"
+                                data-action="plus">+</a>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div *ngFor="let d of days_array[s_index]; index as i;" style="flex: 0 0 12.666667%;
                   max-width: 12.666667%;" class="col-md-2 sm-box">
-                    <div class="styled-radio styled-radio2">
-                      <input style="visibility: hidden;" type="checkbox" (change)="changeDays($event,d,i,s_index)" id="d+{{i}}+{{s_index}}" name="selector+{{s_index}}">
-                      <label [ngClass]="d.selected?'selected-day':''" for="d+{{i}}+{{s_index}}">{{d.value}}</label>
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="error-msg" *ngIf="days_error[s_index]">Please select days.
-                  </div>
-              </div>
-                <div class="row">
-                  <div class="col-6">
-                    <p style="    margin: 0;
+                              <div class="styled-radio styled-radio2">
+                                <input style="visibility: hidden;" type="checkbox"
+                                  (change)="changeDays($event,d,i,s_index)" id="d+{{i}}+{{s_index}}"
+                                  name="selector+{{s_index}}">
+                                <label [ngClass]="d.selected?'selected-day':''"
+                                  for="d+{{i}}+{{s_index}}">{{d.value}}</label>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="error-msg" *ngIf="days_error[s_index]">Please select days.
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-6">
+                              <p style="    margin: 0;
                     font-size: 16px;">Start time:</p>
-                    <div class="form-group">
-                      <ngb-timepicker
-                        id="timefrom" type="text" [hourStep]="hourStep" [minuteStep]="minuteStep" formControlName="from_time"></ngb-timepicker>
-                    </div>
-                  </div>
-                  <div class="col-6">
-                    <p style="    margin: 0;
+                              <div class="form-group">
+                                <ngb-timepicker id="timefrom" type="text" [hourStep]="hourStep"
+                                  [minuteStep]="minuteStep" formControlName="from_time"></ngb-timepicker>
+                              </div>
+                            </div>
+                            <div class="col-6">
+                              <p style="    margin: 0;
                     font-size: 16px;">End time:</p>
-                    <div class="form-group">
-                      <ngb-timepicker
-                        id="timeto" type="text" [hourStep]="hourStep" [minuteStep]="minuteStep" formControlName="to_time"></ngb-timepicker>
+                              <div class="form-group">
+                                <ngb-timepicker id="timeto" type="text" [hourStep]="hourStep" [minuteStep]="minuteStep"
+                                  formControlName="to_time"></ngb-timepicker>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-6 error-msg" *ngIf="from_time_error[s_index]">Please pick a start time
+                              between 9 am to 5 pm.
+                            </div>
+                            <div class="col-6 error-msg" *ngIf="to_time_error[s_index]">Please pick an end time between
+                              9 am to 5 pm.
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
+                </ng-template>
+              </li>
+              <li ngbNavItem="Background Info">
+                <a ngbNavLink>Background Info</a>
+                <ng-template ngbNavContent>
+                  <div class="preference-title">
+                    <h4>{{ active }}</h4>
                   </div>
-                  <div class="row">
-                    <div class="col-6 error-msg" *ngIf="from_time_error[s_index]">Please pick a start time between 9 am to 5 pm.
-                    </div>
-                    <div class="col-6 error-msg" *ngIf="to_time_error[s_index]">Please pick an end time between 9 am to 5 pm.
-                      </div>
-                </div>
-                </div>
-              </div>
-                  </div>
-                </div>
-              </ng-template>
-            </li>
-            <li ngbNavItem="Background Info">
-              <a ngbNavLink>Background Info</a>
-              <ng-template ngbNavContent>
-                <div class="preference-title">
-                  <h4>{{ active }}</h4>
-                </div>
-                <div class="preferences">
-                  <div class="preference-radio mt-3">
-                    <p>Please provide us with your background information.</p>
-                    <div class="row">
-                      <div class="col-md-12">
-                        <div class="card-details">
-                          <input type="number" placeholder="Social Security Number" class="card-number" formControlName="ssn">
+                  <div class="preferences">
+                    <div class="preference-radio mt-3">
+                      <p>Please provide us with your background information.</p>
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div class="card-details">
+                            <input type="number" placeholder="Social Security Number" class="card-number"
+                              formControlName="ssn">
+                          </div>
                         </div>
                       </div>
-                    </div>
-                    <div class="row mt-3">
-                      <div class="col-md-8">
-                        <div class="card-details">
-                          <input type="text" placeholder="Identification Number" class="card-number"
-                            formControlName="bck_id_number">
+                      <div class="row mt-3">
+                        <div class="col-md-8">
+                          <div class="card-details">
+                            <input type="text" placeholder="Identification Number" class="card-number"
+                              formControlName="bck_id_number">
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="card-details">
+                            <select class="card-number" id="phoneTypesDropdown" style="height: 48px;"
+                              formControlName="bck_id_type_id_fk">
+                              <option selected>Identification Type...</option>
+                              <option value="1">Drivers License</option>
+                              <option value="2">Passport Number</option>
+                              <option value="3">State ID</option>
+                            </select>
+                          </div>
                         </div>
                       </div>
-                      <div class="col-md-4">
-                        <div class="card-details">
-                          <select class="card-number" id="phoneTypesDropdown" style="height: 48px;"
-                            formControlName="bck_id_type_id_fk">
-                            <option selected>Identification Type...</option>
-                            <option value="1">Drivers License</option>
-                            <option value="2">Passport Number</option>
-                            <option value="3">State ID</option>
-                          </select>
+                      <p>Enter information related to your license if any.</p>
+                      <div class="row mt-3">
+                        <div class="col-md-12">
+                          <div class="card-details">
+                            <input type="text" placeholder="License Number" class="card-number"
+                              formControlName="licence_number">
+                          </div>
                         </div>
                       </div>
-                    </div>
-                    <p>Enter information related to your license if any.</p>
-                    <div class="row mt-3">
-                      <div class="col-md-12">
-                        <div class="card-details">
-                          <input type="text" placeholder="License Number" class="card-number" formControlName="licence_number">
+                      <p>Give a brief description of the license. <span class="optional-fade">(optional)</span></p>
+                      <div class="row">
+                        <div class="col-md-12">
+                          <textarea class="optinal-textarea" formControlName="licence_desc"></textarea>
                         </div>
                       </div>
-                    </div>
-                    <p>Give a brief description of the license. <span class="optional-fade">(optional)</span></p>
-                    <div class="row">
-                      <div class="col-md-12">
-                        <textarea class="optinal-textarea" formControlName="licence_desc"></textarea>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="preference-radio mt-4">
-                          <p>License valid from?</p>
-                          <div class="form-group">
-                            <div class="col-xs-5 date">
-                              <div class="input-group input-append">
-                                <input
-                                  [ngClass]="registrationForm.get('valid_from').invalid && (registrationForm.get('valid_from').dirty || registrationForm.get('valid_from').touched)?'invalid':''"
-                                  class="form-control form-control-lg" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker
-                                  #df="ngbDatepicker" id="valid_from" type="text" formControlName="valid_from" required>
-                                <div class="input-group-append">
-                                  <button class="btn btn-lg calendar" (click)="df.toggle()" type="button"></button>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="preference-radio mt-4">
+                            <p>License valid from?</p>
+                            <div class="form-group">
+                              <div class="col-xs-5 date">
+                                <div class="input-group input-append">
+                                  <input
+                                    [ngClass]="registrationForm.get('valid_from').invalid && (registrationForm.get('valid_from').dirty || registrationForm.get('valid_from').touched)?'invalid':''"
+                                    class="form-control form-control-lg" placeholder="yyyy-mm-dd" name="dp"
+                                    ngbDatepicker #df="ngbDatepicker" id="valid_from" type="text"
+                                    formControlName="valid_from" required>
+                                  <div class="input-group-append">
+                                    <button class="btn btn-lg calendar" (click)="df.toggle()" type="button"></button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="preference-radio mt-4">
+                            <p>License valid upto?</p>
+                            <div class="form-group">
+                              <div class="col-xs-5 date">
+                                <div class="input-group input-append">
+                                  <input
+                                    [ngClass]="registrationForm.get('valid_upto').invalid && (registrationForm.get('valid_upto').dirty || registrationForm.get('valid_upto').touched)?'invalid':''"
+                                    class="form-control form-control-lg" placeholder="yyyy-mm-dd" name="dp"
+                                    ngbDatepicker #dt="ngbDatepicker" id="valid_upto" type="text"
+                                    formControlName="valid_upto" required>
+                                  <div class="input-group-append">
+                                    <button class="btn btn-lg calendar" (click)="dt.toggle()" type="button"></button>
+                                  </div>
                                 </div>
                               </div>
                             </div>
                           </div>
                         </div>
                       </div>
-                      <div class="col-md-6">
-                        <div class="preference-radio mt-4">
-                          <p>License valid upto?</p>
-                          <div class="form-group">
-                            <div class="col-xs-5 date">
-                              <div class="input-group input-append">
-                                <input
-                                  [ngClass]="registrationForm.get('valid_upto').invalid && (registrationForm.get('valid_upto').dirty || registrationForm.get('valid_upto').touched)?'invalid':''"
-                                  class="form-control form-control-lg" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker
-                                  #dt="ngbDatepicker" id="valid_upto" type="text" formControlName="valid_upto" required>
-                                <div class="input-group-append">
-                                  <button class="btn btn-lg calendar" (click)="dt.toggle()" type="button"></button>
-                                </div>
-                              </div>
-                            </div>
+                    </div>
+                  </div>
+                </ng-template>
+              </li>
+              <li ngbNavItem="Confirm">
+                <a ngbNavLink>Confirm</a>
+                <ng-template ngbNavContent>
+                  <div class="preference-title">
+                    <h4>{{ active }}</h4>
+                  </div>
+                  <div class="preferences">
+                    <div class="preference-radio mt-3">
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div class="card-details">
+                            <input type="text" placeholder="Email" class="card-number" formControlName="email">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row mt-3">
+                        <div class="col-md-12">
+                          <div class="card-details">
+                            <input type="password" placeholder="Password" class="card-number"
+                              formControlName="password">
                           </div>
                         </div>
                       </div>
                     </div>
-                    
-                    
-                  </div>
-                </div>
-              </ng-template>
-            </li>
-            <li ngbNavItem="Confirm">
-              <a ngbNavLink>Confirm</a>
-              <ng-template ngbNavContent>
-                <div class="preference-title">
-                  <h4>{{ active }}</h4>
-                </div>
-                <div class="preferences">
-                  <div class="preference-radio mt-3">
                     <div class="row">
                       <div class="col-md-12">
-                        <div class="card-details">
-                          <input type="text" placeholder="Email" class="card-number" formControlName="email">
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row mt-3">
-                      <div class="col-md-12">
-                        <div class="card-details">
-                          <input type="password" placeholder="Password" class="card-number" formControlName="password">
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="preference-radio mt-4">
-                    <!-- Card Details -->
-                    <p>Payment details</p>
-                    <h6>Enter your payment information to which payments from customers will be processed.</h6>
-                    <div class="row mt-3">
-                      <div class="col-md-12">
-                        <div class="form-row">
-                          <label for="card-element">
-                            Credit or debit card
-                          </label>
-                          <div id="card-element">
-                            <!-- A Stripe Element will be inserted here. -->
+                          <div class="preference-about_home">
+                              <h4>Payment Details</h4>
+                              <div class="payment-icon">
+                                  <i class="fa fa-lock" aria-hidden="true"></i>
+                                  <!-- <p>256 bit Secure<br> SSL Encryption</p> -->
+                                  <p>Powered By Stripe</p>
+                              </div>
                           </div>
-
-                          <!-- Used to display form errors. -->
-                          <div class="error-msg" id="card-errors" role="alert"></div>
+                      </div>
+                  </div>
+                    <div class="preference-radio mt-4">
+                      <h6>Enter your payment information to which payments from customers will be processed.</h6>
+                      <div class="row mt-3">
+                        <div class="col-md-8">
+                          <div class="card-details">
+                            <input type="number" placeholder="Account number" class="card-number card-num"
+                              formControlName="account_number">
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="card-details">
+                            <input type="text" placeholder="Routing Number" class="card-number" formControlName="routing_number">
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                <div class="row mt-4 justify-content-center">
-                  <div class="col-md-6">
-                    <button type="submit" class="btn btn-block complete-booking">
-                      <span class="pe-7s-unlock"></span>Submit Application
-                    </button>
+                  <div class="row mt-4 justify-content-center">
+                    <div class="col-md-6">
+                      <button type="submit" class="btn btn-block complete-booking">
+                        <span class="pe-7s-unlock"></span>Submit Application
+                      </button>
+                    </div>
                   </div>
-                </div>
-              </ng-template>
-            </li>
-          </ul>
+                </ng-template>
+              </li>
+            </ul>
 
-          <div [ngbNavOutlet]="nav" class="ml-4"></div>
+            <div [ngbNavOutlet]="nav" class="ml-4"></div>
+          </div>
         </div>
-      </div>
-    </form>
+      </form>
     </div>
   </div>
 </section>
