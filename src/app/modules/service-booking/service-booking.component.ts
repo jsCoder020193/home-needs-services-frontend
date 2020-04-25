@@ -201,10 +201,12 @@ export class ServiceBookingComponent implements OnInit {
 
   incrementCount(){
     var value = +(this.serviceBookingForm.get('no_of_hours').value);
+    if(value<10)
     this.serviceBookingForm.patchValue({no_of_hours: (++value).toString()});
   }
   decrementCount(){
     var value = +(this.serviceBookingForm.get('no_of_hours').value);
+    if(value>1)
     this.serviceBookingForm.patchValue({no_of_hours: (--value).toString()});
   }
 

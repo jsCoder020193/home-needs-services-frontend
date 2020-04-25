@@ -61,3 +61,30 @@
     background-color: #0062c7;
       border-color: #0062c7;
   }
+
+  .no_of_items{
+    font-weight: 600;
+    font-size: 32px;
+    color: #0DB2E7;
+    padding: 0;
+  }
+
+.preference-service{
+    border-bottom: 2px solid #0DB2E7;
+    margin: 38px 0 0;
+    padding: 26px 0;
+    display: inline-block;
+    width: 100%;
+}
+
+.selected-day{
+  border-color: #10b2e7;
+  color: #10b2e7; 
+}
+
+.border-style{
+  border-top: 2px solid #0DB2E7;
+  padding: 26px 0;
+  display: inline-block;
+  width: 100%;
+}
