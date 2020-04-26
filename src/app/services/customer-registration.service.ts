@@ -23,7 +23,7 @@ export class CustomerRegistrationService {
   
   //create SR Location
   public createServiceRequestLocation(payload): Observable<any> {
-    return this.http.post(`/api/location/create`, payload);
+    return this.http.post(`/api/srlocation/create`, payload);
   }
   //create SR Schedule
   public createServiceRequestSchedule(payload): Observable<any> {

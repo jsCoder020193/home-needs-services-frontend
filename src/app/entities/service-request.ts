@@ -132,7 +132,7 @@ service_state: any;
       service_address_line_2: SR.service_address_line_2 || '',
       service_city: SR.service_city || '',
       service_state: SR.service_state || '',
-      service_request_id_fk: SRID || ''
+      SRID: SRID || ''
     };
     return payload;
   }
