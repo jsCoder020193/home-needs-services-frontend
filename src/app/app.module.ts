@@ -19,6 +19,7 @@ import { ServiceBookingComponent } from './modules/service-booking/service-booki
 import { CustomerRegistrationComponent } from './modules/customer-registration/customer-registration/customer-registration.component';
 import { ModalComponent } from './modules/modal/modal.component';
 import { PaymentInfoComponent } from './shared/payment-info/payment-info.component';
+import { QuotesComponent } from './modules/quotes/quotes.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -33,6 +34,10 @@ const routes: Routes = [
   {
     path: 'service-request',
     component: ServiceBookingComponent
+  },
+  {
+    path: 'quotes',
+    component: QuotesComponent
   }
 ]
 
@@ -46,7 +51,8 @@ const routes: Routes = [
     ServiceBookingComponent,
     CustomerRegistrationComponent,
     ModalComponent,
-    PaymentInfoComponent
+    PaymentInfoComponent,
+    QuotesComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,93 @@
+<section class="booking-details center-block main-block">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Pick a Service Provider</h2>
+                <h6>Pick the right service provider based on your needs.</h6>
+            </div>
+        </div>
+        <div class="row mt-5 justify-content-center">
+            <div class="col-md-12 set-sm-fit mb-4">
+                <form [formGroup]="quotesForm" (ngSubmit)="onSubmit()">
+                    <div class="preference-title">
+                        <h4>Available Quotes</h4>
+                    </div>
+                    <div class="preferences">
+
+                        <div class="preference-radio mt-5">
+                            <div class="row">
+                                <div *ngFor="let quote of quotesArray; index as i;" class="col-xs-12 col-md-4 sm-box">
+                                    <div class="styled-radio">
+                                        <input type="radio" (change)="handleChange(quote)" id="quote+{{i}}"
+                                            name="selector">
+                                        <label class="text-left text-wrap mt-4" for="quote+{{i}}">
+                                            <div class="card-body">
+                                                <h5 class="card-title">
+                                                    
+                                                <div class="row">
+                                                    <div class="col-8">Card title</div>
+                                                    <div class="col-4"><span class="badge badge-success">Verified</span></div>
+                                                </div>
+                                                    
+                                                </h5>
+                                                <p class="card-text">Some quick example text to build on the card title</p>
+                                            </div>
+                                            <ul class="list-group list-group-flush">
+                                                <li class="list-group-item">
+                                                    <div class="row">
+                                                        <div class="col-8">
+                                                            Estimated Price
+                                                        </div>
+                                                        <div class="col-4">
+                                                           $ 4,000
+                                                        </div>
+                                                    </div></li>
+                                                <li class="list-group-item">
+                                                <div class="row">
+                                                    <div class="col-8">
+                                                        Customer Rating
+                                                    </div>
+                                                    <div class="col-4">
+                                                    <ngb-rating [(rate)]="currentRate" [readonly]="true" [max]="5"></ngb-rating>
+                                                    </div>
+                                                </div>
+                                                </li>
+                                                <li class="list-group-item">20 Verified Reviews
+                                                </li>
+                                            </ul>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-4 justify-content-center">
+                        <div class="col-md-8">
+                            <button type="submit" class="btn btn-block complete-booking">
+                                <span class="pe-7s-unlock"></span>Confirm Quote
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- <ngb-accordion [closeOthers]="true" activeIds="ngb-panel-0">
+    <ngb-panel id="static-1" title="Simple" style="margin-top: 15px;">
+      <ng-template ngbPanelContent>
+        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia
+      </ng-template>
+    </ngb-panel>
+    <ngb-panel id="static-2" title="Simple">
+        <ng-template ngbPanelContent>
+          Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia
+        </ng-template>
+      </ngb-panel>
+      <ngb-panel id="static-3" title="Simple">
+        <ng-template ngbPanelContent>
+          Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia
+        </ng-template>
+      </ngb-panel>
+  </ngb-accordion> -->
