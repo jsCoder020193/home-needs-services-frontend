@@ -336,6 +336,7 @@ export class RegisterComponent implements OnInit {
                       } else {
                         console.log(SOLResult)
                         //Navigate to login page
+                        self.openModal('Our team will get in touch with you within 24 hours.','Thank you for signing up!');
                         self.router.navigate(['/']);
                             // this.auth.register(this.credentials).subscribe(
                             //   () => {
@@ -425,8 +426,12 @@ export class RegisterComponent implements OnInit {
   }
 
   saveStripeToken(){
+
     return new Promise((resolve, reject) => {
-    this.stripe.createToken(this.card).then(result => {
+      var extraDetails = {
+        currency: 'usd'
+      };
+    this.stripe.createToken(this.card, extraDetails).then(result => {
           if (result.error) {
             console.log('Error creating payment method.');
             const errorElement = document.getElementById('card-errors');

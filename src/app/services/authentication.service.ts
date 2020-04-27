@@ -1,8 +1,9 @@
-import { Injectable } from '@angular/core'
-import { HttpClient } from '@angular/common/http'
-import { Observable, of } from 'rxjs'
-import { map } from 'rxjs/operators'
-import { Router } from '@angular/router'
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http'
+import { Observable, of, throwError } from 'rxjs'
+import { catchError, retry, map } from 'rxjs/operators'
+import { Router } from '@angular/router';
+
 
 export interface UserDetails {
   first_name: string
@@ -79,10 +80,16 @@ export class AuthenticationService {
 
   public register(user: CreateUserPayload): Observable<any> {
     return this.http.post(`/api/login/register`, user)
+    .pipe(
+      catchError(this.handleError) // then handle the error
+    );
   }
 
   public login(user: TokenPayload): Observable<any> {
     const base = this.http.post(`/api/login/login`, user)
+    .pipe(
+      catchError(this.handleError) // then handle the error
+    );
 
     const request = base.pipe(
       map((data: TokenResponse) => {
@@ -99,6 +106,9 @@ export class AuthenticationService {
     return this.http.get(`/api/login/profile`, {
       headers: { Authorization: ` ${this.getToken()}` }
     })
+    .pipe(
+      catchError(this.handleError) // then handle the error
+    );
   }
 
   public logout(): void {
@@ -106,4 +116,21 @@ export class AuthenticationService {
     window.localStorage.removeItem('usertoken')
     this.router.navigateByUrl('/')
   }
+
+  private handleError(error: HttpErrorResponse) {
+    if (error.error instanceof ErrorEvent) {
+      // A client-side or network error occurred. Handle it accordingly.
+      console.error('An error occurred:', error.error.message);
+    } else {
+      // The backend returned an unsuccessful response code.
+      // The response body may contain clues as to what went wrong,
+      console.error(
+        `Backend returned code ${error.status}, ` +
+        `body was: ${error.error}`);
+    }
+    // return an observable with a user-facing error message
+    return throwError(
+      error);
+  };
+  
 }

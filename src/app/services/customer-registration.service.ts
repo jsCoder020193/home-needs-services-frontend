@@ -18,16 +18,25 @@ export class CustomerRegistrationService {
 
   //create SR
   public createServiceRequest(payload): Observable<any> {
-    return this.http.post(`/api/servicerequest/create`, payload);
+    return this.http.post(`/api/servicerequest/create`, payload)
+    .pipe(
+      catchError(this.handleError) // then handle the error
+    );
   }
   
   //create SR Location
   public createServiceRequestLocation(payload): Observable<any> {
-    return this.http.post(`/api/srlocation/create`, payload);
+    return this.http.post(`/api/srlocation/create`, payload)
+    .pipe(
+      catchError(this.handleError) // then handle the error
+    );
   }
   //create SR Schedule
   public createServiceRequestSchedule(payload): Observable<any> {
-    return this.http.post(`/api/schedule/create`, payload);
+    return this.http.post(`/api/schedule/create`, payload)
+    .pipe(
+      catchError(this.handleError) // then handle the error
+    );
   }
   //Update quotes
   public updateQuotes(payload): Observable<any> {
@@ -50,7 +59,7 @@ export class CustomerRegistrationService {
     }
     // return an observable with a user-facing error message
     return throwError(
-      'Something bad happened; please try again later.');
+      error);
   };
 
 }
