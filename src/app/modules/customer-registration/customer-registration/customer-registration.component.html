@@ -2,10 +2,10 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-              <h2>We have matching Service Providers in your area!</h2>
-              <h6>Complete your booking...</h6>
+                <h2>We have matching Service Providers in your area!</h2>
+                <h6>Complete your booking...</h6>
             </div>
-          </div>
+        </div>
         <div class="row mt-5 justify-content-center">
             <div class="col-md-8 set-sm-fit mb-4">
                 <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
@@ -14,109 +14,132 @@
                     </div>
                     <div class="preferences">
                         <!-- Personal Details -->
-                              <div class="preference-radio mt-5">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="card-details">
-                                            <input type="text" placeholder="Email" class="card-number" formControlName="email">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row mt-3">
-                                    <div class="col-md-12">
-                                        <div class="card-details">
-                                            <input type="password" placeholder="Password" class="card-number" formControlName="password">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row mt-3">
-                                    <div class="col-md-4">
-                                        <div class="card-details">
-                                            <input type="text" placeholder="First Name" class="card-number" formControlName="first_name">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="card-details">
-                                            <input type="text" placeholder="Middle Name" class="card-number" formControlName="middle_name">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="card-details">
-                                            <input type="text" placeholder="Last Name" class="card-number" formControlName="last_name">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row mt-3">
-                                    <div class="col-md-8">
-                                        <div class="card-details">
-                                            <input type="text" placeholder="Phone Number" class="card-number" formControlName="phone_number">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="card-details">
-                                            <select class="card-number" id="phoneTypesDropdown" style="height: 48px;" formControlName="phone_number_type">
-                                              <option selected>Phone Number Type...</option>
-                                              <option value="home">Home</option>
-                                              <option value="work">Work</option>
-                                              <option value="mobile">Mobile</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-check" style="margin-top: 32px;">
-                                    <input (change)="changeAddress($event)" class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                    <label class="form-check-label" for="defaultCheck1">     
-                                        <p>Is your home address the same as your requested service address?</p>
-                                    </label>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="card-details">
-                                            <input type="text" placeholder="Address Line 1" class="card-number" [ngClass]="registrationForm.get('user_address_line_1').invalid && (registrationForm.get('user_address_line_1').dirty || registrationForm.get('user_address_line_1').touched || formSubmitted)?'invalid':''" formControlName="user_address_line_1">
-                                        </div>
-                                    </div>
-                                    <div *ngIf="registrationForm.get('user_address_line_1').invalid && (registrationForm.get('user_address_line_1').dirty || registrationForm.get('user_address_line_1').touched || formSubmitted)">
-                                    <div class="error-msg" *ngIf="registrationForm.get('user_address_line_1').errors['required']">Please enter a address.
-                                    </div>
-                                  </div>
-                                </div>
-                                <div class="row mt-3">
-                                  <div class="col-md-12">
+                        <div class="preference-radio mt-5">
+                            <div class="row">
+                                <div class="col-md-12">
                                     <div class="card-details">
-                                        <input type="text" placeholder="Address Line 2" class="card-number" formControlName="user_address_line_2">
+                                        <input type="text" placeholder="Email" class="card-number"
+                                            formControlName="email">
                                     </div>
                                 </div>
-                                </div>
-                                <div class="row mt-3">
-                                    <div class="col-md-4">
-                                        <div class="card-details">
-                                            <input type="text" placeholder="City" class="card-number" [ngClass]="registrationForm.get('user_city').invalid && (registrationForm.get('user_city').dirty || registrationForm.get('user_city').touched || formSubmitted)?'invalid':''" formControlName="user_city">
-                                        </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-12">
+                                    <div class="card-details">
+                                        <input type="password" placeholder="Password" class="card-number"
+                                            formControlName="password">
                                     </div>
-                                    <div class="col-md-4">
-                                      <div class="card-details">
-                                        <!-- <input type="text" placeholder="State" class="card-number"> -->
-                                        <select class="card-number" id="statesDropdown" style="height: 48px;" [ngClass]="registrationForm.get('user_state').invalid && (registrationForm.get('user_state').dirty || registrationForm.get('user_state').touched || formSubmitted)?'invalid':''" formControlName="user_state">
-                                          <option selected>State</option>
-                                          <option *ngFor="let state of states; index as i;" value="{{state['abbreviation']}}">{{state['name']}}</option>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-4">
+                                    <div class="card-details">
+                                        <input type="text" placeholder="First Name" class="card-number"
+                                            formControlName="first_name">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="card-details">
+                                        <input type="text" placeholder="Middle Name" class="card-number"
+                                            formControlName="middle_name">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="card-details">
+                                        <input type="text" placeholder="Last Name" class="card-number"
+                                            formControlName="last_name">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-8">
+                                    <div class="card-details">
+                                        <input type="text" placeholder="Phone Number" class="card-number"
+                                            formControlName="phone_number">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="card-details">
+                                        <select class="card-number" id="phoneTypesDropdown" style="height: 48px;"
+                                            formControlName="phone_number_type">
+                                            <option selected>Phone Number Type...</option>
+                                            <option value="home">Home</option>
+                                            <option value="work">Work</option>
+                                            <option value="mobile">Mobile</option>
                                         </select>
                                     </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="card-details">
-                                            <input type="text" placeholder="Zipcode" class="card-number" [ngClass]="registrationForm.get('user_zipcode').invalid && (registrationForm.get('user_zipcode').dirty || registrationForm.get('user_zipcode').touched || formSubmitted)?'invalid':''" formControlName="user_zipcode">
-                                        </div>
+                                </div>
+                            </div>
+                            <div class="form-check" style="margin-top: 32px;">
+                                <input (change)="changeAddress($event)" class="form-check-input" type="checkbox"
+                                    value="" id="defaultCheck1">
+                                <label class="form-check-label" for="defaultCheck1">
+                                    <p>Is your home address the same as your requested service address?</p>
+                                </label>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="card-details">
+                                        <input type="text" placeholder="Address Line 1" class="card-number"
+                                            [ngClass]="registrationForm.get('user_address_line_1').invalid && (registrationForm.get('user_address_line_1').dirty || registrationForm.get('user_address_line_1').touched || formSubmitted)?'invalid':''"
+                                            formControlName="user_address_line_1">
                                     </div>
                                 </div>
-                  
-                                <div class="row mt-3">
-                                  <div *ngIf="registrationForm.get('user_city').invalid && (registrationForm.get('user_city').dirty || registrationForm.get('user_city').touched || formSubmitted)">
-                                    <div class="error-msg" *ngIf="registrationForm.get('user_city').errors['required']">Please enter a city.
+                                <div
+                                    *ngIf="registrationForm.get('user_address_line_1').invalid && (registrationForm.get('user_address_line_1').dirty || registrationForm.get('user_address_line_1').touched || formSubmitted)">
+                                    <div class="error-msg"
+                                        *ngIf="registrationForm.get('user_address_line_1').errors['required']">Please
+                                        enter a address.
                                     </div>
-                                  </div>
                                 </div>
-                              </div>
-                            <!--// Styled radio btn 3 -->
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-12">
+                                    <div class="card-details">
+                                        <input type="text" placeholder="Address Line 2" class="card-number"
+                                            formControlName="user_address_line_2">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-4">
+                                    <div class="card-details">
+                                        <input type="text" placeholder="City" class="card-number"
+                                            [ngClass]="registrationForm.get('user_city').invalid && (registrationForm.get('user_city').dirty || registrationForm.get('user_city').touched || formSubmitted)?'invalid':''"
+                                            formControlName="user_city">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="card-details">
+                                        <!-- <input type="text" placeholder="State" class="card-number"> -->
+                                        <select class="card-number" id="statesDropdown" style="height: 48px;"
+                                            [ngClass]="registrationForm.get('user_state').invalid && (registrationForm.get('user_state').dirty || registrationForm.get('user_state').touched || formSubmitted)?'invalid':''"
+                                            formControlName="user_state">
+                                            <option selected>State</option>
+                                            <option *ngFor="let state of states; index as i;"
+                                                value="{{state['abbreviation']}}">{{state['name']}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="card-details">
+                                        <input type="text" placeholder="Zipcode" class="card-number"
+                                            [ngClass]="registrationForm.get('user_zipcode').invalid && (registrationForm.get('user_zipcode').dirty || registrationForm.get('user_zipcode').touched || formSubmitted)?'invalid':''"
+                                            formControlName="user_zipcode">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row mt-3">
+                                <div
+                                    *ngIf="registrationForm.get('user_city').invalid && (registrationForm.get('user_city').dirty || registrationForm.get('user_city').touched || formSubmitted)">
+                                    <div class="error-msg" *ngIf="registrationForm.get('user_city').errors['required']">
+                                        Please enter a city.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--// Styled radio btn 3 -->
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="preference-about_home">
@@ -132,23 +155,46 @@
                         <div class="preference-radio mt-4">
                             <!-- Card Details -->
                             <p>Credit Card details</p>
-                            <h6>Don't worry we wont charge you until the job is finished. You can always come back later and cancel the job in case you change your mind!</h6>
-                                <div class="row mt-3">
-                                    <div class="col-md-12">
-                            <!-- <app-payment-info (saveCCDetails)="saveStripeToken($event)"></app-payment-info> -->
-                            <div class="form-row">
-                                <label for="card-element">
-                                  Credit or debit card
-                                </label>
-                                <div id="card-element">
-                                  <!-- A Stripe Element will be inserted here. -->
+                            <h6>Don't worry we wont charge you until the job is finished. You can always come back later
+                                and cancel the job in case you change your mind!</h6>
+                            <div class="row mt-3">
+                                <div class="col-md-12">
+                                    <!-- <app-payment-info (saveCCDetails)="saveStripeToken($event)"></app-payment-info> -->
+                                    <div class="form-row">
+                                        <label for="card-element">
+                                            Credit or debit card
+                                        </label>
+                                        <div id="card-element">
+                                            <!-- A Stripe Element will be inserted here. -->
+                                        </div>
+
+                                        <!-- Used to display form errors. -->
+                                        <div class="error-msg" id="card-errors" role="alert"></div>
+                                    </div>
                                 </div>
-                            
-                                <!-- Used to display form errors. -->
-                                <div class="error-msg" id="card-errors" role="alert"></div>
-                              </div>        
-                        </div>
-                                </div>
+                            </div>
+                            <h6 class="mt-5">NOTE: You can use the following debit card for testing this application:
+                                <table style="width:100%">
+                                    <tr>
+                                        <th>NUMBER</th>
+                                        <th>BRAND</th>
+                                        <th>CVC</th>
+                                        <th>DATE</th>
+                                    </tr>
+                                    <tr>
+                                        <td>4242424242424242</td>
+                                        <td>Visa</td>
+                                        <td>Any 3 digits</td>
+                                        <td>Any future date</td>
+                                    </tr>
+                                    <tr>
+                                        <td>5555555555554444</td>
+                                        <td>Mastercard</td>
+                                        <td>Any 3 digits</td>
+                                        <td>Any future date</td>
+                                    </tr>
+                                </table>
+                            </h6>
                             <!-- <div class="row mt-3">
                                 <div class="col-md-12">
                                     <div class="card-details">
@@ -181,12 +227,13 @@
                                 <div class="col-md-12">
                                     <div class="terms-reminder">
                                         <div class="form-check" style="margin-top: 32px;">
-                                            <input (change)="changeTnC($event)" class="form-check-input" type="checkbox" value="" id="defaultCheck2">
-                                            <label class="form-check-label" for="defaultCheck2">     
+                                            <input (change)="changeTnC($event)" class="form-check-input" type="checkbox"
+                                                value="" id="defaultCheck2">
+                                            <label class="form-check-label" for="defaultCheck2">
                                                 <!-- <p>Is your home address the same as your requested service address?</p> -->
                                                 <span class="custom-control-description">I read and agree to the <a
-                                                    (click)="openModal()" class="link">terms &
-                                                    conditions</a></span>
+                                                        (click)="openModal()" class="link">terms &
+                                                        conditions</a></span>
                                             </label>
                                         </div>
                                     </div>

@@ -122,7 +122,7 @@ padding-bottom: 300px;">
                           </div>
                         </div>
                       </div>
-        
+
                       <div class="row mt-3">
                         <div
                           *ngIf="registrationForm.get('user_city').invalid && (registrationForm.get('user_city').dirty || registrationForm.get('user_city').touched || formSubmitted)">
@@ -204,7 +204,7 @@ padding-bottom: 300px;">
                           </div>
                         </div>
                       </div>
-        
+
                       <div class="row mt-3">
                         <div
                           *ngIf="registrationForm.get('service_city').invalid && (registrationForm.get('service_city').dirty || registrationForm.get('service_city').touched || formSubmitted)">
@@ -470,37 +470,94 @@ padding-bottom: 300px;">
                     </div>
                     <div class="row">
                       <div class="col-md-12">
-                          <div class="preference-about_home">
-                              <h4>Payment Details</h4>
-                              <div class="payment-icon">
-                                  <i class="fa fa-lock" aria-hidden="true"></i>
-                                  <!-- <p>256 bit Secure<br> SSL Encryption</p> -->
-                                  <p>Powered By Stripe</p>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-                    <div class="preference-radio mt-4">
-                      <h6>Enter your payment information to which payments from customers will be processed.</h6>
-                      <div class="row mt-3">
-                        <div class="col-md-8">
-                          <div class="card-details">
-                            <input type="number" placeholder="Account number" class="card-number card-num"
-                              formControlName="account_number">
+                        <div class="preference-about_home">
+                          <h4>Payment Details</h4>
+                          <div class="payment-icon">
+                            <i class="fa fa-lock" aria-hidden="true"></i>
+                            <!-- <p>256 bit Secure<br> SSL Encryption</p> -->
+                            <p>Powered By Stripe</p>
                           </div>
                         </div>
-                        <div class="col-md-4">
-                          <div class="card-details">
-                            <input type="text" placeholder="Routing Number" class="card-number" formControlName="routing_number">
+                      </div>
+                    </div>
+                    <div class="card">
+                      <div role="tab" class="card-header" id="preventchange-3-header">
+                        <button [disabled]="showAtripe" (click)="beforeChange()" type="button" class="btn btn-link" aria-expanded="true"
+                          aria-controls="preventchange-3">
+                          Click here to securely enter your payment details...</button>
+                      </div>
+                      <div role="tabpanel" class="collapse show" id="preventchange-3"
+                        aria-labelledby="preventchange-3-header">
+                        <div class="card-body" [ngStyle]="{'opacity': (showAtripe)?'1':'0'}">
+                          <!-- <div class="preference-radio mt-4">
+                            <h6>Enter your payment information to which payments from customers will be processed.</h6>
+                            <div class="row mt-3">
+                              <div class="col-md-8">
+                                <div class="card-details">
+                                  <input type="number" placeholder="Account number" class="card-number card-num"
+                                    formControlName="account_number">
+                                </div>
+                              </div>
+                              <div class="col-md-4">
+                                <div class="card-details">
+                                  <input type="text" placeholder="Routing Number" class="card-number"
+                                    formControlName="routing_number">
+                                </div>
+                              </div>
+                            </div>
+                          </div> -->
+                          <div class="preference-radio mt-4">
+                            <!-- Card Details -->
+                            <h6>Enter your payment information to which payments from customers will be processed.</h6>
+                            <div class="row mt-3">
+                              <div class="col-md-12">
+                                <!-- <app-payment-info (saveCCDetails)="saveStripeToken($event)"></app-payment-info> -->
+                                <div class="form-row">
+                                  <label for="card-element">
+                                    Debit Card Details
+                                  </label>
+                                  <div id="card-element">
+                                    <!-- A Stripe Element will be inserted here. -->
+                                  </div>
+
+                                  <!-- Used to display form errors. -->
+                                  <div class="error-msg" id="card-errors" role="alert"></div>
+                                </div>
+                              </div>
+                            </div>
+                            <h6 class="mt-5">NOTE: You can use the following debit card for testing this application:
+                              <table style="width:100%">
+                                <tr>
+                                  <th>NUMBER</th>
+                                  <th>BRAND</th> 
+                                  <th>CVC</th>
+                                  <th>DATE</th>
+                                </tr>
+                                <tr>
+                                  <td>4000056655665556</td>
+                                  <td>Visa (debit)</td>
+                                  <td>Any 3 digits</td>
+                                  <td>Any future date</td>
+                                </tr>
+                                <tr>
+                                  <td>5200828282828210</td>
+                                  <td>Mastercard (debit)</td>
+                                  <td>Any 3 digits</td>
+                                  <td>Any future date</td>
+                                </tr>
+                              </table>
+                            </h6>
                           </div>
-                        </div>  
+                        </div>
                       </div>
                     </div>
                     <div class="preference-radio mt-4">
-                    <h6>By clicking on the Submit Application button, you affirm you have read, understand, and agree to the Home Needs 
-                      <a (click)="openModal('This is sample t&c text','Terms & Conditions')" class="link">Terms and Privacy Policy.</a>
-                    </h6>
-                  </div>
+                      <h6>By clicking on the Submit Application button, you affirm you have read, understand, and agree
+                        to the Home Needs
+                        <a (click)="openModal('This is sample t&c text','Terms & Conditions')" class="link">Terms and
+                          Privacy Policy.</a>
+                      </h6>
+                    </div>
                   </div>
                   <div class="row mt-4 justify-content-center">
                     <div class="col-md-6">
@@ -512,10 +569,10 @@ padding-bottom: 300px;">
                 </ng-template>
               </li>
             </ul>
-        
+
             <div [ngbNavOutlet]="nav" class="ml-4"></div>
           </div>
-        
+
         </div>
       </form>
     </div>

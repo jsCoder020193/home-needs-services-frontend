@@ -8,7 +8,7 @@ export class ServiceOffer {
 
   constructor() { }
 
-  generateUserPayload(user) {
+  generateUserPayload(user,stripe_token) {
     const payload = {
       email: user.email || '',
       password: user.password || '',
@@ -31,7 +31,8 @@ export class ServiceOffer {
       valid_upto: user.valid_upto|| '',
       provides_emergency_service: user.emergency || '',
       account_number: user.account_number || '',
-      routing_number: user.routing_number || ''
+      routing_number: user.routing_number || '',
+      stripe_token: stripe_token || ''
     };
     return payload;
   }

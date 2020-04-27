@@ -10,6 +10,7 @@ import { States } from '../../entities/states';
 import { Services } from '../../entities/services';
 import { SpRegistrationService } from '../../services/sp-registration.service';
 import { ServiceOffer } from '../../entities/service-offer';
+declare var Stripe; // : stripe.StripeStatic;
 
 @Component({
   templateUrl: "./register.component.html",
@@ -35,6 +36,10 @@ export class RegisterComponent implements OnInit {
     user_id: ''
   }
 
+      // Your Stripe public key
+      stripe;
+      card;
+      showAtripe = false;
   registrationForm: FormGroup;
   formSubmitted;
   states = [];
@@ -118,9 +123,7 @@ export class RegisterComponent implements OnInit {
       'sub_service': ['Select Sub Category...'],
       'price': [''],
       'from_time': [{ hour: 9, minute: 0 }],
-      'to_time': [{ hour: 17, minute: 0 }],
-      'account_number': ['', [Validators.required]],
-      'routing_number': ['', [Validators.required]]
+      'to_time': [{ hour: 17, minute: 0 }]
 
     });
   }
@@ -288,11 +291,10 @@ export class RegisterComponent implements OnInit {
       //send twilio request
 
       // save cc to stripe
-      // self.saveStripeToken().then(function(stripe_token){
-      //   console.log("from call:::"+stripe_token);
-      //register customer 
+      self.saveStripeToken().then(function(stripe_token){
+      //register sp 
       var SPID;
-      const userPayload = self._ServiceOffer.generateUserPayload(formValue);
+      const userPayload = self._ServiceOffer.generateUserPayload(formValue,stripe_token);
       console.log(userPayload)
       self.spRegistrationService.registerServiceProvider(userPayload)
         .subscribe((result) => {
@@ -371,10 +373,10 @@ export class RegisterComponent implements OnInit {
             self.router.navigate(['/register/sp']);
           });
         })
-      // })
-      // .catch((err)=>{
-      //   console.log(err)
-      // })
+      })
+      .catch((err)=>{
+        console.log(err)
+      })
 
     } else {
       //form has errors
@@ -401,6 +403,42 @@ export class RegisterComponent implements OnInit {
           return item;
       }
     })
+  }
+
+  beforeChange() {
+
+    this.stripe = Stripe('pk_test_4nPehc8vZrCWL72wwGn9CVUF00RbQ6FyD1');
+    this.showAtripe = true;
+    // Create `card` element that will watch for updates
+    // and display error messages
+    const elements = this.stripe.elements();
+    this.card = elements.create('card');
+    this.card.mount('#card-element');
+    this.card.addEventListener('change', event => {
+      const displayError = document.getElementById('card-errors');
+      if (event.error) {
+        displayError.textContent = event.error.message;
+      } else {
+        displayError.textContent = '';
+      }
+    });
+  }
+
+  saveStripeToken(){
+    return new Promise((resolve, reject) => {
+    this.stripe.createToken(this.card).then(result => {
+          if (result.error) {
+            console.log('Error creating payment method.');
+            const errorElement = document.getElementById('card-errors');
+            errorElement.textContent = result.error.message;
+            reject(result.error);
+          } else {
+            console.log('Token acquired!');
+            console.log(result.token.id);
+            resolve(result.token.id);
+          }
+        });
+    });
   }
 
   openModal(msg, title) {
