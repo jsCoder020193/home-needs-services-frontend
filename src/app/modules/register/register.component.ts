@@ -282,14 +282,6 @@ export class RegisterComponent implements OnInit {
     self.services_id_list = self.arrayUnique(self.services_id_list);
     console.log(self.services_id_list)
     console.log(formValue)
-    // this.auth.register(this.credentials).subscribe(
-    //   () => {
-    //     this.router.navigateByUrl("/profile");
-    //   },
-    //   err => {
-    //     console.error(err);
-    //   }
-    // );
 
     //reset all values on submit
     if (status == 'VALID') {
@@ -305,29 +297,79 @@ export class RegisterComponent implements OnInit {
       self.spRegistrationService.registerServiceProvider(userPayload)
         .subscribe((result) => {
           console.log(result)
-          SPID = result['serviceProviderID'];
-          const SOpayload = self._ServiceOffer.generateSOPayload(self.services_id_list, SPID);
-          console.log(SOpayload)
-          self.spRegistrationService.createServiceOffer(SOpayload)
-            .subscribe((SOArrayResult) => {
-              console.log(SOArrayResult)
-              //add sr_location
-              const SOLocationPayload = self._ServiceOffer.generateSOLocationPayload(formValue);
-              SOLocationPayload['SPID'] = SPID;
-              console.log(SOLocationPayload)
-              self.spRegistrationService.createSOLocation(SOLocationPayload)
-                .subscribe((SOLResult) => {
-                  console.log(SOLResult)
-                  //Navigate to login page
-                  self.router.navigate(['/login']);
-                }, (error) => {
-                  //reload page
-                  self.openModal('Please try again!', 'Something went wrong!');
+          if (result['errno']) {
+            self.openModal(result['displayMessage'] ? result['displayMessage'] : result['sqlMessage'], 'Something went wrong!');
+            self.router.navigateByUrl('/login', { skipLocationChange: true }).then(() => {
+              self.router.navigate(['/register/sp']);
+            });
+          } else if (result['dataError']) {
+            self.openModal(result['dataError'], 'Something went wrong!');
+            self.router.navigateByUrl('/login', { skipLocationChange: true }).then(() => {
+              self.router.navigate(['/register/sp']);
+            });
+          } else {
+            SPID = result['serviceProviderID'];
+            const SOpayload = self._ServiceOffer.generateSOPayload(self.services_id_list, SPID);
+            console.log(SOpayload)
+            self.spRegistrationService.createServiceOffer(SOpayload)
+              .subscribe((SOArrayResult) => {
+                if (result['errno']) {
+                  self.openModal(result['displayMessage'] ? result['displayMessage'] : result['sqlMessage'], 'Something went wrong!');
                   self.router.navigateByUrl('/login', { skipLocationChange: true }).then(() => {
                     self.router.navigate(['/register/sp']);
                   });
-                })
-            })
+                } else {
+                  console.log(SOArrayResult['serviceOfferIDArray'])
+                  //add sr_location
+                  const SOLocationPayload = self._ServiceOffer.generateSOLocationPayload(formValue);
+                  SOLocationPayload['SPID'] = SPID;
+                  console.log(SOLocationPayload)
+                  self.spRegistrationService.createSOLocation(SOLocationPayload)
+                    .subscribe((SOLResult) => {
+                      if (result['errno']) {
+                        self.openModal(result['displayMessage'] ? result['displayMessage'] : result['sqlMessage'], 'Something went wrong!');
+                        self.router.navigateByUrl('/login', { skipLocationChange: true }).then(() => {
+                          self.router.navigate(['/register/sp']);
+                        });
+                      } else {
+                        console.log(SOLResult)
+                        //Navigate to login page
+                        self.router.navigate(['/']);
+                            // this.auth.register(this.credentials).subscribe(
+                            //   () => {
+                            //     this.router.navigateByUrl("/profile");
+                            //   },
+                            //   err => {
+                            //     console.error(err);
+                            //   }
+                            // );
+                      }
+                    }, (error) => {
+                      //reload page
+                      console.log(error)
+                      self.openModal('Please try again!', 'Something went wrong!');
+                      self.router.navigateByUrl('/login', { skipLocationChange: true }).then(() => {
+                        self.router.navigate(['/register/sp']);
+                      });
+                    })
+                }
+              }, (error) => {
+                //reload page
+                console.log(error)
+                self.openModal('Please try again!', 'Something went wrong!');
+                self.router.navigateByUrl('/login', { skipLocationChange: true }).then(() => {
+                  self.router.navigate(['/register/sp']);
+                });
+              })
+
+          }
+        }, (error) => {
+          //reload page
+          console.log(error)
+          self.openModal('Please try again!', 'Something went wrong!');
+          self.router.navigateByUrl('/login', { skipLocationChange: true }).then(() => {
+            self.router.navigate(['/register/sp']);
+          });
         })
       // })
       // .catch((err)=>{
