@@ -19,7 +19,8 @@ export class QuotesComponent implements OnInit {
 
   quotesForm: FormGroup;
   formSubmitted;
-  quotesArray = [1,1,1,1,1,1];
+  quotesArray = [1,2,3,4,5];
+  selectedQuote;
   currentRate = 4;
   constructor(private formBuilder: FormBuilder,
     private router: Router,
@@ -42,9 +43,13 @@ export class QuotesComponent implements OnInit {
       'service_id': ['', [Validators.required]]
     });
   }
-  handleChange(quote){}
+  handleChange(quote){
+    console.log(quote)
+    this.selectedQuote = quote;
+  }
   onSubmit(){
-
+//update quote
+//create job
   }
 
 }
