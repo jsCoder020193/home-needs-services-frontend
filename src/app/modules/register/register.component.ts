@@ -377,6 +377,10 @@ export class RegisterComponent implements OnInit {
       })
       .catch((err)=>{
         console.log(err)
+        self.openModal('Please try again!', 'Something went wrong!');
+        self.router.navigateByUrl('/login', { skipLocationChange: true }).then(() => {
+          self.router.navigate(['/register/sp']);
+        });
       })
 
     } else {

@@ -35,7 +35,7 @@
               <div class="row">
                 <div *ngFor="let service of selectedSubCategories; index as i;" class="col-xs-12 col-md-4 sm-box">
                   <div class="styled-radio">
-                    <input type="radio" id="{{i}}" name="selector" (change)="handleSubServiceChange(service)">
+                    <input type="radio" id="{{i}}" name="selector2" (change)="handleSubServiceChange(service)">
                     <label for="{{i}}">{{service.title}}</label>
                   </div>
                 </div>
@@ -67,6 +67,22 @@
               <div class="col-md-12">
                 <div class="preference-about_home">
                   <h4>Choose hours and dates</h4>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="preference-radio mt-4">
+                  <!-- Styled radio btn 3 -->
+                  <p>Is this an emergency?</p>
+                  <div class="row">
+                  <div *ngFor="let e of emergencyValues; index as i;" class="col-md-6 sm-box">
+                    <div class="styled-radio styled-radio2">
+                      <input type="radio" (change)="changeEmergencyOption(e)" id="e+{{i}}" name="selector3">
+                      <label for="e+{{i}}">{{e}}</label>
+                    </div>
+                  </div>
+                </div>
                 </div>
               </div>
             </div>
@@ -104,7 +120,7 @@
               </div>
               <div class="col-md-6">
                 <div class="preference-radio mt-4">
-                  <p>When would you like to start?</p>
+                  <p>What time would you like to start?</p>
                   <div class="form-group">
                     <ngb-timepicker
                       [ngClass]="serviceBookingForm.get('time').invalid && (serviceBookingForm.get('time').dirty || serviceBookingForm.get('time').touched)?'invalid':''"
@@ -124,9 +140,8 @@
               </div>
             </div>
             <div class="row">
-              <div class="col-md-6">
+              <!-- <div class="col-md-6">
                 <div class="preference-radio mt-4">
-                  <!-- Styled radio btn 3 -->
                   <p>Is this an emergency?</p>
                   <div class="row">
                   <div *ngFor="let e of emergencyValues; index as i;" class="col-md-6 sm-box">
@@ -137,7 +152,7 @@
                   </div>
                 </div>
                 </div>
-              </div>
+              </div> -->
               <div *ngIf="!isEmergency" class="col-md-6">
                 <div class="preference-radio mt-4">
                   <!-- Styled radio btn 3 -->
@@ -166,7 +181,7 @@
               <div class="row">
                 <div *ngFor="let f of frequency; index as i;" class="col-md-3 sm-box">
                   <div class="styled-radio styled-radio2">
-                    <input type="radio" (change)="handleFrequencyChange(f)" id="f+{{i}}" name="selector1">
+                    <input type="radio" (change)="handleFrequencyChange(f)" id="f+{{i}}" name="selector4">
                     <label for="f+{{i}}">{{f['name']}}</label>
                   </div>
                 </div>
@@ -178,6 +193,23 @@
                 Please select a value.
               </div>
             </div>
+            <div *ngIf="showDuration" class="preference-radio mt-4">
+              <p>How long?</p>
+              <div class="row">
+                <div *ngFor="let d of durations; index as i;" class="col-md-3 sm-box">
+                  <div class="styled-radio styled-radio2">
+                    <input type="radio" (change)="handleDurationChange(d)" id="d+{{i}}" name="selector5">
+                    <label for="d+{{i}}">{{d['name']}}</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+            *ngIf="showDuration && serviceBookingForm.get('duration').invalid && (serviceBookingForm.get('duration').dirty || serviceBookingForm.get('duration').touched || formSubmitted)">
+            <div class="error-msg" *ngIf="serviceBookingForm.get('duration').errors.required">
+              Please select a value.
+            </div>
+          </div>
             <div class="row">
               <div class="col-md-12">
                 <div class="preference-about_home">

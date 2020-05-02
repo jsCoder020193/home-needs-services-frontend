@@ -19,31 +19,48 @@ export class CustomerRegistrationService {
   //create SR
   public createServiceRequest(payload): Observable<any> {
     return this.http.post(`/api/servicerequest/create`, payload)
-    .pipe(
-      catchError(this.handleError) // then handle the error
-    );
+      .pipe(
+        catchError(this.handleError) // then handle the error
+      );
   }
-  
+
   //create SR Location
   public createServiceRequestLocation(payload): Observable<any> {
     return this.http.post(`/api/srlocation/create`, payload)
-    .pipe(
-      catchError(this.handleError) // then handle the error
-    );
+      .pipe(
+        catchError(this.handleError) // then handle the error
+      );
   }
   //create SR Schedule
   public createServiceRequestSchedule(payload): Observable<any> {
     return this.http.post(`/api/schedule/create`, payload)
-    .pipe(
-      catchError(this.handleError) // then handle the error
-    );
+      .pipe(
+        catchError(this.handleError) // then handle the error
+      );
   }
   //Update quotes
   public updateQuotes(payload): Observable<any> {
     return this.http.post(`/api/quotes/update`, payload)
-    .pipe(
-      catchError(this.handleError) // then handle the error
-    );
+      .pipe(
+        catchError(this.handleError) // then handle the error
+      );
+  }
+
+
+  //Update quotes
+  public updateJobConfimed(payload): Observable<any> {
+    return this.http.post(`/api/quotes/updateJobConfimed`, payload)
+      .pipe(
+        catchError(this.handleError) // then handle the error
+      );
+  }
+
+  //Update quotes
+  public createJob(payload): Observable<any> {
+    return this.http.post(`/api/jobs/create`, payload)
+      .pipe(
+        catchError(this.handleError) // then handle the error
+      );
   }
 
   private handleError(error: HttpErrorResponse) {

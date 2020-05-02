@@ -16,7 +16,7 @@
 
                         <div class="preference-radio mt-5">
                             <div class="row">
-                                <div *ngFor="let quote of quotesArray; index as i;" class="col-xs-12 col-md-4 sm-box">
+                                <div *ngFor="let quote of (quotesArray)?(quotesArray):(quotesArrayCookies); index as i;" class="col-xs-12 col-md-4 sm-box">
                                     <div class="styled-radio">
                                         <input type="radio" (change)="handleChange(quote)" id="quote+{{i}}"
                                             name="selector">
@@ -25,12 +25,12 @@
                                                 <h5 class="card-title">
                                                     
                                                 <div class="row">
-                                                    <div class="col-8">Card title</div>
+                                                    <div class="col-8">{{quote['service_provider_name']}}</div>
                                                     <div class="col-4"><span class="badge badge-success">Verified</span></div>
                                                 </div>
                                                     
                                                 </h5>
-                                                <p class="card-text">Some quick example text to build on the card title</p>
+                                                <!-- <p class="card-text">Some quick example text to build on the card title</p> -->
                                             </div>
                                             <ul class="list-group list-group-flush">
                                                 <li class="list-group-item">
@@ -39,7 +39,7 @@
                                                             Estimated Price
                                                         </div>
                                                         <div class="col-4">
-                                                           $ 4,000
+                                                           $ {{quote['price_range']}}
                                                         </div>
                                                     </div></li>
                                                 <li class="list-group-item">
@@ -48,7 +48,7 @@
                                                         Customer Rating
                                                     </div>
                                                     <div class="col-4">
-                                                    <ngb-rating [(rate)]="currentRate" [readonly]="true" [max]="5"></ngb-rating>
+                                                    <ngb-rating [(rate)]="r" [readonly]="true" [max]="5"></ngb-rating>
                                                     </div>
                                                 </div>
                                                 </li>

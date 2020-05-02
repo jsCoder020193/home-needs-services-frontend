@@ -22,7 +22,9 @@ export class ServiceBookingComponent implements OnInit {
   date: NgbDateStruct;
   time: NgbTimeStruct;
   hourStep = 1;
-  minuteStep = 30;
+  minuteStep = 60;
+
+  showDuration = false;
 
   serviceBookingForm: FormGroup;
   homeData;
@@ -47,6 +49,12 @@ export class ServiceBookingComponent implements OnInit {
   {name: 'YEARLY', value: 'annual'}];
   selectedFrequency;
 
+  durations = [{name:'ONE MONTH', value: 1},
+  {name: '3 MONTHS', value: 3},
+  {name: '6 MONTHS', value: 6},
+  {name: '9 MONTHS', value: 9},
+  {name: 'ONE YEAR', value: 12}];
+  selectedDuration;
 
   constructor(private formBuilder: FormBuilder, 
     private activatedRoute: ActivatedRoute, 
@@ -79,6 +87,7 @@ export class ServiceBookingComponent implements OnInit {
       'emergency': ['',[Validators.required]],
       'no_of_hours': [{value: '1', disabled: true}],
       'frequency': ['', [Validators.required]],
+      'duration': ['', [Validators.required]],
       'service_zipcode': [{value: self.homeData['service_zipcode']?self.homeData['service_zipcode']:''}],
       'service_address_line_1': ['', [Validators.required]],
       'service_address_line_2': [''],
@@ -102,8 +111,21 @@ export class ServiceBookingComponent implements OnInit {
   }
 
   handleFrequencyChange(f){
+    if(f['value'] != 'one_time')
+      this.showDuration = true;
+    else{
+      this.showDuration = false;
+      this.selectedDuration = {name:'same_day', value: 0};
+      this.serviceBookingForm.patchValue({duration: this.selectedDuration['value']});
+    }
+
     this.selectedFrequency = f;
     this.serviceBookingForm.patchValue({frequency: this.selectedFrequency['value']});
+  }
+
+  handleDurationChange(d){
+    this.selectedDuration = d;
+    this.serviceBookingForm.patchValue({duration: this.selectedDuration['value']});
   }
 
   changeEmergencyOption(option){
@@ -131,20 +153,19 @@ export class ServiceBookingComponent implements OnInit {
         //navigate to service booking
         //if false prompt user-modal*/
         const quotePayload = self._ServiceRequest.generateQuotesRequestPayload(formData);
-        //TO-DO
-        // self.serviceBookingService.getQuotes(quotePayload)
-        // .subscribe((result)=>{
 
-        // })
-        self.serviceBookingService.getQuotesExist({flag: 'true'}).subscribe(
+        self.serviceBookingService.getQuotes(quotePayload).subscribe(
           (result) => {
-            if(result['exist'] && result['exist'] == true){
+            console.log(result)
+            console.log(result.length)
+            if(result.length >0){
               self._ServiceRequest.setHomeData(formData);
               self._ServiceRequest.setCookies(formData);
               const quotesArray = {
-                quotes: ['q1','q2','q3','q4','q5']
+                quotes: result
               };
               self._ServiceRequest.setCookies(quotesArray);
+              self._ServiceRequest.setQuotesExist(result);
               self.router.navigateByUrl('/register/customer');
             }else{
               /*******************TO-DO reset all cookies except email and zipcode*/
