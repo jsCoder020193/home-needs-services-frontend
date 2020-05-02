@@ -1,0 +1,9 @@
+.preferences {
+    background: #E4EDF7;
+    padding: 28px 40px;
+}
+
+.list-group-flush .list-group-item {
+    background: #E4EDF7;
+}
+

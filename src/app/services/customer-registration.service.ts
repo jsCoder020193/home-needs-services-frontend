@@ -63,6 +63,21 @@ export class CustomerRegistrationService {
       );
   }
 
+
+  public getJobsForCustomer(userID): Observable<any> {
+    return this.http.get('/api/jobs/customer'+ '/' + userID)
+      .pipe(
+        catchError(this.handleError) // then handle the error
+      );
+  }
+
+  public getJobsForSP(userID): Observable<any> {
+    return this.http.get('/api/jobs/sp/'+ '/' + userID)
+      .pipe(
+        catchError(this.handleError) // then handle the error
+      );
+  }
+
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.
