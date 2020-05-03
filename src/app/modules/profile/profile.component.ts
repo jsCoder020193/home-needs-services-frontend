@@ -26,8 +26,6 @@ export class ProfileComponent {
     const self = this;
     self.auth.profile().subscribe(
       user => {
-        console.log("from profile component")
-        console.log(user)
         self.details = user
         self.userDetails = user;
         self.userType = self.userDetails['user_type'];
@@ -41,10 +39,6 @@ export class ProfileComponent {
           }, (error) => {
             //reload page
             console.log(error)
-            self.openModal('Please try again!', 'Something went wrong!');
-            self.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-              self.router.navigate(['/profile']);
-            });
           })
         }else{
           self.customerRegistrationService.getJobsForSP(userID)
@@ -55,10 +49,6 @@ export class ProfileComponent {
           }, (error) => {
             //reload page
             console.log(error)
-            self.openModal('Please try again!', 'Something went wrong!');
-            self.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-              self.router.navigate(['/profile']);
-            });
           })
         }
       },

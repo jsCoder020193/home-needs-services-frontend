@@ -30,7 +30,7 @@ export class ServiceRequest {
   service_city: any;
   service_state: any;
 
-  quotesDescArray;
+  quotesArray;
   SRID;
   quotes;
   customerID;
@@ -96,10 +96,10 @@ export class ServiceRequest {
   }
 
   setQuotes(q) {
-    this.quotesDescArray = q;
+    this.quotesArray = q;
   }
   getQuotes() {
-    return this.quotesDescArray;
+    return this.quotesArray;
   }
 
   setCookies(data) {

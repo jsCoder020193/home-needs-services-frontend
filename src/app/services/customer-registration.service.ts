@@ -72,7 +72,7 @@ export class CustomerRegistrationService {
   }
 
   public getJobsForSP(userID): Observable<any> {
-    return this.http.get('/api/jobs/sp/'+ '/' + userID)
+    return this.http.get('/api/jobs/sp'+ '/' + userID)
       .pipe(
         catchError(this.handleError) // then handle the error
       );

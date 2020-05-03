@@ -23,7 +23,6 @@ export class QuotesComponent implements OnInit {
   quotesArray;
   quotesArrayCookies;
   selectedQuote;
-  quotesExistCookies;
   cookies;
   r = 4;
   ratings = [1, 2, 3, 4, 5];
@@ -46,8 +45,9 @@ export class QuotesComponent implements OnInit {
     self.formSubmitted = false;
     self.quotesArray = self._ServiceRequest.getQuotes();
     self.quotesArrayCookies = JSON.parse(self._ServiceRequest.getCookieByName('quotesArray'));
-    self.quotesExistCookies = JSON.parse(self._ServiceRequest.getCookieByName('quotes'));
     self.cookies = self._ServiceRequest.getCookies();
+    console.log(self.quotesArrayCookies)
+    console.log(self.cookies)
     //make a calll to get quotes
     //make a call to get ratings
   }
@@ -74,24 +74,34 @@ export class QuotesComponent implements OnInit {
     self.customerRegistrationService.updateJobConfimed({ quoteID: quoteID })
       .subscribe((result) => {
         const f = self._ServiceRequest.getJobsValues();
+        console.log(f)
+        var quotes;
         var final;
-        if(f['SRID'])
+        if(f['SRID']){
+          quotes = f['quotes'];
           final = f;
-        else
+        }
+        else{
+          quotes = JSON.parse(self.cookies['quotes']);
           final = self.cookies;
-        const q = JSON.parse(final['quotes']);
+        }
         var SPID;
-        q.forEach(element => {
+        console.log(quotes)
+        console.log(final)
+        quotes.forEach(element => {
           if(element['q_id'] == quoteID)
             SPID = element['service_provider_id'];
         });
-        const jobPayload = {
-          quote_id_fk: quoteID,
-          customer_id_fk: final['customerID'],
-          service_provider_id_fk: SPID,
-          services_id_fk: final['service_id'],
-          address_id_fk: final['addressID']
-        }
+
+          const jobPayload = {
+            quote_id_fk: quoteID,
+            customer_id_fk: final['customerID'],
+            service_provider_id_fk: SPID,
+            services_id_fk: final['service_id'],
+            address_id_fk: final['addressID']
+          }
+
+
         self.customerRegistrationService.createJob(jobPayload)
           .subscribe((jobResult) => {
             // this.auth.register(this.credentials).subscribe(
