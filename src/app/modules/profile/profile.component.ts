@@ -14,6 +14,8 @@ import { ModalComponent } from '../modal/modal.component';
 export class ProfileComponent {
   details: UserDetails
   userDetails;
+  jobs;
+  userType;
   constructor(private auth: AuthenticationService,
     private formBuilder: FormBuilder,
     private router: Router,
@@ -28,18 +30,19 @@ export class ProfileComponent {
         console.log(user)
         self.details = user
         self.userDetails = user;
-        const userType = self.userDetails['user_type'];
+        self.userType = self.userDetails['user_type'];
         const userID = self.userDetails['user_id_fk'];
-        if(userType == "customer"){
+        if(self.userType == "customer"){
           self.customerRegistrationService.getJobsForCustomer(userID)
           .subscribe((jobResult) => {
             // self.router.navigate(['/login']);
             console.log(jobResult)
+            self.jobs = jobResult;
           }, (error) => {
             //reload page
             console.log(error)
             self.openModal('Please try again!', 'Something went wrong!');
-            self.router.navigateByUrl('/login', { skipLocationChange: true }).then(() => {
+            self.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
               self.router.navigate(['/profile']);
             });
           })
@@ -48,11 +51,12 @@ export class ProfileComponent {
           .subscribe((jobResult) => {
             // self.router.navigate(['/login']);
             console.log(jobResult)
+            self.jobs = jobResult;
           }, (error) => {
             //reload page
             console.log(error)
             self.openModal('Please try again!', 'Something went wrong!');
-            self.router.navigateByUrl('/login', { skipLocationChange: true }).then(() => {
+            self.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
               self.router.navigate(['/profile']);
             });
           })

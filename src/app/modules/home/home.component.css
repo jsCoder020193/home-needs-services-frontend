@@ -77,3 +77,7 @@ h1 {
   background-color: #0062c7;
     border-color: #0062c7;
 }
+
+.main-block {
+  padding: 10px 0;
+}

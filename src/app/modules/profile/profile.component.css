@@ -1,9 +1,15 @@
 .preferences {
     background: #E4EDF7;
-    padding: 28px 40px;
+    padding: 16px 40px;
 }
 
 .list-group-flush .list-group-item {
     background: #E4EDF7;
 }
+
+.preference-title h4 {
+    color: #ffffff;
+    padding: 14px 30px;
+}
+
 

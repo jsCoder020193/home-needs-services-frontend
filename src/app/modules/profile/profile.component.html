@@ -59,7 +59,7 @@
         </div>
       </div>
     </div>
-    <div class="row mt-5 justify-content-center">
+    <div class="row justify-content-center">
       <div class="col-md-10 set-sm-fit mb-4">
         <!-- <form [formGroup]="quotesForm" (ngSubmit)="onSubmit()"> -->
         <div class="preference-title">
@@ -67,9 +67,44 @@
         </div>
         <div class="preferences">
 
-          <div class="preference-radio">
+          <div *ngIf="userType == 'customer'" class="preference-radio">
             <div class="row">
-
+              <ul class="list-group list-group-flush">
+                <li *ngFor="let job of jobs" class="list-group-item">
+                  <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">{{job['service_title']}}</h5>
+                    <p class="font-weight-normal" style="font-size: 16px;">Estimated Price: ${{job['price_range']}}</p>
+                  </div>
+                  <p class="mb-1 font-weight-light">Your service provider's contact details: <span><img src="../../../../assets/images/social.png" alt="visa-icon"></span> {{job['service_provider_name']}} <span><img src="../../../../assets/images/communications.png" alt="visa-icon"></span> {{job['phone_number']}}
+                  </p>
+                  <p class="mb-1 font-weight-normal">Job Dates:
+                  </p>
+                  <ul class="list-group">
+                    <li *ngFor="let s of job['job_schedule_meta']" class="list-group-item"><span><img src="../../../../assets/images/interface (1).png" alt="visa-icon"></span> {{s['repeat_start'].substring(0,10)}}    <span><img src="../../../../assets/images/tool.png" alt="visa-icon"></span>{{s['start_time']}}</li>
+                  </ul>
+                </li>  
+              </ul>
+            </div>
+          </div>
+          <div *ngIf="userType == 'service_provider'" class="preference-radio">
+            <div class="row">
+              <ul class="list-group list-group-flush">
+                <li *ngFor="let job of jobs" class="list-group-item">
+                  <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">{{job['service_title']}}</h5>
+                    <p class="font-weight-normal" style="font-size: 16px;">Estimated Price: ${{job['price_range']}}</p>
+                  </div>
+                  <p class="mb-1 font-weight-light">Your job details: </p>
+                  <p class="mb-1 font-weight-light"><span><img src="../../../../assets/images/social.png" alt="visa-icon"></span> {{job['customer_name']}} </p>
+                  <p class="mb-1 font-weight-light"><span><img src="../../../../assets/images/seo-and-web.png" alt="visa-icon"></span> {{job['customer_adress']['address_line_1']}}, {{job['customer_adress']['address_line_2']}}, {{job['customer_adress']['city']}}, {{job['customer_adress']['state']}},{{job['customer_adress']['country']}},{{job['customer_adress']['zipcode']}}</p>
+ 
+                  <p class="mb-1 font-weight-normal">Job Dates:
+                  </p>
+                  <ul class="list-group">
+                    <li *ngFor="let s of job['job_schedule_meta']" class="list-group-item"><span><img src="../../../../assets/images/interface (1).png" alt="visa-icon"></span> {{s['repeat_start'].substring(0,10)}}    <span><img src="../../../../assets/images/tool.png" alt="visa-icon"></span>{{s['start_time']}}</li>
+                  </ul>
+                </li>  
+              </ul>
             </div>
           </div>
         </div>
