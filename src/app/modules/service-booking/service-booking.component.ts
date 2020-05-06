@@ -6,6 +6,8 @@ import {NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
 import {NgbTimeStruct} from '@ng-bootstrap/ng-bootstrap';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
+import { NgxSpinnerService } from "ngx-spinner";
+
 import {ServiceRequest} from '../../entities/service-request';
 import {Services} from '../../entities/services';
 import {ServiceBookingService} from '../../services/service-booking.service';
@@ -63,7 +65,8 @@ export class ServiceBookingComponent implements OnInit {
     private router: Router,
     private serviceBookingService: ServiceBookingService,
     private modalService: NgbModal,
-    private _states: States) { }
+    private _states: States,
+    private spinner: NgxSpinnerService) { }
 
   ngOnInit(): void {
     const self = this;
@@ -153,9 +156,10 @@ export class ServiceBookingComponent implements OnInit {
         //navigate to service booking
         //if false prompt user-modal*/
         const quotePayload = self._ServiceRequest.generateQuotesRequestPayload(formData);
-
+        this.spinner.show();
         self.serviceBookingService.getQuotes(quotePayload).subscribe(
           (result) => {
+            this.spinner.hide();
             console.log(result)
             console.log(result.length)
             if(result.length >0){
@@ -180,6 +184,7 @@ export class ServiceBookingComponent implements OnInit {
           err => {
             console.error(err)
             //something went wrong-modal
+            this.spinner.hide();
             const msg = "We are experiencing some error! Please try again.";
             const title = "Sorry!";
             self.open(title,msg);

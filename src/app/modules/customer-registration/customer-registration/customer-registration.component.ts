@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
+import { NgxSpinnerService } from "ngx-spinner";
+
 import { ModalComponent } from '../../modal/modal.component';
 import { ServiceRequest } from '../../../entities/service-request';
 import { States } from '../../../entities/states';
@@ -36,7 +38,8 @@ export class CustomerRegistrationComponent implements OnInit {
     private modalService: NgbModal,
     private _ServiceRequest: ServiceRequest,
     private _states: States,
-    private customerRegistrationService: CustomerRegistrationService) { }
+    private customerRegistrationService: CustomerRegistrationService,
+    private spinner: NgxSpinnerService) { }
 
   ngOnInit(): void {
     const self = this;
@@ -126,6 +129,7 @@ export class CustomerRegistrationComponent implements OnInit {
         //send twilio request
 
         // save cc to stripe
+        self.spinner.show();
         self.saveStripeToken().then(function (stripe_token) {
           //register customer 
           const userPayload = self._ServiceRequest.generateUserPayload(formValue, stripe_token);
@@ -189,6 +193,7 @@ export class CustomerRegistrationComponent implements OnInit {
                               self.customerRegistrationService.updateQuotes(updateQuotesPayload)
                                 .subscribe((result) => {
                                   console.log(result)
+                                  self.spinner.hide();
                                   self._ServiceRequest.setCookies({SRID: SRResult['SRID']});
                                   self._ServiceRequest.setSRID(SRResult['SRID']);
                                   //delete all cookies
@@ -200,6 +205,7 @@ export class CustomerRegistrationComponent implements OnInit {
                                 }, (error) => {
                                   //reload page
                                   console.log(error)
+                                  self.spinner.hide();
                                   self.openModal('Please try again!', 'Something went wrong!');
                                   self.router.navigateByUrl('/login', { skipLocationChange: true }).then(() => {
                                     self.router.navigate(['/']);
@@ -208,6 +214,7 @@ export class CustomerRegistrationComponent implements OnInit {
                             }, (error) => {
                               //reload page
                               console.log(error)
+                              self.spinner.hide();
                               self.openModal('Please try again!', 'Something went wrong!');
                               self.router.navigateByUrl('/login', { skipLocationChange: true }).then(() => {
                                 self.router.navigate(['/']);
@@ -216,6 +223,7 @@ export class CustomerRegistrationComponent implements OnInit {
                         }, (error) => {
                           //reload page
                           console.log(error)
+                          self.spinner.hide();
                           self.openModal('Please try again!', 'Something went wrong!');
                           self.router.navigateByUrl('/login', { skipLocationChange: true }).then(() => {
                             self.router.navigate(['/']);
@@ -225,6 +233,7 @@ export class CustomerRegistrationComponent implements OnInit {
                   }, (error) => {
                     //reload page
                     console.log(error)
+                    self.spinner.hide();
                     self.openModal('Please try again!', 'Something went wrong!');
                     self.router.navigateByUrl('/login', { skipLocationChange: true }).then(() => {
                       self.router.navigate(['/']);
@@ -234,6 +243,7 @@ export class CustomerRegistrationComponent implements OnInit {
             }, (error) => {
               //reload page
               console.log(error)
+              self.spinner.hide();
               self.openModal('Please try again!', 'Something went wrong!');
               self.router.navigateByUrl('/login', { skipLocationChange: true }).then(() => {
                 self.router.navigate(['/']);
@@ -242,6 +252,7 @@ export class CustomerRegistrationComponent implements OnInit {
         })
           .catch((err) => {
             console.log(err)
+            self.spinner.hide();
             self.openModal('Please try again!', 'Something went wrong!');
             self.router.navigateByUrl('/login', { skipLocationChange: true }).then(() => {
               self.router.navigate(['/']);
